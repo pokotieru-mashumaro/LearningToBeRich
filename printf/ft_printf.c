@@ -1,37 +1,24 @@
 #include "ft_printf.h"
 
-int	percent_terminal(const char branch_char, void *args)
+int	percent_terminal(const char branch_char, va_list *args)
 {
 	if (branch_char == 's')
-		return (s_print((char *)args));
+		return (s_print(va_arg(*args, char *)));
 	else if (branch_char == 'p')
-		return (p_print((unsigned long)args));
-	return (0);
-}
-
-int	percent_terminal2(const char branch_char, int args)
-{
-	if (branch_char == 'c')
-		return (c_print((int)args));
+		return (p_print(va_arg(*args, unsigned long)));
+		else if (branch_char == 'c')
+		return (c_print(va_arg(*args, int)));
 	else if (branch_char == 'd' || branch_char == 'i')
-		return (d_i_print((int)args));
+		return (d_i_print(va_arg(*args, int)));
 	else if (branch_char == 'u')
-		return (u_print((unsigned int)args));
+		return (u_print(va_arg(*args, unsigned int)));
 	else if (branch_char == 'x')
-		return (x_print((unsigned int)args));
+		return (x_print((va_arg(*args, unsigned int))));
 	else if (branch_char == 'X')
-		return (upper_x_print((unsigned int)args));
+		return (upper_x_print(va_arg(*args, unsigned int)));
 	else if (branch_char == '%')
 		return (per_print());
 	return (0);
-}
-
-int	memsize_switch(char c)
-{
-	if (c == 's' || c == 'p')
-		return (8);
-	else
-		return (4);
 }
 
 int	ft_printf(const char *format, ...)
@@ -51,10 +38,7 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			format++;
-			if (*format == 's' || *format == 'p')
-				count += percent_terminal(*format, va_arg(args, void *));
-			else
-				count += percent_terminal2(*format, va_arg(args, int));
+			count += percent_terminal(*format, &args);
 		}
 		format++;
 	}
@@ -62,13 +46,15 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-// int	main(void)
-// {
-// 	int	b;
-// 	int	c;
+int	main(void)
+{
+	int	b;
+	int	c;
 
-// 	b = ft_printf("%d %d %%\n", 42, -2147483648);
-// 	c = printf("%d %ld %%\n", 42, -2147483648);
-// 	printf("ft = %d | natural = %d", b, c);
-// 	return (0);
-// }
+	int d = 42;
+	char *e= "aaa";
+	b = ft_printf("%d %p %%\n", d, e);
+	c = printf("%d %p %%\n", d, e);
+	printf("ft = %d | natural = %d", b, c);
+	return (0);
+}
