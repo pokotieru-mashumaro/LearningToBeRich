@@ -46,15 +46,15 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int	main(void)
-{
-	int	b;
-	int	c;
+// int	main(void)
+// {
+// 	int	b;
+// 	int	c;
 
-	int d = 42;
-	char *e= "aaa";
-	b = ft_printf("%d %p %%\n", d, e);
-	c = printf("%d %p %%\n", d, e);
-	printf("ft = %d | natural = %d", b, c);
-	return (0);
-}
+// 	int d = 42;
+// 	char *e= "aaa";
+// 	b = ft_printf("%d %p %%\n", d, e);
+// 	c = printf("%d %p %%\n", d, e);
+// 	printf("ft = %d | natural = %d", b, c);
+// 	return (0);
+// }
