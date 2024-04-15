@@ -6,8 +6,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
+char *get_next_line(int fd);
 
-char	*ft_strjoin(char *left_str, char *buff);
+char *ft_strjoin(char *s1, char *s2);
 int ft_strlen(char *s);
 #endif

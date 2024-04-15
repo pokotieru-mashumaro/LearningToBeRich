@@ -27,58 +27,34 @@ char *ft_strdup(char *s1)
 	return ans;
 }
 
-char	*ft_strjoin(char *left_str, char *buff)
+char *ft_strjoin(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+    char *ret;
+    int i;
+	int j;
 
-	if (!left_str)
+	if (!s1)
+		s1 = ft_strdup("\0");
+    ret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+    i = 0;
+    while (s1[i])
 	{
-		left_str = (char *)malloc(1 * sizeof(char));
-		left_str[0] = '\0';
+        ret[i] = s1[i];
+		i++;
 	}
-	if (!left_str || !buff)
-		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
-	if (str == NULL)
-		return (NULL);
-	i = -1;
 	j = 0;
-	if (left_str)
-		while (left_str[++i] != '\0')
-			str[i] = left_str[i];
-	while (buff[j] != '\0')
-		str[i++] = buff[j++];
-	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
-	free(left_str);
-	return (str);
+    while (s2[j])
+        ret[i++] = s2[j++];
+    ret[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+    return ret;
 }
 
-// char *ft_strjoin(char *s1, char *s2)
+// int main()
 // {
-//     char *ret;
-//     int i;
-
-//     if (!s1)
-//     {
-//         free(s1);
-//         return ft_strdup(s2);
-//     }
-//     ret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-//     i = 0;
-//     while (*s1)
-//     {
-//         ret[i] = *s1;
-//         i++;
-//         s1++;
-//     }
-//     while (*s2)
-//     {
-//         ret[i] = *s2;
-//         i++;
-//         s2++;
-//     }
-//     ret[i] = '\0';
-//     return ret;
+// 	char *s1 = (char *)malloc(5);
+// 	s1 = "aiueo";
+// 	char *a = ft_strjoin(s1, "12345");
+// 	printf("%s", a);
+// 	return 0;
 // }

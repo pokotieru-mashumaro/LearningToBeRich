@@ -71,11 +71,7 @@ char *cut_left_on_laststr(char *last_str)
 	ret = (char *)malloc(ft_strlen(last_str) - i + 1);
 	j = 0;
 	while (last_str[i])
-	{
-		ret[j] = last_str[i];
-		j++;
-		i++;
-	}
+		ret[j++] = last_str[i++];
 	ret[j] = '\0';
 	free(last_str);
 	return ret;
