@@ -21,8 +21,15 @@ char *get_line(int fd, char *last_str)
 	int buffer_bytes;
 
 	buff = (char *)malloc(BUFFER_SIZE + 1);
-	while (!find_newline(last_str) && (buffer_bytes = read(fd, buff, BUFFER_SIZE)) > 0)
+	buffer_bytes = 100;
+	while (!find_newline(last_str) && buffer_bytes != 0)
 	{
+		buffer_bytes = read(fd, buff, BUFFER_SIZE);
+		if (buffer_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
 		buff[buffer_bytes] = '\0';
 		last_str = ft_strjoin(last_str, buff);
 	}
