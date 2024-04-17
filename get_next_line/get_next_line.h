@@ -8,6 +8,6 @@
 
 char *get_next_line(int fd);
 
-char *ft_strjoin(char *s1, char *s2);
+char *concat_two_str(char *s1, char *s2);
 int ft_strlen(char *s);
 #endif

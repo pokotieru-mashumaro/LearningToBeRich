@@ -27,7 +27,7 @@ char *ft_strdup(char *s1)
 	return ans;
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char *concat_two_str(char *s1, char *s2)
 {
     char *ret;
     int i;

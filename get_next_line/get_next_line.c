@@ -21,17 +21,13 @@ char *get_line(int fd, char *last_str)
 	int buffer_bytes;
 
 	buff = (char *)malloc(BUFFER_SIZE + 1);
-	buffer_bytes = 100;
-	while (!find_newline(last_str) && buffer_bytes != 0)
+	while (!find_newline(last_str))
 	{
 		buffer_bytes = read(fd, buff, BUFFER_SIZE);
-		if (buffer_bytes == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
+		if (buffer_bytes <= 0)
+			break;
 		buff[buffer_bytes] = '\0';
-		last_str = ft_strjoin(last_str, buff);
+		last_str = concat_two_str(last_str, buff);
 	}
 	free(buff);
 	if (buffer_bytes == -1)
@@ -70,10 +66,7 @@ char *cut_left_on_laststr(char *last_str)
 	while (last_str[i] && last_str[i] != '\n')
 		i++;
 	if (!last_str[i])
-	{
-		free(last_str);
 		return (NULL);
-	}
 	i++;
 	ret = (char *)malloc(ft_strlen(last_str) - i + 1);
 	j = 0;
@@ -96,6 +89,8 @@ char *get_next_line(int fd)
 		return (NULL);
 	ret = cut_over_newline(last_str);
 	last_str = cut_left_on_laststr(last_str);
+	if (!last_str)
+		free(last_str);
 	return (ret);
 }
 
