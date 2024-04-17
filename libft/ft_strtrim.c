@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	int		i;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
 	while (s1[start] && find_set(s1[start], set))
 		start++;
@@ -39,6 +41,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (start >= end)
 		return (ft_strdup(""));
 	ret = (char *)malloc(end - start + 1);
+	if (!ret)
+		return (NULL);
 	i = 0;
 	while (start < end)
 	{

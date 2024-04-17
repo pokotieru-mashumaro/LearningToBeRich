@@ -14,7 +14,7 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (*lst)
+	if (lst && *lst && del)
 	{
 		ft_lstclear(&(*lst)->next, del);
 		del((*lst)->content);

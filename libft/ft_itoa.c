@@ -41,6 +41,8 @@ char	*ft_itoa(int n)
 		digit++;
 	}
 	ans = (char *)malloc(digit + 1);
+	if (!ans)
+		return (NULL);
 	ans[digit] = '\0';
 	while (digit--)
 	{

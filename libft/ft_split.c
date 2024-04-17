@@ -60,7 +60,11 @@ char	**ft_split(const char *s, char c)
 {
 	char	**words;
 
+	if (!s)
+		return (NULL);
 	words = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
+	if (!words)
+		return (NULL);
 	split_component(s, c, words);
 	return (words);
 }

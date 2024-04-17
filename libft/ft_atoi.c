@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 
 int	check_overflow(long long now, long long past)
 {
