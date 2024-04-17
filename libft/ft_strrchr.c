@@ -15,7 +15,10 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	char	*point;
+	int seg;
 
+	seg = ft_strlen(s);
+	(void)seg;
 	point = NULL;
 	while (s)
 	{
@@ -28,14 +31,12 @@ char	*ft_strrchr(const char *s, int c)
 	return (point);
 }
 
-// int main(void)
-// {
+int main(void)
+{
+	char *p;
 
-// 	char test[20] = "abfcdefghijk";
-// 	char *p;
+	p = ft_strrchr(((void *)0), '\0');
 
-// 	p = ft_strrchr(test,'f');
-
-// 	printf("検索文字が見つかった場所から表示→%s\n",p);
-// 	return (0);
-// }
+	printf("検索文字が見つかった場所から表示→%s\n",p);
+	return (0);
+}

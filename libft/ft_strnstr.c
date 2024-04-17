@@ -65,13 +65,9 @@ char	*ft_strstr(const char *haystack, const char *needle)
 
 // int	main(void)
 // {
-// 	const char *largestring = "aaabcabcd";
-// 	const char *smallstring = "aabc";
 // 	char *ptr;
 
-// 	ptr = strnstr(largestring, smallstring, 9);
-// 	printf("%s\n", ptr);
-// 	ptr = ft_strnstr(largestring, smallstring, 9);
+// 	ptr = ft_strnstr(((void *)0), "fake", 3);
 // 	printf("%s\n", ptr);
 // 	return (0);
 // }
