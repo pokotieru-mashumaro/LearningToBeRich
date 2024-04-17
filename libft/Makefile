@@ -1,6 +1,7 @@
 NAME	=	libft.a
 INCLUDE	=	libft.h
 CFLAGS	=	-Wall -Wextra -Werror
+RM			=	rm -f
 
 FUNCTIONS	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 			ft_memchr.c ft_memcmp.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \
@@ -14,17 +15,19 @@ BONUS_FUNCTIONS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 				ft_lstmap.c
 
-OBJ			=	$(FUNCTIONS:.c=.o)
-BONUS_OBJ	=	$(BONUS_FUNCTIONS:.c=.o)
-RM			=	rm -f
+MAND_OBJ    =    $(FUNCTIONS:.c=.o)
+BONUS_OBJ    =    $(BONUS_FUNCTIONS:.c=.o)
+
+ifeq ($(MAKECMDGOALS), bonus)
+    OBJ = $(MAND_OBJ) $(BONUS_OBJ)
+else
+    OBJ = $(MAND_OBJ)
+endif
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+    ar rc $(NAME) $(OBJ)
 
-bonus: $(BONUS_OBJ)
-	ar rc $(NAME) $(BONUS_OBJ)
-	ranlib $(NAME)
+bonus: $(NAME)
 
 all: $(NAME)
 
