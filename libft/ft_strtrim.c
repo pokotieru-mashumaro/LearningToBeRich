@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/16 12:36:00 by kkomatsu          #+#    #+#             */
+/*   Updated: 2024/04/16 13:20:17 by kkomatsu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	find_set(char c, char const *set)
@@ -34,12 +46,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 		start++;
 	}
+	ret[i] = '\0';
 	return (ret);
 }
 
 // int	main(void)
 // {
-// 	char *a = ft_strtrim("   xxx   xxx", " x");
-// 	printf("%s", a);
+// 	char *a = ft_strtrim("123", "");
+// 	printf("%s\n", a);
 // 	return (0);
 // }

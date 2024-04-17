@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/16 12:34:52 by kkomatsu          #+#    #+#             */
+/*   Updated: 2024/04/16 19:19:14 by kkomatsu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
@@ -5,6 +17,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
+	if (!big)
+		return (NULL);
 	if (!ft_strlen(little))
 		return ((char *)big);
 	i = 0;
@@ -22,34 +36,32 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-// char	*ft_strnstr(const char *big, const char *little, size_t len)
-// {
-// 	char	*ptr_big;
-// 	char	*ptr_little;
-// 	int		count_little;
+/*
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	char	*ptr_hy;
+	char	*ptr_nd;
+	int		count_nd;
 
-// 	count_little = ft_strlen(little);
-// 	if (!count_little)
-// 		return (ptr_big);
-// 	if (len == 0)
-// 		return (NULL);
-// 	while (*ptr_big && len > 0)
-// 	{
-// 		while ((*ptr_big == *ptr_little) && len > 0)
-// 		{
-// 			ptr_little++;
-// 			if (!*ptr_little)
-// 				return (ptr_big - count_little + 1);
-// 			ptr_big++;
-// 			len--;
-// 		}
-// 		ptr_little = (char *)little;
-// 		ptr_big++;
-// 		len--;
-// 	}
-// 	printf("aaa\n");
-// 	return (NULL);
-// }
+	ptr_hy = (char *) haystack;
+	ptr_nd = (char *) needle;
+	while (ptr_nd[count_nd])
+		count_nd++;
+	while (*ptr_hy)
+	{
+		while (*ptr_hy == *ptr_nd)
+		{
+			ptr_nd++;
+			if (*ptr_nd == '\0')
+				return (ptr_hy - count_nd + 1);
+			ptr_hy++;
+		}
+		ptr_nd = (char *)needle;
+		ptr_hy++;
+	}
+	return (NULL);
+}
+*/
 
 // int	main(void)
 // {

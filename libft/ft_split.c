@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/16 15:34:40 by kkomatsu          #+#    #+#             */
+/*   Updated: 2024/04/16 15:34:53 by kkomatsu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	count_word(const char *s, char c)
@@ -17,14 +29,12 @@ int	count_word(const char *s, char c)
 	return (count);
 }
 
-char	**ft_split(const char *s, char c)
+void	split_component(const char *s, char c, char **words)
 {
-	char	**words;
 	int		j;
 	int		k;
 	char	*start;
 
-	words = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
 	j = 0;
 	while (*s)
 	{
@@ -33,7 +43,7 @@ char	**ft_split(const char *s, char c)
 			s++;
 		if (*s)
 		{
-			start = (char *) s;
+			start = (char *)s;
 			while (*s && (*s != c))
 				s++;
 			words[j] = (char *)malloc(s - start + 1);
@@ -44,6 +54,14 @@ char	**ft_split(const char *s, char c)
 		}
 	}
 	words[j] = NULL;
+}
+
+char	**ft_split(const char *s, char c)
+{
+	char	**words;
+
+	words = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
+	split_component(s, c, words);
 	return (words);
 }
 
