@@ -15,89 +15,89 @@ int find_newline(char *s)
 	return 0;
 }
 
-char *get_line(int fd, char *last_str)
+char *get_line(int fd, char *stock_str)
 {
-	char *buff;
-	int buffer_bytes;
+	char *buf;
+	int n;
 
-	buff = (char *)malloc(BUFFER_SIZE + 1);
-	while (!find_newline(last_str))
-	{
-		buffer_bytes = read(fd, buff, BUFFER_SIZE);
-		if (buffer_bytes <= 0)
-			break;
-		buff[buffer_bytes] = '\0';
-		last_str = concat_two_str(last_str, buff);
-	}
-	free(buff);
-	if (buffer_bytes == -1)
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buf)
 		return (NULL);
-	return (last_str);
+	while (!find_newline(stock_str))
+	{
+		n = read(fd, buf, BUFFER_SIZE);
+		if (n <= 0)
+			break;
+		buf[n] = '\0';
+		stock_str = concat_two_str(stock_str, buf);
+	}
+	free(buf);
+	if (n == -1)
+		return (NULL);
+	return (stock_str);
 }
 
-char *cut_over_newline(char *last_str)
+char *cut_over_newline(char *stock_str)
 {
 	int i;
 	char *ret;
 	char *ret_original;
 
-	if (!last_str)
+	if (stock_str[0] == '\0')
 		return (NULL);
 	i = 0;
-	while (last_str[i] && last_str[i] != '\n')
+	while (stock_str[i] && stock_str[i] != '\n')
 		i++;
 	ret = (char *)malloc(i + 2);
 	if (!ret)
 		return NULL;
 	ret_original = ret; 
-	while (*last_str && *last_str != '\n')
-		*ret++ = *last_str++;
-	if (*last_str == '\n')
+	while (*stock_str && *stock_str != '\n')
+		*ret++ = *stock_str++;
+	if (*stock_str == '\n')
 		*ret++ = '\n';
 	*ret = '\0';
 	return ret_original;
 }
 
-char *cut_left_on_laststr(char *last_str)
+char *cut_left_on_laststr(char *stock_str)
 {
 	int i;
 	int j;
 	char *ret;
 
 	i = 0;
-	while (last_str[i] && last_str[i] != '\n')
+	while (stock_str[i] != '\n')
+	{
+		if (!stock_str[i])
+		{
+			free(stock_str);
+			return (NULL);
+		}
 		i++;
-	if (last_str[i] == '\0')
-	{	
-		// printf("IN cut:%p\n", last_str);
-		free(last_str);
-		return (NULL);
 	}
 	i++;
-	ret = (char *)malloc(ft_strlen(last_str) - i + 1);
+	ret = (char *)malloc(ft_strlen(stock_str) - i + 1);
 	j = 0;
-	while (last_str[i])
-		ret[j++] = last_str[i++];
+	while (stock_str[i])
+		ret[j++] = stock_str[i++];
 	ret[j] = '\0';
-	free(last_str);
+	free(stock_str);
 	return ret;
 }
 
 char *get_next_line(int fd)
 {
 	char *ret;
-	static char *last_str;
+	static char *stock_str;
 
-	// printf("start: %p\n", last_str);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	last_str = get_line(fd, last_str);
-	if (!last_str)
+	stock_str = get_line(fd, stock_str);
+	if (!stock_str)
 		return (NULL);
-	ret = cut_over_newline(last_str);
-	last_str = cut_left_on_laststr(last_str);
-	// if (!last_str)
-	// 	printf("IN get_line_next: %p\n", last_str);
+	ret = cut_over_newline(stock_str);
+	stock_str = cut_left_on_laststr(stock_str);
 	return (ret);
 }
 
@@ -110,10 +110,10 @@ char *get_next_line(int fd)
 
 // 	fd = open((char *)av[1], O_RDONLY);
 // 	i = 0;
-// 	while (i < 3)
+// 	while (i < 10)
 // 	{
 // 		pri = get_next_line(fd);
-// 		printf("%s", pri);
+// 		printf("line%d: %s", i+1, pri);
 // 		free(pri);
 // 		i++;
 // 	}

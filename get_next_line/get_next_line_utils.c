@@ -13,19 +13,19 @@ int ft_strlen(char *s)
 char *ft_strdup(char *s1)
 {
 	int i;
-	char *ans;
+	char *ret;
 
 	i = 0;
-	ans = (char *)malloc(ft_strlen(s1) + 1);
-	if (!ans)
+	ret = (char *)malloc(ft_strlen(s1) + 1);
+	if (!ret)
 		return (NULL);
 	while (s1[i])
 	{
-		ans[i] = s1[i];
+		ret[i] = s1[i];
 		i++;
 	}
-	ans[i] = '\0';
-	return ans;
+	ret[i] = '\0';
+	return ret;
 }
 
 char *concat_two_str(char *s1, char *s2)
@@ -36,7 +36,6 @@ char *concat_two_str(char *s1, char *s2)
 
 	if (!s1)
 		s1 = ft_strdup("\0");
-	
     ret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!ret)
 		return NULL;
