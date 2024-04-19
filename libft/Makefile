@@ -25,11 +25,9 @@ else
 endif
 
 $(NAME): $(OBJ)
-    ar rc $(NAME) $(OBJ)
+	ar rc $(NAME) $(OBJ)
 
 bonus: $(NAME)
-
-all: $(NAME)
 
 .c.o:
 	cc $(CFLAGS) -I $(INCLUDE) -c $< -o $@
