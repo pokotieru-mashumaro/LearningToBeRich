@@ -31,7 +31,7 @@ char *get_line(int fd, char *last_str)
 	}
 	free(buff);
 	if (buffer_bytes == -1)
-			return (NULL);
+		return (NULL);
 	return (last_str);
 }
 
@@ -41,12 +41,14 @@ char *cut_over_newline(char *last_str)
 	char *ret;
 	char *ret_original;
 
-	i = 0;
-	if (!last_str[i])
+	if (!last_str)
 		return (NULL);
+	i = 0;
 	while (last_str[i] && last_str[i] != '\n')
 		i++;
 	ret = (char *)malloc(i + 2);
+	if (!ret)
+		return NULL;
 	ret_original = ret; 
 	while (*last_str && *last_str != '\n')
 		*ret++ = *last_str++;
@@ -65,8 +67,12 @@ char *cut_left_on_laststr(char *last_str)
 	i = 0;
 	while (last_str[i] && last_str[i] != '\n')
 		i++;
-	if (!last_str[i])
+	if (last_str[i] == '\0')
+	{	
+		// printf("IN cut:%p\n", last_str);
+		free(last_str);
 		return (NULL);
+	}
 	i++;
 	ret = (char *)malloc(ft_strlen(last_str) - i + 1);
 	j = 0;
@@ -82,6 +88,7 @@ char *get_next_line(int fd)
 	char *ret;
 	static char *last_str;
 
+	// printf("start: %p\n", last_str);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	last_str = get_line(fd, last_str);
@@ -89,8 +96,8 @@ char *get_next_line(int fd)
 		return (NULL);
 	ret = cut_over_newline(last_str);
 	last_str = cut_left_on_laststr(last_str);
-	if (!last_str)
-		free(last_str);
+	// if (!last_str)
+	// 	printf("IN get_line_next: %p\n", last_str);
 	return (ret);
 }
 
@@ -99,10 +106,11 @@ char *get_next_line(int fd)
 // 	int fd;
 // 	int i;
 // 	char *pri;
+// 	(void) ac;
 
 // 	fd = open((char *)av[1], O_RDONLY);
 // 	i = 0;
-// 	while (i < 100)
+// 	while (i < 3)
 // 	{
 // 		pri = get_next_line(fd);
 // 		printf("%s", pri);

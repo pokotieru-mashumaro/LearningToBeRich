@@ -5,8 +5,6 @@ int ft_strlen(char *s)
 	int i;
 
 	i = 0;
-    if (!s)
-		return (0);
 	while (s[i])
 		i++;
 	return i;
@@ -19,11 +17,14 @@ char *ft_strdup(char *s1)
 
 	i = 0;
 	ans = (char *)malloc(ft_strlen(s1) + 1);
+	if (!ans)
+		return (NULL);
 	while (s1[i])
 	{
 		ans[i] = s1[i];
 		i++;
 	}
+	ans[i] = '\0';
 	return ans;
 }
 
@@ -35,7 +36,10 @@ char *concat_two_str(char *s1, char *s2)
 
 	if (!s1)
 		s1 = ft_strdup("\0");
+	
     ret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!ret)
+		return NULL;
     i = 0;
     while (s1[i])
 	{
@@ -54,7 +58,7 @@ char *concat_two_str(char *s1, char *s2)
 // {
 // 	char *s1 = (char *)malloc(5);
 // 	s1 = "aiueo";
-// 	char *a = ft_strjoin(s1, "12345");
+// 	char *a = concat_two_str(s1, "12345");
 // 	printf("%s", a);
 // 	return 0;
 // }
