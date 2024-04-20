@@ -20,12 +20,26 @@ rrr : rraとrrbを同時に実行。
 - エラーの場合、標準エラーに "Error "と'˶n'を表示しなければなりません。エラーとは、例えば、引数が整数でない、引数が整数より大きい、重複がある、命令が存在しない、書式が正しくない、などです。
 */
 
+void swap(int *front, int *back)
+{
+	int *stock;
+
+	stock = front;
+	front = back;
+	back = stock;
+}
+
+void push_a(int **a, int **b)
+{
+
+}
+
 int checker(int fd)
 {
 
 }
 
-int	main(int ac, char **av)
-{
-	return (0);
-}
+// int	main(int ac, char **av)
+// {
+// 	return (0);
+// }

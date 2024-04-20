@@ -1,5 +1,4 @@
 #include "push_swap.h"
-
 /*
 
 sa : swap a - スタックaの先頭の2つの要素を入れ替える。）
@@ -29,8 +28,19 @@ void push_swap(int x)
 
 }
 
+int output_error()
+{
+    write(1, "Error\n", 6);
+    return 0;
+}
+
 int main(int ac, char *av[])
 {
-printf("hello, world\n");
-return 0;
+    int **a;
+    int **b;
+
+    if (is_av_error(ac, av))
+        return (output_error());
+    write(1, "OK\n", 3);
+    return 0;
 }
