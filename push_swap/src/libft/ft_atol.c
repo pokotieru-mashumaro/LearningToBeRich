@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:24:14 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/16 21:04:06 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:19:17 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
-int	check_overflow(long long now, long long past)
+static int	check_overflow(long long now, long long past)
 {
 	if (now <= 0 && past != 0)
 		return (1);
@@ -20,7 +20,7 @@ int	check_overflow(long long now, long long past)
 		return (0);
 }
 
-long	longmax(int minus)
+static long	longmax(int minus)
 {
 	if (minus == 1)
 		return (LONG_MAX);
@@ -28,7 +28,7 @@ long	longmax(int minus)
 		return (LONG_MIN);
 }
 
-void	init(int *i, int *minus, long long *ans, long long *ans_stock)
+static void	init(int *i, int *minus, long long *ans, long long *ans_stock)
 {
 	*i = 0;
 	*minus = 1;
@@ -36,7 +36,7 @@ void	init(int *i, int *minus, long long *ans, long long *ans_stock)
 	*ans_stock = 0;
 }
 
-long 	ft_atol(char *str)
+long	ft_atol(char *str)
 {
 	int			i;
 	int			minus;
@@ -62,9 +62,6 @@ long 	ft_atol(char *str)
 
 // int	main(void)
 // {
-// 	printf("%d\n", ft_atoi("18446744073709551616"));
-// 	printf("%d\n", ft_atoi("18446744073709551616"));
-// 	printf("#########\n");
-// 	printf("%d\n", atoi("18446744073709551616"));
-// 	printf("%d\n", atoi("18446744073709551616"));
+// 	printf("%ld\n", ft_atol("12"));
+// 	printf("%ld\n", ft_atol("18446744073709551616"));
 // }
