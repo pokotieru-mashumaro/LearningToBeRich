@@ -40,7 +40,7 @@ int	is_av_error(int ac, char **av)
 	char	**stock;
 
 	i = 1;
-	stock = (char **)malloc(ac * sizeof(char *));
+	stock = (char **)malloc(sizeof(char *) * ac);
 	if (!stock)
 		return (1);
 	while (i < ac)

@@ -16,13 +16,20 @@ static void	swap(t_dst **dst)
 {
 	t_dst	*front_to_back;
 	t_dst	*back_to_front;
+	t_dst	*theard_num;
 
 	front_to_back = *dst;
 	back_to_front = front_to_back->next;
-	front_to_back->next = back_to_front->next;
-	back_to_front->next = front_to_back;
+	if (!front_to_back || !back_to_front)
+		return;
+	theard_num = back_to_front->next;
+
+	front_to_back->next = theard_num;
 	front_to_back->prev = back_to_front;
+	back_to_front->next = front_to_back;
 	back_to_front->prev = NULL;
+	if (theard_num)
+		theard_num->prev = front_to_back;
 	*dst = back_to_front;
 }
 

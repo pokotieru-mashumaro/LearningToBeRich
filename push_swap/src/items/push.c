@@ -15,14 +15,18 @@
 static void	push(t_dst **send, t_dst **recieve)
 {
 	t_dst	*send_to_recieve;
+	t_dst	*next_send_top;
 	t_dst	*recieve_ptr;
 
 	send_to_recieve = *send;
+	next_send_top = send_to_recieve->next;
 	recieve_ptr = *recieve;
-	*send = send_to_recieve->next;
-	send_to_recieve->next->prev = NULL;
 	send_to_recieve->next = recieve_ptr;
-	recieve_ptr->prev = send_to_recieve;
+	if (next_send_top)
+		next_send_top->prev = NULL;
+	if (!(!recieve || !(*recieve)))
+		recieve_ptr->prev = send_to_recieve;
+	*send = next_send_top;
 	*recieve = send_to_recieve;
 }
 

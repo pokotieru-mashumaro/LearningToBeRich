@@ -26,10 +26,7 @@ int	main(int ac, char **av)
 	if (!a || !b)
 		return (0);
 	init_dst(a, b, ac, av);
-	// pa(a, b);
-	// pa(a, b);
-	sa(a);
-	rra(a);
+	push_swap(a, b);
 	debug_boxes(a, b);
 	printf("END\n");
 	return (0);
