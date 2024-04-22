@@ -28,20 +28,5 @@ int	main(int ac, char **av)
 	init_dst(a, b, ac, av);
 	push_swap(a, b);
 	debug_boxes(a, b);
-	printf("END\n");
 	return (0);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	t_dst	**a;
-// 	t_dst	**b;
-
-// 	a = (t_dst **)malloc(sizeof(t_dst));
-// 	b = (t_dst **)malloc(sizeof(t_dst));
-// 	init_dst(a, b, ac, av);
-// 	// reverse_rotate(a);
-// 	debug_boxes(a, b);
-// 	printf("is sorted: %d\n", is_sorted_descending(a));
-// 	return (0);
-// }

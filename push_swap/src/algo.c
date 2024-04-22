@@ -55,31 +55,32 @@ static int	phase_one(t_dst **a, t_dst **b)
 	return (0);
 }
 
-// static int	phase_two(t_dst **a, t_dst **b)
-// {
-// 	t_dst	*b_ptr;
+static int	phase_two(t_dst **a, t_dst **b)
+{
+	t_dst	*b_ptr;
 
-// 	b_ptr = *b;
-// 	while (b_ptr->next)
-// 	{
-// 		if (b_ptr->value < b_ptr->next->value)
-// 			sb(b);
-// 		// if (is_sorted_descending(b) && !(b))
-// 		// 	return (1);
-// 		pb(a, b);
-// 		b_ptr = b_ptr->next;
-// 	}
-// 	return (0);
-// }
+	b_ptr = *b;
+	while (b_ptr->next)
+	{
+		if (b_ptr->value < b_ptr->next->value)
+		{
+			sb(b);
+			b_ptr = *b;
+		}
+		pb(a, b);
+		b_ptr = *b;
+	}
+	pb(a, b);
+	return (0);
+}
 
 void	push_swap(t_dst **a, t_dst **b)
 {
-	// while (1)
-	// {
-	// 	if (phase_one(a, b))
-	// 		return ;
-	// 	if (phase_two(a, b))
-	// 		return ;
-	// }
-	phase_one(a, b);
+	while (1)
+	{
+		if (phase_one(a, b))
+			return ;
+		if (phase_two(a, b))
+			return ;
+	}
 }
