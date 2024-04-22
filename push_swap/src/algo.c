@@ -32,31 +32,26 @@ static int	phase_one(t_dst **a, t_dst **b)
 
 	a_ptr = *a;
 	// printf("初期の先頭: 現在地:%p 値:%ld next:%p prev:%p\n", a_ptr, a_ptr->value, a_ptr->next, a_ptr->prev);
-	while (a_ptr)
+	while (a_ptr->next)
 	{
-		if (!a_ptr->next)
-		{
-			printf("現在地:%p 値:%ld next:%p prev:%p\n", a_ptr, a_ptr->value, a_ptr->next, a_ptr->prev);
-			// pa(a, b);
-			// return 0;
-		}
 		if (a_ptr->value > a_ptr->next->value)
 		{
 			// printf("%ld > %ld\n", a_ptr->prev->value, a_ptr->value);
-			printf("swap前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
+			// printf("swap前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
 			sa(a);
-			printf("swapあとの先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
+			a_ptr = *a;
+			// printf("swapあとの先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
 			// printf("swapした結果: 現在地:%p 値:%ld next:%p prev:%p\n", a_ptr, a_ptr->value, a_ptr->next, a_ptr->prev);
 		}
 		if (is_sorted_ascending(a) && (!(*b) || !b))
 			return (1);
-		printf("push前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
+		// printf("push前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
 		pa(a, b);
-		printf("push後の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
-		a_ptr = a_ptr->next;
-		debug_boxes(a, b);
-		printf("--------\n");
+		a_ptr = *a;
+		// printf("push後の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
+		// printf("--------\n");
 	}
+	pa(a, b);
 	return (0);
 }
 
