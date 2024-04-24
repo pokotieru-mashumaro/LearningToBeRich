@@ -1,46 +1,52 @@
-#include <signal.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <signal.h>
 #include <unistd.h>
 
-static void f(int a)
+static void f(int sig)
 {
-
+    (void) sig;
+    printf("client finish\n");
+    exit(0);
 }
 
-void send_to_server(int pid, char c)
+static void send_to_server(int server_pid, char c)
 {
-  char a;
-  char b;
-  int i;
+    int i;
 
-  i = 0;
-  while (i < 8)
-  {
-    if (c & (1 << i))
-        kill(pid, SIGUSR2);
-    else
-        kill(pid, SIGUSR1);
-    i++;
-  }
+    i = 0;
+    while (i < 8)
+    {
+        if (c & (1 << i))
+            kill(server_pid, SIGUSR2);
+        else
+            kill(server_pid, SIGUSR1);
+        usleep(1500);
+        i++;
+    }
 }
 
 int main(int ac, char **av)
 {
-    int pid;
+    int server_pid;
     char *str;
     int i;
 
     if (ac != 3)
         return 0;
-    pid = atoi(av[1]);
+    server_pid = atoi(av[1]);
     str = av[2];
     i = 0;
-    // signal(SIGUSR1, f);
-	// signal(SIGUSR2, f);
+    signal(SIGUSR1, f);
+    signal(SIGUSR2, f);
     while (str[i])
     {
-        send_to_server(pid, str[i]);
-        i++;   
+        send_to_server(server_pid, str[i]);
+        i++;
     }
+    send_to_server(server_pid, '\0');
+    while (1)
+        pause();
     return 0;
 }
