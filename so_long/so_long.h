@@ -7,6 +7,9 @@
 # include <errno.h>
 # include <string.h>
 
+# include "get_next_line/get_next_line.h"
+# include "mlx/mlx.h"
+
 typedef struct s_space
 {
 	int		x;
@@ -18,6 +21,7 @@ typedef struct s_map
 {
 	int width;
     int height;
+    char **arrangement;
     t_space *wall;
     t_space *collectibles;
     t_space *enemy;
@@ -41,5 +45,7 @@ typedef struct s_game {
     t_map *map;
     t_player player;
 }	t_game;
+
+void init_game(t_game *game);
 
 #endif

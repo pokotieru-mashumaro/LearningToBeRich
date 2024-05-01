@@ -15,30 +15,9 @@ P for the player’s starting position
 • Display the movement count directly on screen instead of writing it in the shell.
 */
 
-void count_w_h(t_map *map)
-{
-
-}
-
-t_map *init_map()
-{
-    t_map *map;
-
-    return map;
-}
-
 int game_error(t_game *game)
 {
     return 0;
-}
-
-void init_game(t_game *game)
-{
-    int fd;
-
-    fd = open(game->file_name, O_RDONLY);
-    game->map = init_map();
-    return ;
 }
 
 static int check_ber(char *s1, char *s2)
@@ -76,10 +55,16 @@ int check_input(int ac, char **av)
 int main(int ac, char **av)
 {
     t_game game;
+    // void	*mlx;
+	// void	*mlx_win;
 
     if (!check_input(ac, av))
         return 0;
     init_game(&game);
+    // mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	// mlx_loop(mlx);
+    
     printf("-------\n");
     return 0;
 }
