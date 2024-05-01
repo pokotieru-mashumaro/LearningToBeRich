@@ -8,7 +8,7 @@ int ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return i;
-} 
+}
 
 char *ft_strdup(char *s1)
 {

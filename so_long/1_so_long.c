@@ -54,17 +54,13 @@ int check_input(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    t_game game;
-    // void	*mlx;
-	// void	*mlx_win;
+    t_game *game;
 
     if (!check_input(ac, av))
         return 0;
-    init_game(&game);
-    // mlx = mlx_init();
-	// mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	// mlx_loop(mlx);
-    
+    init_game(game, av);
+    printf("init: w=%d, h=%d\n", game->map->width, game->map->height);
+    init_mlx(game);
     printf("-------\n");
     return 0;
 }
