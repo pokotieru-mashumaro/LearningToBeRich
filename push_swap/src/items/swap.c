@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:22:05 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 17:00:36 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/04/24 23:49:30 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void	swap(t_dst **dst)
 	front_to_back = *dst;
 	back_to_front = front_to_back->next;
 	if (!front_to_back || !back_to_front)
-		return;
+		return ;
 	theard_num = back_to_front->next;
-
 	front_to_back->next = theard_num;
 	front_to_back->prev = back_to_front;
 	back_to_front->next = front_to_back;

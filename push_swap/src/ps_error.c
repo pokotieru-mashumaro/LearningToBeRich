@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:47:51 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 21:10:18 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:36:47 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	is_int(char *s)
 		if ((s[0] != '-'))
 			if (s[i] < '0' || '9' < s[i])
 				return (0);
+		if (s[0] == '-' && s[1] == '0')
+			return (0);
 		i++;
 	}
 	if (ft_atol(s) < INT_MIN || INT_MAX < ft_atol(s))

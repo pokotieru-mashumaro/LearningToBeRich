@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:50 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 18:28:31 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:31:12 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ phase_two:
 	もしbが降順になっていたらreturnする。
 	aにpushする。
 	これらをbがなくなるまで行う。
+
+phase_three
+
 */
 
 static int	phase_one(t_dst **a, t_dst **b)
@@ -31,25 +34,17 @@ static int	phase_one(t_dst **a, t_dst **b)
 	t_dst	*a_ptr;
 
 	a_ptr = *a;
-	// printf("初期の先頭: 現在地:%p 値:%ld next:%p prev:%p\n", a_ptr, a_ptr->value, a_ptr->next, a_ptr->prev);
 	while (a_ptr->next)
 	{
 		if (a_ptr->value > a_ptr->next->value)
 		{
-			// printf("%ld > %ld\n", a_ptr->prev->value, a_ptr->value);
-			// printf("swap前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
 			sa(a);
 			a_ptr = *a;
-			// printf("swapあとの先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
-			// printf("swapした結果: 現在地:%p 値:%ld next:%p prev:%p\n", a_ptr, a_ptr->value, a_ptr->next, a_ptr->prev);
 		}
 		if (is_sorted_ascending(a) && (!(*b) || !b))
 			return (1);
-		// printf("push前の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
 		pa(a, b);
 		a_ptr = *a;
-		// printf("push後の先頭: 現在地:%p 値:%ld next:%ld prev:%p\n", a_ptr, a_ptr->value, a_ptr->next->value, a_ptr->prev);
-		// printf("--------\n");
 	}
 	pa(a, b);
 	return (0);
@@ -74,13 +69,33 @@ static int	phase_two(t_dst **a, t_dst **b)
 	return (0);
 }
 
+static void	phase_three(t_dst **a, t_dst **b)
+{
+	int	a_flag;
+	int	b_flag;
+
+	a_flag = 0;
+	b_flag = 0;
+	if (!a[0])
+		return ;
+	if (a[0]->value > ft_lstlast(a)->value)
+		a_flag = 1;
+	if (!b[0])
+		return ;
+	if (b[0]->value > ft_lstlast(b)->value)
+		b_flag = 1;
+	if (a_flag && b_flag)
+		rr(a, b);
+	return ;
+}
+
 void	push_swap(t_dst **a, t_dst **b)
 {
 	while (1)
 	{
 		if (phase_one(a, b))
 			return ;
-		if (phase_two(a, b))
-			return ;
+		phase_two(a, b);
+		// phase_three(a, b);
 	}
 }

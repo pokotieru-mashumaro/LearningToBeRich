@@ -6,15 +6,15 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:46 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 20:40:35 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:58:00 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void init_dst(t_dst **a, t_dst **b, int ac, char **av)
+void	init_dst(t_dst **a, t_dst **b, int ac, char **av)
 {
-	int i;
+	int	i;
 
 	*a = NULL;
 	*b = NULL;
@@ -26,10 +26,10 @@ void init_dst(t_dst **a, t_dst **b, int ac, char **av)
 	}
 }
 
-int is_sorted_ascending(t_dst **a)
+int	is_sorted_ascending(t_dst **a)
 {
-	t_dst *stock;
-	long judge;
+	t_dst	*stock;
+	long	judge;
 
 	stock = *a;
 	judge = stock->value;
@@ -43,10 +43,10 @@ int is_sorted_ascending(t_dst **a)
 	return (1);
 }
 
-int is_sorted_descending(t_dst **b)
+int	is_sorted_descending(t_dst **b)
 {
-	t_dst *stock;
-	long judge;
+	t_dst	*stock;
+	long	judge;
 
 	stock = *b;
 	judge = stock->value;
@@ -60,10 +60,10 @@ int is_sorted_descending(t_dst **b)
 	return (1);
 }
 
-void debug_boxes(t_dst **a, t_dst **b)
+void	debug_boxes(t_dst **a, t_dst **b)
 {
-	int i;
-	t_dst *stock;
+	int		i;
+	t_dst	*stock;
 
 	printf("DEBUG start!!\n");
 	if (*a)
@@ -78,7 +78,7 @@ void debug_boxes(t_dst **a, t_dst **b)
 		}
 		printf("a: %d番目  =  %ld\n\n", i + 1, stock->value);
 		if (!b || !(*b))
-			return;
+			return ;
 	}
 	if (*b)
 	{

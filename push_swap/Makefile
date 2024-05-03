@@ -16,6 +16,10 @@ all: $(NAME)
 $(NAME):
 	cc $(CFLAGS) -I$(INCLUDE) $(FUNCTIONS) -o push_swap
 
+fsanitize:
+	cc $(CFLAGS) -g -fsanitize=address -I$(INCLUDE) $(FUNCTIONS) -o push_swap
+
+
 clean:
 	$(RM) push_swap
 
