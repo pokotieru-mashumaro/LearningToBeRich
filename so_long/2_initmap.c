@@ -80,7 +80,7 @@ static void read_arrangement(int fd, t_map *map)
 t_map *init_map(t_game *game, int fd)
 {
     t_map *map;
-
+    
     read_arrangement(fd, map);
 	set_n(map);
     return map;

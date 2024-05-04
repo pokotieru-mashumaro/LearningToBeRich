@@ -22,7 +22,7 @@ static void send_to_server(int server_pid, char c)
             kill(server_pid, SIGUSR2);
         else
             kill(server_pid, SIGUSR1);
-        usleep(1500);
+        usleep(100);
         i++;
     }
 }

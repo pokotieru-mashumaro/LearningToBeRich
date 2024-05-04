@@ -58,6 +58,7 @@ int main(int ac, char **av)
 
     if (!check_input(ac, av))
         return 0;
+    game = (t_game *)malloc(sizeof(t_game));
     init_game(game, av);
     printf("init: w=%d, h=%d\n", game->map->width, game->map->height);
     init_mlx(game);

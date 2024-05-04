@@ -49,7 +49,7 @@ typedef struct s_game {
     t_map *map;
     t_player player;
     t_player *enemies;
-    t_image image;
+    t_image *image;
     int get_collect;
 }	t_game;
 
