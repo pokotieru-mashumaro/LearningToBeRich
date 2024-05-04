@@ -44,6 +44,11 @@ t_dst				*ft_lstlast(t_dst *dst);
 int					ft_lstsize(t_dst *dst);
 void				ft_lstadd_back(t_dst **dst, t_dst *new);
 
+
+long	get_pivot_num(char **av);
+void separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num);
+
+
 void				sa(t_dst **a);
 void				sb(t_dst **b);
 void				ss(t_dst **a, t_dst **b);

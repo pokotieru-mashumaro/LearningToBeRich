@@ -29,6 +29,45 @@ phase_three
 
 */
 
+// int is_exist(t_dst **dst)
+// {
+// 	t_dst	*ptr;
+// 	ptr = *dst;
+// 	if (!dst || !ptr)
+// 		return 0;
+// 	if (!ptr->next)
+// 		return 0;
+// 	return 1;
+// }
+
+// static int phase_one_and_two(t_dst **a, t_dst **b)
+// {
+// 	int a_flag;
+// 	int b_flag;
+// 	t_dst	*a_ptr;
+// 	t_dst	*b_ptr;
+
+// 	a_flag = 0;
+// 	b_flag = 0;
+// 	a_ptr = *a;
+// 	b_ptr = *b;
+// 	if (is_exist(a) && a_ptr->value > a_ptr->next->value)
+// 		a_flag = 1;
+// 	if (is_exist(b) && b_ptr->value > b_ptr->next->value)
+// 		b_flag = 1;
+// 	if (a_flag && b_flag)
+// 	{
+// 		ss(a, b);
+// 		pa();
+// 		pb
+// 	}
+// 	else if (a_flag)
+// 		sa(a);
+// 	else if (b_flag)
+// 		sb(b);
+// 	return 0;
+// }
+
 static int	phase_one(t_dst **a, t_dst **b)
 {
 	t_dst	*a_ptr;
@@ -69,25 +108,29 @@ static int	phase_two(t_dst **a, t_dst **b)
 	return (0);
 }
 
-static void	phase_three(t_dst **a, t_dst **b)
-{
-	int	a_flag;
-	int	b_flag;
+// static void	phase_three(t_dst **a, t_dst **b)
+// {
+// 	int	a_flag;
+// 	int	b_flag;
 
-	a_flag = 0;
-	b_flag = 0;
-	if (!a[0])
-		return ;
-	if (a[0]->value > ft_lstlast(a)->value)
-		a_flag = 1;
-	if (!b[0])
-		return ;
-	if (b[0]->value > ft_lstlast(b)->value)
-		b_flag = 1;
-	if (a_flag && b_flag)
-		rr(a, b);
-	return ;
-}
+// 	a_flag = 0;
+// 	b_flag = 0;
+// 	if (!a[0])
+// 		return ;
+// 	if (a[0]->value > ft_lstlast(*a)->value)
+// 		a_flag = 1;
+// 	if (!b[0])
+// 		return ;
+// 	if (b[0]->value < ft_lstlast(*b)->value)
+// 		b_flag = 1;
+// 	if (a_flag && b_flag)
+// 		rr(a, b);
+// 	else if (a_flag)
+// 		ra(a);
+// 	else if (b_flag)
+// 		rb(b);
+// 	return ;
+// }
 
 void	push_swap(t_dst **a, t_dst **b)
 {

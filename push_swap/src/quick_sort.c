@@ -20,13 +20,13 @@ void	bubble_sort(char **av, int n)
 	int		i;
 
 	stock = 0;
-	iter = n - 1;
+	iter = n ;
 	onemore = 0;
-	i = 0;
+	i = 1;
 	while (onemore == 0)
 	{
 		onemore = 1;
-		i = 0;
+		i = 1;
 		while (i < iter)
 		{
 			if (ft_atol(av[i + 1]) < ft_atol(av[i]))
@@ -41,10 +41,9 @@ void	bubble_sort(char **av, int n)
 	}
 }
 
-long	get_pivot(char **av)
+long	get_pivot_num(char **av)
 {
 	int		av_count;
-	int		pivot_num;
 	char	**av_dup;
 
 	av_count = 0;
@@ -52,18 +51,45 @@ long	get_pivot(char **av)
 	while (av[av_count])
 		av_count++;
 	av_count -= 1;
-	printf("%d \n", av_count);
-	bubble_sort(av_dup, av_count);
-	if (av_count % 2 == 1)
-		return (ft_atol(av_dup[av_count / 2 + 1]));
-	else
-	{
-		return (ft_atol(av_dup[av_count / 2 + 1]));
-	}
+	bubble_sort(av_dup, av_count);	
+	return (ft_atol(av_dup[av_count / 2 ]));
 }
 
-int	main(int ac, char **av)
+void separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num)
 {
-	printf("%d \n", get_pivot(av));
-	return (0);
+	t_dst *a_ptr;
+	t_dst *b_ptr;
+	int max;
+	int i;
+
+	a_ptr = *a;
+	b_ptr = *b;
+	max = 0;
+	i = 0;
+	while (av[max])
+		max++;
+	max--;
+	// printf("%d, %ld\n", max, pivot_num);
+	while (a_ptr->next && i < max)
+	{
+		if (a_ptr->value > pivot_num)
+		{
+			pa(a, b);
+			a_ptr = *a;
+			i++;
+		}
+		if (a_ptr->value <= pivot_num)
+		{
+			ra(a);
+			a_ptr = *a;
+			i++;
+		}
+	}
+	return;
 }
+
+// int	main(int ac, char **av)
+// {
+// 	printf("%ld \n", get_pivot(av));
+// 	return (0);
+// }

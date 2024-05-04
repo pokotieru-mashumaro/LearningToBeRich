@@ -31,9 +31,10 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	init_dst(a, b, ac, av);
-	push_swap(a, b);
+	separated_by_pivot(av, a, b, get_pivot_num(av));
+	// push_swap(a, b);
 	debug_boxes(a, b);
-	printf("%ld\n", ft_atol(av[2]));
+	// printf("%ld\n", ft_atol(av[2]));
 	free(a);
 	free(b);
 	return (0);
