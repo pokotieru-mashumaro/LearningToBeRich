@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:12:25 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 21:14:39 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/05 01:22:30 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void				push_swap(t_dst **a, t_dst **b);
 long				ft_atol(char *str);
 int					ft_strlen(char *s);
 int					ft_strcmp(char *s1, char *s2);
+char	**ft_split(const char *s, char c);
 
 t_dst				*ft_lstnew(long value);
 t_dst				*ft_lstlast(t_dst *dst);
@@ -47,7 +48,8 @@ void				ft_lstadd_back(t_dst **dst, t_dst *new);
 
 long	get_pivot_num(char **av);
 void separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num);
-
+int alg_1(t_dst **a, t_dst **b);
+void many_pb(t_dst **a, t_dst **b);
 
 void				sa(t_dst **a);
 void				sb(t_dst **b);

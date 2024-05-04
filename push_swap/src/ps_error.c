@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:47:51 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/03 18:36:47 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/05 02:19:49 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ int	is_av_error(int ac, char **av)
 	int		i;
 	int		j;
 	char	**stock;
+	int		av_count;
 
-	i = 1;
-	stock = (char **)malloc(sizeof(char *) * ac);
+	i = 0;
+	av_count = 0;
+	while (av[av_count])
+		av_count++;
+	stock = (char **)malloc(sizeof(char *) * av_count);
 	if (!stock)
 		return (1);
-	while (i < ac)
+	while (i < av_count)
 	{
 		stock[i - 1] = NULL;
 		if (!is_int(av[i]))

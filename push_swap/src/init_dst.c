@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_dst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:46 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/03 16:58:00 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/05 02:15:18 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	init_dst(t_dst **a, t_dst **b, int ac, char **av)
 {
 	int	i;
+	int av_count;
 
 	*a = NULL;
 	*b = NULL;
-	i = 1;
-	while (i < ac)
+	i = 0;
+	av_count = 0;
+	while (av[av_count])
+		av_count++;
+	while (i < av_count)
 	{
 		ft_lstadd_back(a, ft_lstnew(ft_atol(av[i])));
 		i++;
