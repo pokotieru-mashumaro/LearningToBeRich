@@ -72,13 +72,13 @@ void separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num)
 	// printf("%d, %ld\n", max, pivot_num);
 	while (a_ptr->next && i < max)
 	{
-		if (a_ptr->value > pivot_num)
+		if (a_ptr->value <= pivot_num)
 		{
 			pa(a, b);
 			a_ptr = *a;
 			i++;
 		}
-		if (a_ptr->value <= pivot_num)
+		if (a_ptr->value > pivot_num)
 		{
 			ra(a);
 			a_ptr = *a;
@@ -86,6 +86,61 @@ void separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num)
 		}
 	}
 	return;
+}
+
+
+/*
+return 0; no swap
+return 1; swap a
+return 2; swap b
+return 3; swap a and b
+*/
+int is_swap(t_dst **a, t_dst **b)
+{
+	int a_flag;
+	int b_flag;
+
+	a_flag = 0;
+	b_flag = 0;
+
+
+
+	if (a_flag && b_flag)
+		return 3;
+	else if (a_flag)
+		return 1;
+	else if (b_flag)
+		return 2;
+	return 0;
+}
+
+/*
+return 0; no rotate
+return 1; rotate a
+return 2; rotate b
+return 3; rotate a and b
+*/
+int is_rotate(t_dst **a, t_dst **b)
+{
+	int a_flag;
+	int b_flag;
+
+	a_flag = 0;
+	b_flag = 0;
+
+	if (a_flag && b_flag)
+		return 3;
+	else if (a_flag)
+		return 1;
+	else if (b_flag)
+		return 2;
+	return 0;
+}
+
+
+int alg_1()
+{
+
 }
 
 // int	main(int ac, char **av)
