@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:23:35 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/24 23:49:49 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:04:19 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	pa(t_dst **a, t_dst **b)
 	if (!(*a) || !a)
 		return ;
 	push(a, b);
-	write(1, "pa\n", 3);
+	write(1, "pb\n", 3);
 }
 
 void	pb(t_dst **a, t_dst **b)
@@ -43,5 +43,5 @@ void	pb(t_dst **a, t_dst **b)
 	if (!(*b) || !b)
 		return ;
 	push(b, a);
-	write(1, "pb\n", 3);
+	write(1, "pa\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:50 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/03 19:31:12 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/06 03:36:21 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,5 @@ void	push_swap(t_dst **a, t_dst **b)
 		if (phase_one(a, b))
 			return ;
 		phase_two(a, b);
-		// phase_three(a, b);
 	}
 }

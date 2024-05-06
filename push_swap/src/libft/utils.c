@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:48:09 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 17:00:44 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/05 16:36:17 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,33 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+void	bubble_sort(char **av, int n)
+{
+	char	*stock;
+	int		iter;
+	int		onemore;
+	int		i;
+
+	stock = 0;
+	iter = n;
+	onemore = 0;
+	i = 1;
+	while (onemore == 0)
+	{
+		onemore = 1;
+		i = 1;
+		while (i < iter)
+		{
+			if (ft_atol(av[i + 1]) < ft_atol(av[i]))
+			{
+				onemore = 0;
+				stock = av[i];
+				av[i] = av[i + 1];
+				av[i + 1] = stock;
+			}
+			i++;
+		}
+	}
 }

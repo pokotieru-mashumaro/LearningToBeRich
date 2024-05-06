@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_dst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:46 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/05 02:15:18 by komatsukota      ###   ########.fr       */
+/*   Updated: 2024/05/06 03:21:37 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	init_dst(t_dst **a, t_dst **b, int ac, char **av)
+void	init_dst(t_dst **a, t_dst **b, char **av)
 {
 	int	i;
-	int av_count;
+	int	av_count;
 
 	*a = NULL;
 	*b = NULL;
@@ -64,39 +64,39 @@ int	is_sorted_descending(t_dst **b)
 	return (1);
 }
 
-void	debug_boxes(t_dst **a, t_dst **b)
-{
-	int		i;
-	t_dst	*stock;
+// void	debug_boxes(t_dst **a, t_dst **b)
+// {
+// 	int		i;
+// 	t_dst	*stock;
 
-	printf("DEBUG start!!\n");
-	if (*a)
-	{
-		i = 0;
-		stock = *a;
-		while (stock->next)
-		{
-			printf("a: %d番目  =  %ld\n", i + 1, stock->value);
-			stock = stock->next;
-			i++;
-		}
-		printf("a: %d番目  =  %ld\n\n", i + 1, stock->value);
-		if (!b || !(*b))
-			return ;
-	}
-	if (*b)
-	{
-		i = 0;
-		stock = *b;
-		while (stock->next)
-		{
-			printf("b: %d番目  =  %ld\n", i + 1, stock->value);
-			stock = stock->next;
-			i++;
-		}
-		printf("b: %d番目  =  %ld\n", i + 1, stock->value);
-	}
-}
+// 	printf("DEBUG start!!\n");
+// 	if (*a)
+// 	{
+// 		i = 0;
+// 		stock = *a;
+// 		while (stock->next)
+// 		{
+// 			printf("a: %d番目  =  %ld\n", i + 1, stock->value);
+// 			stock = stock->next;
+// 			i++;
+// 		}
+// 		printf("a: %d番目  =  %ld\n\n", i + 1, stock->value);
+// 		if (!b || !(*b))
+// 			return ;
+// 	}
+// 	if (*b)
+// 	{
+// 		i = 0;
+// 		stock = *b;
+// 		while (stock->next)
+// 		{
+// 			printf("b: %d番目  =  %ld\n", i + 1, stock->value);
+// 			stock = stock->next;
+// 			i++;
+// 		}
+// 		printf("b: %d番目  =  %ld\n", i + 1, stock->value);
+// 	}
+// }
 
 // int	main(int ac, char **av)
 // {

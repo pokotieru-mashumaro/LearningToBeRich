@@ -62,3 +62,13 @@ void	ft_lstadd_back(t_dst **dst, t_dst *new)
 	new->prev = stock;
 	stock->next = new;
 }
+
+void	ft_lstclear(t_dst **lst)
+{
+	if (lst && *lst)
+	{
+		ft_lstclear(&(*lst)->next);
+		free(*lst);
+		*lst = NULL;
+	}
+}
