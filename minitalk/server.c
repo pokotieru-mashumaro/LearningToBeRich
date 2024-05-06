@@ -53,6 +53,7 @@ static void get_char_from_client(int sig, siginfo_t *info, void *context)
   static int client_pid;
   static char c;
   static int i;
+  int kill_flag;
 
   (void) context;
   if (!client_pid)
@@ -66,9 +67,9 @@ static void get_char_from_client(int sig, siginfo_t *info, void *context)
     if (c == '\0')
     {
       if (sig == SIGUSR1)
-        kill(client_pid, SIGUSR1);
+        kill_flag = kill(client_pid, SIGUSR1);
       else
-        kill(client_pid, SIGUSR2);
+        kill_flag = kill(client_pid, SIGUSR2);
       client_pid = 0;
       write(1, "\n", 1);
       return ;

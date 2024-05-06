@@ -14,14 +14,17 @@ static void f(int sig)
 static void send_to_server(int server_pid, char c)
 {
     int i;
+    int kill_flag;
 
     i = 0;
     while (i < 8)
     {
         if (c & (1 << i))
-            kill(server_pid, SIGUSR2);
+            kill_flag = kill(server_pid, SIGUSR2);
         else
-            kill(server_pid, SIGUSR1);
+            kill_flag = kill(server_pid, SIGUSR1);
+        if (kill_flag == -1)
+            return;
         usleep(100);
         i++;
     }
