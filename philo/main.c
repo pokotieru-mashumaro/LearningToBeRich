@@ -1,5 +1,12 @@
 #include "philo.h"
 
+#include <libc.h>
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q a.out");
+}
+
 /*
 - 人以上の哲学者が円卓に座っている。
 テーブルの中央にはスパゲッティが入った大きなボウルがある。
@@ -35,32 +42,24 @@ number_of_times_each_philosopher_must_eat (オプション引数)： すべて�
 隣の人が食事できるかをmutex
 */
 
-int	ft_atoi(char *str)
+void free_config(t_config *config)
 {
-	int			i;
-	int			minus;
-	long	ans;
-
-	i = 0;
-	minus = 1;
-	ans = 0;
-	if (str[i] == '-')
-	{
-		minus = -1;
-		i++;
-	}
-	while ('0' <= str[i] && str[i] <= '9')
-		ans = (ans * 10) + (str[i] - '0');
-	return (minus * ans);
+	free(config->philos);
+	free(config->forks);
+	free(config);
 }
 
 int main(int ac, char **av)
 {
-    t_rules *rules;
+    t_config *config;
 
     if (ac != 5 && ac != 6)
         return (0);
-    init_rules(rules, av);
-    printf("------\n");
+    config = init_config(av);
+	if (!config)
+		return 0;
+	ohhh_ikuzo(config);
+	free_config(config);
+    // printf("------\n");
     return 0;
 }

@@ -6,14 +6,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <pthread.h>
-# include <stdbool.h>
-# include <semaphore.h>
 # include <sys/time.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <sys/wait.h>
-# include <fcntl.h>
-# include <signal.h>
+
+struct s_config;
 
 typedef	struct s_philo
 {
@@ -21,10 +17,13 @@ typedef	struct s_philo
     int	right_fork_id;
 	int	left_fork_id;
     int eat_count;
+	long long last_meal_time;
+	struct s_config *config;
+	pthread_t thead;
 } t_philo;
 
 
-typedef struct s_rules
+typedef struct s_config
 {
 	int	number_of_philosophers;
 	int time_to_die;
@@ -33,15 +32,18 @@ typedef struct s_rules
 	int number_of_times_each_philosopher_must_eat;
     int is_dead;
     long long start_ms;
-    
     t_philo *philos;
-} t_rules;
+	int *forks;
+} t_config;
 
 
-int init_rules(t_rules *rules, char **av);
+void ohhh_ikuzo(t_config *config);
+
+t_config *init_config(char **av);
 
 long long get_milliseconds();
 
 int	ft_atoi(char *str);
+int	ft_usleep(int milliseconds);
 
 #endif
