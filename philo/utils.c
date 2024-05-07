@@ -24,3 +24,13 @@ int	ft_usleep(int milliseconds)
 		usleep(500);
 	return (0);
 }
+
+void ft_printff(t_philo *philo, char *s)
+{
+	t_config *config;
+
+	config = philo->config;
+	pthread_mutex_lock(&(config->printing));
+	printf("%lld %d %s\n", get_milliseconds() - config->start_ms, philo->id, s);
+	pthread_mutex_unlock(&(config->printing));
+}

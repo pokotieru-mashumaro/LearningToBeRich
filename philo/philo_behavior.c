@@ -1,18 +1,31 @@
 #include "philo.h"
 
-void give_me_the_fork()
+void give_me_the_fork(t_philo *philo)
 {
+	t_config *config;
 
+	config = philo->config;
+	pthread_mutex_lock(&config->forks[philo->left_fork_id]);
+	ft_printff(philo, "left fork");
+	pthread_mutex_lock(&config->forks[philo->right_fork_id]);
+	ft_printff(philo, "right fork");
+	ft_printff(philo, "eating");
+	ft_usleep(config->time_to_eat);
+	philo->eat_count++;
+	philo->last_meal_time = get_milliseconds();
+	pthread_mutex_unlock(&config->forks[philo->left_fork_id]);
+	pthread_mutex_unlock(&config->forks[philo->right_fork_id]);
 }
 
 void eating(t_philo *philo, int time_to_eat)
 {
+	ft_printff(philo, "eating");
 	ft_usleep(time_to_eat);
 	philo->last_meal_time = get_milliseconds();
 	philo->eat_count++;
 }
 
-void monitor(t_config *config)
+void finish(t_config *config)
 {
 	t_philo *philos;
 	int i;
@@ -24,6 +37,8 @@ void monitor(t_config *config)
 		pthread_join(philos[i].thead, NULL);
 		i++;
 	}
+	pthread_mutex_destroy(&config->i_would_like_to_have_a_fork);
+	pthread_mutex_destroy(&config->printing);
 }
 
 void *philo_routine(void *p)
@@ -37,7 +52,7 @@ void *philo_routine(void *p)
 	while (1)
 	{
 		printf("%d %lld\n", philo->id, get_milliseconds());
-		give_me_the_fork();
+		give_me_the_fork(philo);
 		eating(philo, config.time_to_eat);
 		ft_usleep(config.time_to_sleep);
 		break;
@@ -60,6 +75,5 @@ void ohhh_ikuzo(t_config *config)
 		philos[i].last_meal_time = get_milliseconds();
 		i++;
 	}
-	//以下に終了条件を満たすかを見るmonitor関数
-	monitor(config);
+	finish(config);
 }

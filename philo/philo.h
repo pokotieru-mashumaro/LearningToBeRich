@@ -33,7 +33,9 @@ typedef struct s_config
     int is_dead;
     long long start_ms;
     t_philo *philos;
-	int *forks;
+	pthread_mutex_t i_would_like_to_have_a_fork;
+	pthread_mutex_t printing;
+	pthread_mutex_t *forks;
 } t_config;
 
 
@@ -45,5 +47,6 @@ long long get_milliseconds();
 
 int	ft_atoi(char *str);
 int	ft_usleep(int milliseconds);
+void ft_printff(t_philo *philo, char *s);
 
 #endif
