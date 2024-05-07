@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void give_me_the_fork(t_philo *philo)
+void eating(t_philo *philo)
 {
 	t_config *config;
 
@@ -17,12 +17,25 @@ void give_me_the_fork(t_philo *philo)
 	pthread_mutex_unlock(&config->forks[philo->right_fork_id]);
 }
 
-void eating(t_philo *philo, int time_to_eat)
+void monitor(t_config *config)
 {
-	ft_printff(philo, "eating");
-	ft_usleep(time_to_eat);
-	philo->last_meal_time = get_milliseconds();
-	philo->eat_count++;
+	t_philo *philos;
+	int i;
+
+	philos = config->philos;
+	i = 0;
+	while (i < config->number_of_philosophers && !config->is_dead)
+	{
+		if (philos[i].last_meal_time -get_milliseconds() > config->time_to_die)
+		{
+			ft_printff(&philos[i], "die");
+			config->is_dead = 1;
+		}
+		if (config->is_dead)
+			break;
+		i++;
+	}
+
 }
 
 void finish(t_config *config)
@@ -37,7 +50,12 @@ void finish(t_config *config)
 		pthread_join(philos[i].thead, NULL);
 		i++;
 	}
-	pthread_mutex_destroy(&config->i_would_like_to_have_a_fork);
+	i = 0;
+	while (i < config->number_of_philosophers)
+	{
+		pthread_mutex_destroy(&config->forks[i]);
+		i++;
+	}
 	pthread_mutex_destroy(&config->printing);
 }
 
@@ -51,13 +69,14 @@ void *philo_routine(void *p)
 		usleep(200);
 	while (1)
 	{
-		printf("%d %lld\n", philo->id, get_milliseconds());
-		give_me_the_fork(philo);
-		eating(philo, config.time_to_eat);
+		eating(philo);
+		ft_printff(philo, "sleeping");
 		ft_usleep(config.time_to_sleep);
+		ft_printff(philo, "thinking");
 		break;
 	}
 	printf("%d %lld\n", philo->id, get_milliseconds());
+	return NULL;
 }
 
 void ohhh_ikuzo(t_config *config)

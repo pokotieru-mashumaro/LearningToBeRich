@@ -33,7 +33,6 @@ typedef struct s_config
     int is_dead;
     long long start_ms;
     t_philo *philos;
-	pthread_mutex_t i_would_like_to_have_a_fork;
 	pthread_mutex_t printing;
 	pthread_mutex_t *forks;
 } t_config;
