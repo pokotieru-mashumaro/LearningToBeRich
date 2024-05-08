@@ -15,22 +15,31 @@ int	ft_atoi(char *str)
 	return (ans);
 }
 
-int	ft_usleep(int milliseconds)
+long long get_milliseconds() 
 {
-	int	start;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
+
+int	ft_usleep(long long time)
+{
+	long long	start;
 
 	start = get_milliseconds();
-	while ((get_milliseconds() - start) < milliseconds)
-		usleep(500);
+	while ((get_milliseconds() - start) < time)
+		usleep(50);
 	return (0);
 }
 
 void ft_printff(t_philo *philo, char *s)
 {
 	t_config *config;
+	long long	time;
 
 	config = philo->config;
+	time = get_milliseconds() - config->start_ms;
 	pthread_mutex_lock(&(config->printing));
-	printf("%lld %d %s\n", get_milliseconds() - config->start_ms, philo->id, s);
+	printf("%lld %d %s\n", time, philo->id + 1, s);
 	pthread_mutex_unlock(&(config->printing));
 }

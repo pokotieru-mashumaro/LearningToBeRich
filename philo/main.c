@@ -1,11 +1,11 @@
 #include "philo.h"
 
-#include <libc.h>
+// #include <libc.h>
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q a.out");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q a.out");
+// }
 
 /*
 - 人以上の哲学者が円卓に座っている。
@@ -42,11 +42,15 @@ number_of_times_each_philosopher_must_eat (オプション引数)： すべて�
 隣の人が食事できるかをmutex
 */
 
-void free_config(t_config *config)
+int free_config(t_config *config)
 {
-	free(config->philos);
-	free(config->forks);
-	free(config);
+    if (config->philos != NULL)
+	    free(config->philos);
+    if (config->forks != NULL)
+	    free(config->forks);
+    if (config != NULL)
+	    free(config);
+    return 0;
 }
 
 int main(int ac, char **av)
@@ -57,9 +61,7 @@ int main(int ac, char **av)
         return (0);
     config = init_config(av);
 	if (!config)
-		return 0;
+		return free_config(config);
 	ohhh_ikuzo(config);
-	free_config(config);
-    // printf("------\n");
-    return 0;
+    return free_config(config);
 }

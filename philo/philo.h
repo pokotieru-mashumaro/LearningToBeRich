@@ -45,7 +45,7 @@ t_config *init_config(char **av);
 long long get_milliseconds();
 
 int	ft_atoi(char *str);
-int	ft_usleep(int milliseconds);
+int	ft_usleep(long long milliseconds);
 void ft_printff(t_philo *philo, char *s);
 
 #endif
