@@ -12,8 +12,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-all:
-	$(NAME)
+all: $(NAME)
 
 .c.o:
 	cc $(CFLAGS) -I $(INCLUDE) -c $< -o $@

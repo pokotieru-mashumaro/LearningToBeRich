@@ -1,0 +1,7 @@
+https://github.com/madebypixel02/minishell
+
+lexer (単語分割)
+parser (構文解析)
+expander (環境変数展開)
+executer (コマンド実行)
+
