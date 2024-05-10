@@ -21,10 +21,8 @@ typedef	struct s_philo
     int eat_count;
 	long long last_meal_time;
 	struct s_config *config;
-    int is_dead;
-	pthread_t thead;
+	pthread_t monitor;
 } t_philo;
-
 
 typedef struct s_config
 {
