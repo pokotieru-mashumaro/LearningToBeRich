@@ -1,5 +1,5 @@
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdio.h>
 # include <string.h>
@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+#include <sys/types.h>
 
 struct s_config;
 
@@ -36,19 +37,5 @@ typedef struct s_config
 	pthread_mutex_t eat_or_die;
 	pthread_mutex_t *forks;
 } t_config;
-
-
-void banquet_of_philosophers(t_config *config);
-void monitor(t_config *config);
-void finish(t_config *config);
-
-t_config *init_config(char **av);
-
-long long get_milliseconds();
-int all_eat_check(t_config *config);
-
-int	ft_atoi(char *str);
-int	ft_usleep(long long milliseconds);
-void ft_printff(t_philo *philo, char *s);
 
 #endif

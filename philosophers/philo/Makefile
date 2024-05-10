@@ -2,7 +2,7 @@ NAME = philo
 INCLUDE = philo.h
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = main.c init.c philo_behavior.c utils.c
+FILES = main.c init.c philo_behavior.c philo_tool.c utils.c
 OBJ = $(FILES:.c=.o)
 
 RM = rm -f
