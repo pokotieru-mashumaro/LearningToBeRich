@@ -57,14 +57,16 @@ int all_eat_check(t_config *config)
 {
 	t_philo *philos;
 	int i;
-
+	int eat_flag;
+	
 	philos = config->philos;
+	eat_flag = 1;
 	i = 0;
 	while (i < config->number_of_philosophers)
 	{
 		if (philos[i].eat_count < config->number_of_times_each_philosopher_must_eat)
-			return 0;
+			eat_flag = 0;
 		i++;
 	}
-	return 1;
+	return eat_flag;
 }
