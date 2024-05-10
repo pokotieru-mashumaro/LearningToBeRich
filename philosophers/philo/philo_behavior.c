@@ -43,7 +43,7 @@ static void *philo_routine(void *p)
 		eating(philo);
 		if (config.is_dead)
 			return NULL;
-		sleep(philo);
+		sleeping(philo);
 		thinking(philo);
 	}
 	return NULL;

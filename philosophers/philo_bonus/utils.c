@@ -14,8 +14,6 @@ int	ft_atoi(char *str)
 		ans = (ans * 10) + (str[i] - '0');
 		i++;
 	}
-	if (!str[i] || '0' > str[i] || str[i] < '9')
-		return -1;
 	return (ans);
 }
 
@@ -49,22 +47,4 @@ void ft_printff(t_philo *philo, char *s)
 		printf("%lld %d %s\n", time, philo->id + 1, s);
 		pthread_mutex_unlock(&(config->printing));
 	}
-}
-
-//0: 
-//1: all eat
-int all_eat_check(t_config *config)
-{
-	t_philo *philos;
-	int i;
-
-	philos = config->philos;
-	i = 0;
-	while (i < config->number_of_philosophers)
-	{
-		if (philos[i].eat_count < config->number_of_times_each_philosopher_must_eat)
-			return 0;
-		i++;
-	}
-	return 1;
 }

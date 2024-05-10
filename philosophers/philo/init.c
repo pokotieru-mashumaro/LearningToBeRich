@@ -55,5 +55,6 @@ t_config *init_config(char **av)
         return NULL;
     if (init_philos_forks(config))
         return NULL;
+    config->is_dead = 0;
     return config;
 }

@@ -1,5 +1,12 @@
 #include "philo_bonus.h"
 
+/*
+memset, printf, malloc, free, write, fork, kill,
+exit, pthread_create, pthread_detach, pthread_join,
+usleep, gettimeofday, waitpid, 
+sem_open 開く, sem_post ロック解除, sem_wait ロック, sem_unlink 閉じる
+*/
+
 int free_config(t_config *config)
 {
     if (config->philos != NULL)

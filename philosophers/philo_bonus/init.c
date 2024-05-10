@@ -1,39 +1,5 @@
 #include "philo.h"
 
-static int init_philos_forks(t_config *config)
-{
-    int i;
-    t_philo *philos;
-    pthread_mutex_t *forks;
-
-    i = 0;
-    philos = (t_philo *)malloc(config->number_of_philosophers * sizeof(t_config));
-    if (!philos)
-        return 1;
-    forks = (pthread_mutex_t *)malloc(config->number_of_philosophers * sizeof(pthread_mutex_t));
-    if (!forks)
-    {
-        free(philos);
-        return 1;
-    }
-    while (i < config->number_of_philosophers)
-    {
-        philos[i].id = i;
-        philos[i].right_fork_id = i;
-        philos[i].left_fork_id = (i + 1) % config->number_of_philosophers;
-        philos[i].eat_count = 0;
-        philos[i].last_meal_time = 0;
-        philos[i].config = config;
-        philos[i].thead = NULL;
-        if (pthread_mutex_init(&forks[i], NULL))
-            return 1;
-        i++;
-    }
-    config->philos = philos;
-    config->forks = forks;
-    return 0;
-}
-
 t_config *init_config(char **av)
 {
     t_config *config;

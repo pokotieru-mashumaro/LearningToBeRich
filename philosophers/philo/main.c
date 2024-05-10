@@ -58,7 +58,10 @@ int main(int ac, char **av)
     t_config *config;
 
     if (ac != 5 && ac != 6)
-        return (0);
+    {
+        printf("init error\n");
+        return 0;
+    }
     config = init_config(av);
 	if (!config)
     {
