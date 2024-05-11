@@ -18,16 +18,24 @@ static void parent(pid_t pid_child)
 }
 
 
-int main(void)
+int main(int ac, char **av, char **envp)
 {
-    pid_t pid;
-    pid = fork();
-    if(pid == -1)
-        err(EXIT_FAILURE, "fork() failed");
+    // pid_t pid;
+    // pid = fork();
+    // if(pid == -1)
+    //     err(EXIT_FAILURE, "fork() failed");
 
-    if(pid == 0)
-        child();
-    else
-        parent(pid);
+    // if(pid == 0)
+    //     child();
+    // else
+    //     parent(pid);
+    int i;
 
+    i = 0;
+    while (envp[i])
+    {
+        printf("%s\n", envp[i]);
+        i++;
+    }
+    return 0;
 }

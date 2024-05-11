@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:34:40 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/16 15:34:53 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:25:22 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	count_word(const char *s, char c)
+static int	count_word(const char *s, char c)
 {
 	int	count;
 

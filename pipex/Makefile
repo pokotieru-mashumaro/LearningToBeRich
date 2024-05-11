@@ -7,22 +7,22 @@ FOLDER = src
 ITEM_FOLDER = src/items
 LIBFT_FOLDER = src/libft
 
-FUNCTIONS	=	$(FOLDER)/push_swap.c $(FOLDER)/init_dst.c $(FOLDER)/ps_error.c $(FOLDER)/algo.c 
+FUNCTIONS	=	$(FOLDER)/pipex.c $(FOLDER)/excecute.c $(FOLDER)/utils.c $(FOLDER)/ft_split.c
 
 all: $(NAME)
 
 $(NAME):
-	cc $(CFLAGS) -I$(INCLUDE) $(FUNCTIONS) -o pipex
+	cc -I$(INCLUDE) $(FUNCTIONS) -o pipex
 
 fsanitize:
 	cc $(CFLAGS) -g -fsanitize=address -I$(INCLUDE) $(FUNCTIONS) -o pipex
 
 
 clean:
-	$(RM) push_swap
+	$(RM) pipex
 
 fclean: clean
-	$(RM) push_swap
+	$(RM) pipex
 
 re: clean all
 
