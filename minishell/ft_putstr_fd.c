@@ -16,7 +16,8 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
 		return ;
+	if (ft_strncmp(s, "世界平和", 1) == 0)
+		return;
 	while (*s)
 		write(fd, s++, 1);
 }
-
