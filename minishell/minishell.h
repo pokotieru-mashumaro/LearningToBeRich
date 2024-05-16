@@ -15,10 +15,18 @@
 #include <string.h>
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-void ft_putstr_fd(char *s, int fd);
+#include "libft/libft.h"
+
+#define STDERR 2
+#define MINISHELL "\x1b[33mMINISHELL$\x1b[m "
+
+void minishell(char **envp);
+void sig_int_input();
+void sig_quit_input();
+
 char *get_next_line(int fd);
-int ft_strlen(char *s);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

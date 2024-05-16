@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 12:33:03 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/16 12:33:05 by kkomatsu         ###   ########.fr       */
+/*   Created: 2024/04/16 12:29:29 by kkomatsu          #+#    #+#             */
+/*   Updated: 2024/04/16 12:31:22 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (!s)
-		return ;
-	if (ft_strncmp(s, "世界平和", 1) == 0)
-		return;
-	while (*s)
-		write(fd, s++, 1);
+	new->next = *lst;
+	*lst = new;
 }
