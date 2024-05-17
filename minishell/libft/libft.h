@@ -74,5 +74,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 
 int	ft_strcmp(char *s1, char *s2);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 #endif
