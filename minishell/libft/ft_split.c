@@ -6,13 +6,13 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:34:40 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/16 15:34:53 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:52:09 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int count_word(const char *s, char c)
+static int	count_word(const char *s, char c)
 {
 	int	count;
 

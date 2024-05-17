@@ -1,0 +1,16 @@
+.
+..
+.DS_Store
+.vscode
+Makefile
+a
+a.out
+aaa
+get_next_line.c
+libft
+main.c
+minishell
+minishell.h
+signal.c
+zlexer.c
+zzzdocyyy

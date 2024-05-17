@@ -68,8 +68,7 @@ heredoc; matsui
 
 フォーマット;
 cmd -option
-(file_name)
-redirect
+redirect <
 file name
 (redirect)
 ...
