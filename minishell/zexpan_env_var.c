@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void expan_logic2(char *word, char **ep, char **env_var)
+static char *expan_logic2(char *word, char **ep, char **env_var)
 {
 	char *stk;
 	int i;
@@ -14,11 +14,12 @@ static void expan_logic2(char *word, char **ep, char **env_var)
 			word++;
 		name = (char *)malloc(word - stk + 1);
 		i = -1;
-		while (i < word - stk)
+		while (++i < word - stk)
 			name[i] = stk[i];
 		name[i] = '\0';
 		*env_var = ft_strjoin(*env_var, getenv(name));
 	}
+	return word;
 }
 
 static char *expan_logic(char *word, char **ep)
@@ -43,14 +44,14 @@ static char *expan_logic(char *word, char **ep)
 		}
 		stk2[j] = '\0';
 		env_var = ft_strjoin(env_var, stk2);
-		expan_logic2(word, ep, &env_var);
+		word = expan_logic2(word, ep, &env_var);
 	}
 	return env_var;
 }
 
 char *expan_env_var(char *word, char **ep)
 {
-	if (!ft_strncmp(word, "\'", 1))
+	if (word[0] == '\'')
 		return word;
 	else
 		return expan_logic(word, ep);
@@ -58,7 +59,7 @@ char *expan_env_var(char *word, char **ep)
 
 // int main(int ac, char **av, char **ep)
 // {
-// 	printf("%s\n", expan_env_var(av[1], ep));
+// 	printf("%s\n", expan_env_var("emnvklvenl $LANG", ep));
 // 	// while (*ep)
 // 	// {
 // 	// 	printf("%s\n", *ep);
