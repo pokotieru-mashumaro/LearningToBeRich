@@ -14,16 +14,6 @@
 
 #include "minishell.h"
 
-//環境変数展開
-void	expan_env_var(char *word, char **ep)
-{
-	char	*env_var;
-	int word_len;
-	while (*word != '$')
-		word++;
-
-}
-
 int	quotes_is_odd(char *s)
 {
 	int	single_quotes;

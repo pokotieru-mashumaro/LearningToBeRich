@@ -57,4 +57,7 @@ void				sig_quit_input(void);
 
 char				*get_next_line(int fd);
 
+
+char *expan_env_var(char *word, char **ep);
+
 #endif
