@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:47:56 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/06 03:53:56 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/21 01:10:19 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,21 @@ void	many_pb(t_dst **a, t_dst **b)
 	return ;
 }
 
-int	under_five_av_checker(t_dst **a, t_dst **b, char **av)
+int	under_five_av_checker(t_dst **a, t_dst **b, char **av, t_config *conf)
 {
-	if (count_av(av) == 2)
+	if (conf->len == 2)
 	{
 		sa(a);
 		return (1);
 	}
-	if (count_av(av) == 3)
+	if (conf->len == 3)
 	{
 		three_arg(av, a, b);
 		return (1);
 	}
-	if (count_av(av) > 6)
+	if (conf->len > 6)
 	{
-		push_swap(a, b);
+		radix_sort(a, b, conf);
 		return (1);
 	}
 	return (0);
@@ -81,6 +81,7 @@ int	main(int ac, char **av)
 {
 	t_dst	**a;
 	t_dst	**b;
+	t_config * conf;
 
 	if (ac <= 2)
 		return (output_error());
@@ -96,14 +97,15 @@ int	main(int ac, char **av)
 		free(a);
 		return (0);
 	}
-	init_dst(a, b, av);
+	conf = (t_config *)malloc(sizeof(t_config));
+	init_dst(a, b, av, conf);
 	if (is_sorted_ascending(a))
 	{
 		ft_lstclear(a);
 		ft_lstclear(b);
 		return (0);
 	}
-	if (under_five_av_checker(a, b, av))
+	if (under_five_av_checker(a, b, av, conf))
 		return (0);
 	separated_by_pivot(av, a, b, get_pivot_num(av));
 	alg_1(a, b);

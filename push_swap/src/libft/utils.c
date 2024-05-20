@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:48:09 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/05 16:36:17 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/20 23:32:51 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

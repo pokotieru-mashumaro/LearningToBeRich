@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:23:35 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/05 16:04:19 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/21 00:51:06 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ static void	push(t_dst **send, t_dst **recieve)
 
 void	pa(t_dst **a, t_dst **b)
 {
-	if (!(*a) || !a)
-		return ;
-	push(a, b);
-	write(1, "pb\n", 3);
+	// if (!(*a) || !a)
+	// 	return ;
+	push(b, a);
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_dst **a, t_dst **b)
 {
-	if (!(*b) || !b)
-		return ;
-	push(b, a);
-	write(1, "pa\n", 3);
+	// if (!(*b) || !b)
+	// 	return ;
+	push(a, b);
+	write(1, "pb\n", 3);
 }

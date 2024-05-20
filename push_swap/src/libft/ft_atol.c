@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:24:14 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 17:19:17 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/20 22:44:07 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

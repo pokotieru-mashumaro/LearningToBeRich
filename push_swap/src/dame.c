@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   dame.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:32:51 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/06 03:26:33 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/20 21:25:15 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	three_arg(char **av, t_dst **a, t_dst **b)
 	bottom = ft_atol(av[2]);
 	if (top < middle && middle > bottom && top < bottom)
 	{
-		pa(a, b);
-		sa(a);
 		pb(a, b);
+		sa(a);
+		pa(a, b);
 	}
 	else if (top > middle && middle < bottom && top < bottom)
 		sa(a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dst_operation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:54 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/04/21 18:20:54 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/20 21:55:50 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_dst	*ft_lstnew(long value)
 	if (!new)
 		return (NULL);
 	new->value = value;
+	new->press_val = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

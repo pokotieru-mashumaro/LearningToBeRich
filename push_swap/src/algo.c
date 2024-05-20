@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:50 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/06 03:36:21 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/20 21:24:34 by komatsukota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ static int	phase_one(t_dst **a, t_dst **b)
 		}
 		if (is_sorted_ascending(a) && (!(*b) || !b))
 			return (1);
-		pa(a, b);
+		pb(a, b);
 		a_ptr = *a;
 	}
-	pa(a, b);
+	pb(a, b);
 	return (0);
 }
 
@@ -101,10 +101,10 @@ static int	phase_two(t_dst **a, t_dst **b)
 			sb(b);
 			b_ptr = *b;
 		}
-		pb(a, b);
+		pa(a, b);
 		b_ptr = *b;
 	}
-	pb(a, b);
+	pa(a, b);
 	return (0);
 }
 
