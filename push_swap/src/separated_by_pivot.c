@@ -32,12 +32,12 @@ void	separated_by_pivot(char **av, t_dst **a, t_dst **b, long pivot_num)
 
 	a_ptr = *a;
 	i = 0;
-	max = count_av(av);
+	max = count_av(av) - 1;
 	while (a_ptr->next && i < max)
 	{
 		if (a_ptr->value <= pivot_num)
 		{
-			pa(a, b);
+			pb(a, b);
 			a_ptr = *a;
 			i++;
 		}

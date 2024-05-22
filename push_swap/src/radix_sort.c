@@ -37,23 +37,23 @@ void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 	}
 }
 
-int main(int ac, char **av)
-{
-	t_dst	**a;
-	t_dst	**b;
-	t_config * conf;
+// int main(int ac, char **av)
+// {
+// 	t_dst	**a;
+// 	t_dst	**b;
+// 	t_config * conf;
 
-	a = (t_dst **)malloc(sizeof(t_dst *));
-	if (!a)
-		return (0);
-	b = (t_dst **)malloc(sizeof(t_dst *));
-	if (!b)
-	{
-		free(a);
-		return (0);
-	}
-	conf = (t_config *)malloc(sizeof(t_config));
-	init_dst(a, b, av, conf);
-	radix_sort(a, b, conf);
-	return 0;
-}
+// 	a = (t_dst **)malloc(sizeof(t_dst *));
+// 	if (!a)
+// 		return (0);
+// 	b = (t_dst **)malloc(sizeof(t_dst *));
+// 	if (!b)
+// 	{
+// 		free(a);
+// 		return (0);
+// 	}
+// 	conf = (t_config *)malloc(sizeof(t_config));
+// 	init_dst(a, b, av, conf);
+// 	radix_sort(a, b, conf);
+// 	return 0;
+// }

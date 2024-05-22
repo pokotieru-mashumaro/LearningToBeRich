@@ -19,7 +19,9 @@ void	init_dst(t_dst **a, t_dst **b, char **av, t_config *conf)
 	long *arr;
 
 	*a = (t_dst *)malloc(sizeof(t_dst));
-	*b = (t_dst *)malloc(sizeof(t_dst));;
+	*b = (t_dst *)malloc(sizeof(t_dst));
+	if (!*a || !*b)
+		exit(0);
 	av_count = 0;
 	while (av[av_count])
 		av_count++;
@@ -28,14 +30,12 @@ void	init_dst(t_dst **a, t_dst **b, char **av, t_config *conf)
 	arr = coordinate_press(av, av_count);
 	conf->len = av_count;
 	conf->max_num = av_count - 1;
-	// printf("^^^^^^^\n");
-	*a = NULL;
-	*b = NULL;
 	while (i < av_count)
 	{
 		ft_lstadd_back(a, ft_lstnew(arr[i]));
 		i++;
 	}
+	free(arr);
 }
 
 int	is_sorted_ascending(t_dst **a)
@@ -72,40 +72,40 @@ int	is_sorted_descending(t_dst **b)
 	return (1);
 }
 
-void	debug_boxes(t_dst **a, t_dst **b)
-{
-	int		i;
-	t_dst	*stock;
+// void	debug_boxes(t_dst **a, t_dst **b)
+// {
+// 	int		i;
+// 	t_dst	*stock;
 
-	printf("DEBUG start!!\n");
-	if (*a)
-	{
-		i = 0;
-		stock = *a;
-		while (stock->next)
-		{
-			printf("a: %d番目  =  %ld\n", i + 1, stock->value);
-			stock = stock->next;
-			i++;
-		}
-		printf("a: %d番目  =  %ld\n\n", i + 1, stock->value);
-		if (!b || !(*b))
-			return ;
-	}
-	if (*b)
-	{
-		i = 0;
-		stock = *b;
-		while (stock->next)
-		{
-			printf("b: %d番目  =  %ld\n", i + 1, stock->value);
-			stock = stock->next;
-			i++;
-		}
-		printf("b: %d番目  =  %ld\n", i + 1, stock->value);
-	}
-	printf("---------------------------\n");
-}
+// 	printf("DEBUG start!!\n");
+// 	if (*a)
+// 	{
+// 		i = 0;
+// 		stock = *a;
+// 		while (stock->next)
+// 		{
+// 			printf("a: %d番目  =  %ld\n", i + 1, stock->value);
+// 			stock = stock->next;
+// 			i++;
+// 		}
+// 		printf("a: %d番目  =  %ld\n\n", i + 1, stock->value);
+// 		if (!b || !(*b))
+// 			return ;
+// 	}
+// 	if (*b)
+// 	{
+// 		i = 0;
+// 		stock = *b;
+// 		while (stock->next)
+// 		{
+// 			printf("b: %d番目  =  %ld\n", i + 1, stock->value);
+// 			stock = stock->next;
+// 			i++;
+// 		}
+// 		printf("b: %d番目  =  %ld\n", i + 1, stock->value);
+// 	}
+// 	printf("---------------------------\n");
+// }
 
 // int	main(int ac, char **av)
 // {

@@ -62,7 +62,7 @@ int	is_av_error(char **av)
 	int		j;
 	char	**stock;
 
-	i = 0;
+	i = 1;
 	stock = (char **)malloc(sizeof(char *) * count_av(av));
 	if (!stock || count_av(av) == 0)
 	{
@@ -77,7 +77,7 @@ int	is_av_error(char **av)
 			free(stock);
 			return (1);
 		}
-		j = 0;
+		j = 1;
 		while (stock[j])
 		{
 			if (ft_strcmp(av[i], stock[j]) == 0)

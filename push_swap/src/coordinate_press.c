@@ -63,6 +63,8 @@ long *coordinate_press(char** av, int len)
 	av++;
 	arr = sort(av, len);
     ret = (long*)malloc(len * sizeof(long));
+	if (!ret || !arr)
+		exit(0);
 	i = 0;
 	while (i < len)
 	{
