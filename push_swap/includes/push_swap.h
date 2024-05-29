@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:12:25 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/21 01:01:08 by komatsukota      ###   ########.fr       */
+/*   Updated: 2024/05/22 18:24:00 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ typedef struct s_dst
 
 typedef struct s_config
 {
-	int len;
-	int max_num;
-} t_config;
+	int				len;
+	int				max_num;
+}					t_config;
 
-
-void	init_dst(t_dst **a, t_dst **b, char **av, t_config *conf);
+void				init_dst(t_dst **a, t_dst **b, char **av, t_config *conf);
 
 int					is_av_error(char *av[]);
 int					output_error(void);
@@ -78,8 +77,7 @@ void				rra(t_dst **a);
 void				rrb(t_dst **b);
 void				rrr(t_dst **a, t_dst **b);
 
-
-long *coordinate_press(char** av, int len);
-void	radix_sort(t_dst **a, t_dst **b, t_config *conf);
+long				*coordinate_press(char **av, int len);
+void				radix_sort(t_dst **a, t_dst **b, t_config *conf);
 
 #endif

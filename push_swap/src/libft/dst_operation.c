@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dst_operation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 14:13:54 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/20 21:55:50 by komatsukota      ###   ########.fr       */
+/*   Updated: 2024/05/22 17:53:58 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_dst	*ft_lstnew(long value)
 {
 	t_dst	*new;
 
-	new = malloc(sizeof(t_dst));
+	new = (t_dst *)malloc(sizeof(t_dst));
 	if (!new)
 		return (NULL);
 	new->value = value;

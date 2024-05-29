@@ -6,11 +6,19 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:47:51 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/06 03:50:28 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:45:39 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+
+static int	ft_isdigit(int c)
+{
+	if (48 <= c && c <= 57)
+		return (1);
+	return (0);
+}
 
 static int	is_int(char *s)
 {
@@ -21,15 +29,16 @@ static int	is_int(char *s)
 	i = 0;
 	zero_count = 0;
 	max = ft_strlen(s);
-	if (max == 1 && (s[i] < '0' || '9' < s[i]))
+	if (max == 1 && !ft_isdigit(s[i]))
 		return (0);
 	while (s[zero_count] == '0')
 		zero_count++;
 	while (i < max)
 	{
-		if ((s[0] != '-'))
-			if (s[i] < '0' || '9' < s[i])
-				return (0);
+		if (s[0] != '-' && !ft_isdigit(s[i]))
+			return (0);
+		if (i != 0 && !ft_isdigit(s[i]))
+			return (0);
 		if (s[0] == '-' && s[1] == '0')
 			return (0);
 		i++;
@@ -56,38 +65,44 @@ void	free_char_pp(char **av)
 	free(av);
 }
 
+void	error_component(char **stk, char **av, int i)
+{
+	int	j;
+
+	j = 1;
+	while (stk[j])
+	{
+		if (ft_strcmp(av[i], stk[j]) == 0)
+		{
+			write(1, "Error\n", 6);
+			exit(0);
+		}
+		j++;
+	}
+	stk[i] = av[i];
+}
+
 int	is_av_error(char **av)
 {
 	int		i;
-	int		j;
 	char	**stock;
 
 	i = 1;
 	stock = (char **)malloc(sizeof(char *) * count_av(av));
 	if (!stock || count_av(av) == 0)
 	{
-		free(stock);
-		return (1);
+		write(1, "Error\n", 6);
+		exit(0);
 	}
 	while (i < count_av(av))
 	{
 		stock[i] = NULL;
 		if (!is_int(av[i]))
 		{
-			free(stock);
-			return (1);
+			write(1, "Error\n", 6);
+			exit(0);
 		}
-		j = 1;
-		while (stock[j])
-		{
-			if (ft_strcmp(av[i], stock[j]) == 0)
-			{
-				free(stock);
-				return (1);
-			}
-			j++;
-		}
-		stock[i] = av[i];
+		error_component(stock, av, i);
 		i++;
 	}
 	free(stock);

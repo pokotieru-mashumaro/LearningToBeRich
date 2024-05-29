@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: komatsukotarou <komatsukotarou@student.    +#+  +:+       +#+        */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:47:56 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/05/21 01:27:16 by komatsukota      ###   ########.fr       */
+/*   Updated: 2024/05/28 18:27:34 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-#include <libc.h>
+// #include <libc.h>
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q push_swap");
-}
+// __attribute__((destructor)) static void destructor()
+// {
+// 	system("leaks -q push_swap");
+// }
 
 int	count_av(char **av)
 {
@@ -56,7 +56,7 @@ int	under_five_av_checker(t_dst **a, t_dst **b, char **av, t_config *conf)
 		three_arg(av, a, b);
 		return (1);
 	}
-	if (conf->len > 10)
+	if (conf->len > 6)
 	{
 		radix_sort(a, b, conf);
 		return (1);
@@ -66,11 +66,13 @@ int	under_five_av_checker(t_dst **a, t_dst **b, char **av, t_config *conf)
 
 int	main(int ac, char **av)
 {
-	t_dst	**a;
-	t_dst	**b;
-	t_config * conf;
+	t_dst		**a;
+	t_dst		**b;
+	t_config	*conf;
 
-	if (ac <= 2)
+	if (ac <= 1)
+		exit(0);
+	if (ac == 2)
 		return (output_error());
 	if (is_av_error(av))
 		return (output_error());

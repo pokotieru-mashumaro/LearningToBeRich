@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/22 17:40:06 by kkomatsu          #+#    #+#             */
+/*   Updated: 2024/05/28 17:17:28 by kkomatsu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 // https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e
@@ -10,9 +22,9 @@ static long	get_top(t_dst *dst)
 
 void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 {
-	int	max_bits;
-	int	i;
-	int	j;
+	int		max_bits;
+	int		i;
+	int		j;
 	long	num;
 
 	max_bits = 0;
@@ -25,7 +37,7 @@ void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 		while (j < conf->len)
 		{
 			num = get_top(*a);
-			if (num & (1<<i))
+			if (num & (1 << i))
 				ra(a);
 			else
 				pb(a, b);
@@ -55,5 +67,5 @@ void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 // 	conf = (t_config *)malloc(sizeof(t_config));
 // 	init_dst(a, b, av, conf);
 // 	radix_sort(a, b, conf);
-// 	return 0;
+// 	return (0);
 // }
