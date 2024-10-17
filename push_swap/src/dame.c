@@ -12,31 +12,31 @@
 
 #include "../includes/push_swap.h"
 
-void	three_arg(char **av, t_dst **a, t_dst **b)
+void	three_arg(t_dst **a, t_dst **b)
 {
 	long	top;
 	long	middle;
-	long	bottom;
 
-	top = ft_atol(av[0]);
-	middle = ft_atol(av[1]);
-	bottom = ft_atol(av[2]);
-	if (top < middle && middle > bottom && top < bottom)
+	top = (*a)->value;
+	middle = (*a)->next->value;
+
+	//132 213 231 312 321
+	if (top == 0 && middle == 2)
 	{
 		pb(a, b);
 		sa(a);
 		pa(a, b);
 	}
-	else if (top > middle && middle < bottom && top < bottom)
+	else if (top == 1 && middle == 0)
 		sa(a);
-	else if (top < middle && middle > bottom && top > bottom)
+	else if (top == 1 && middle == 2)
 		rra(a);
-	else if (top > middle && middle < bottom && top > bottom)
+	else if (top == 2 && middle == 0)
 		ra(a);
-	else if (top > middle && middle > bottom && top > bottom)
+	else if (top == 2 && middle == 1)
 	{
+		ra(a);
 		sa(a);
-		rra(a);
 	}
 	return ;
 }
@@ -47,7 +47,7 @@ return (1); swap a
 return (2); swap b
 return (3); swap a and b
 */
-int	is_swap(t_dst **a, t_dst **b)
+static int	is_swap(t_dst **a, t_dst **b)
 {
 	int		a_flag;
 	int		b_flag;
@@ -81,7 +81,7 @@ return (1); rotate a
 return (2); rotate b
 return (3); rotate a and b
 */
-int	is_rotate(t_dst **a, t_dst **b)
+static int	is_rotate(t_dst **a, t_dst **b)
 {
 	int	a_flag;
 	int	b_flag;
@@ -102,7 +102,7 @@ int	is_rotate(t_dst **a, t_dst **b)
 		return (0);
 }
 
-void	let_go(t_dst **a, t_dst **b, int is_swap, int is_rotate)
+static void	let_go(t_dst **a, t_dst **b, int is_swap, int is_rotate)
 {
 	int	is_sort_a;
 	int	is_sort_b;

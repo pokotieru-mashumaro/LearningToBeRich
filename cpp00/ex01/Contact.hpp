@@ -5,8 +5,6 @@
 # include <iostream>
 # include <string>
 
-using namespace	std;
-
 class Contact
 {
   public:
@@ -14,11 +12,11 @@ class Contact
 	~Contact(void);
 
   private:
-	string firstName;
-	string lastName;
-	string nickName;
-	string phoneNumber;
-	string darkestSecret;
+	std::string firstName;
+	std::string lastName;
+	std::string nickName;
+	std::string phoneNumber;
+	std::string darkestSecret;
 
   public:
 	void setItems(void);

@@ -29,7 +29,7 @@ void	ft_putstr_fd(char *s, char *a, int fd)
 int	main_executable(char *av[], int i, int tmp_fd, char **env)
 {
 	av[i] = NULL;
-	dup2(tmp_fd, STDIN_FILENO);
+	dup2(tmp_fd, 0);
 	close(tmp_fd);
 	execve(av[0], av, env);
 	ft_putstr_fd("error: cannot execute ", av[0], 2);
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	i = 0;
-	tmp_fd = dup(STDIN_FILENO);
+	tmp_fd = dup(0);
 	while (av[i] && av[i + 1])
 	{
 		av = &av[i + 1];
@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **env)
 			{
 				close(tmp_fd);
 				waitpid(-1, NULL, 0);
-				tmp_fd = dup(STDIN_FILENO);
+				tmp_fd = dup(0);
 			}
 		}
 		else if (i != 0 && strcmp(av[i], "|") == 0)
@@ -78,7 +78,7 @@ int	main(int ac, char **av, char **env)
 			pipe(fd);
 			if (fork() == 0)
 			{
-				dup2(fd[1], STDOUT_FILENO);
+				dup2(fd[1], 1);
 				close(fd[0]);
 				close(fd[1]);
 				if (main_executable(av, i, tmp_fd, env))

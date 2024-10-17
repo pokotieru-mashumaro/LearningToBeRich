@@ -60,7 +60,7 @@ void				separated_by_pivot(char **av, t_dst **a, t_dst **b,
 int					alg_1(t_dst **a, t_dst **b);
 void				many_pb(t_dst **a, t_dst **b);
 int					count_av(char **av);
-void				three_arg(char **av, t_dst **a, t_dst **b);
+void				three_arg(t_dst **a, t_dst **b);
 
 void				sa(t_dst **a);
 void				sb(t_dst **b);

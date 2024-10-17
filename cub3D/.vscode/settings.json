@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cub3d.h": "c",
+        "bitset": "c",
+        "stdlib.h": "c",
+        "math.h": "c",
+        "mlx.h": "c",
+        "mlx_sample.h": "c",
+        "ratio": "cpp"
+    }
+}

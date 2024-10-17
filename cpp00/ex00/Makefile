@@ -6,7 +6,7 @@ RM			=	rm -f
 OBJS		=	$(SRCS:.cpp=.o)
 
 %.o: %.cpp
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 

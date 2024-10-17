@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 22:02:13 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/07/14 23:41:07 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/07/16 10:29:04 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,13 @@ int	main(int ac, char **av, char **ep)
 		{
 			if (!fork())
 			{
+				exec(av, i, tmp_fd, ep);
 			}
 			else
 			{
+				close(tmp_fd);
+				waitpid(-1, NULL, 0);
+				tmp_fd = dup(0);
 			}
 		}
         else if (av[i] && strcmp(av[i], "|"))
@@ -74,9 +78,16 @@ int	main(int ac, char **av, char **ep)
             pipe(fd);
             if (!fork())
 			{
+				dup2(fd[1], 1);
+				close(fd[0]);
+				close(fd[1]);
+				exec(av, i, tmp_fd, ep);
 			}
 			else
 			{
+				close(fd[1]);
+				close(tmp_fd);
+				tmp_fd = fd[0];
 			}
         }
 	}

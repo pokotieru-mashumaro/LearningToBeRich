@@ -52,6 +52,11 @@ void	ft_lstadd_back(t_dst **dst, t_dst *new)
 {
 	t_dst	*stock;
 
+	if (!new)
+	{
+		ft_lstclear(dst);
+		exit(0);
+	}
 	if (!(*dst) || !dst)
 	{
 		*dst = new;

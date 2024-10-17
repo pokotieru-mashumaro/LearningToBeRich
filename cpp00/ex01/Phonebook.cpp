@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 18:03:16 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/06/28 23:48:20 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:35:13 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-
-using namespace	std;
 
 PhoneBook::PhoneBook(void)
 {
@@ -49,7 +47,7 @@ void PhoneBook::addContact(void)
 	}
 }
 
-static int	check_id_str(string id_str)
+static int	check_id_str(std::string id_str)
 {
 	int	i;
 
@@ -65,19 +63,19 @@ static int	check_id_str(string id_str)
 
 static void put_title(void)
 {
-	cout << "       Id |First Name| LastName | Nickname " << endl;
-	cout << "-------------------------------------------" << endl;
+	std::cout << "       Id |First Name| LastName | Nickname " << std::endl;
+	std::cout << "-------------------------------------------" << std::endl;
 }
 
 void PhoneBook::searchContact(void)
 {
-	string id_str;
+	std::string id_str;
     int i;
 	int id;
 
 	if (_total_contacts == 0)
 	{
-		cout << endl << "🚨 🤬🤬 contact does not exist🤬🤬 🚨" << endl << endl;
+		std::cout << std::endl << "🚨 🤬🤬 contact does not exist🤬🤬 🚨" << std::endl << std::endl;
 		return ;
 	}
     i = 0;
@@ -88,20 +86,20 @@ void PhoneBook::searchContact(void)
         i++;
     }
 	id = -1;
-	cout << "Enter the id of the search target : ";
-	getline(cin, id_str);
+	std::cout << "Enter the id of the search target : ";
+	getline(std::cin, id_str);
     if (!check_id_str(id_str) || id_str == "")
     {
-        cout << endl << "🚨 🤬🤬 only accepts positive integers 🤬🤬 🚨" << endl << endl;
+        std::cout << std::endl << "🚨 🤬🤬 only accepts positive integers 🤬🤬 🚨" << std::endl << std::endl;
         return ;
     }
 	id = stoi(id_str);
     if (id >= _total_contacts)
     {
-        cout << endl << "🚨 🤬🤬 This id does not exist 🤬🤬 🚨" << endl << endl;
+        std::cout << std::endl << "🚨 🤬🤬 This id does not exist 🤬🤬 🚨" << std::endl << std::endl;
         return ;
     }
-	cout << endl;
+	std::cout << std::endl;
 	_contacts[id].output_me_all();
-	cout << endl;
+	std::cout << std::endl;
 }

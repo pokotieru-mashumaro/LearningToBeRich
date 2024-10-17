@@ -44,7 +44,7 @@ void	many_pb(t_dst **a, t_dst **b)
 	return ;
 }
 
-int	under_five_av_checker(t_dst **a, t_dst **b, char **av, t_config *conf)
+int	under_five_av_checker(t_dst **a, t_dst **b, t_config *conf)
 {
 	if (conf->len == 2)
 	{
@@ -53,7 +53,7 @@ int	under_five_av_checker(t_dst **a, t_dst **b, char **av, t_config *conf)
 	}
 	if (conf->len == 3)
 	{
-		three_arg(av, a, b);
+		three_arg(a, b);
 		return (1);
 	}
 	if (conf->len > 6)
@@ -84,7 +84,7 @@ int	main(int ac, char **av)
 	init_dst(a, b, av, conf);
 	if (is_sorted_ascending(a))
 		exit(0);
-	if (under_five_av_checker(a, b, av, conf))
+	if (under_five_av_checker(a, b, conf))
 		exit(0);
 	separated_by_pivot(av, a, b, get_pivot_num(av));
 	alg_1(a, b);

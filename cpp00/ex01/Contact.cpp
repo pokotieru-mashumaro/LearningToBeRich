@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:21 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/06/28 23:41:28 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:34:00 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
-
-using namespace	std;
 
 Contact::Contact(void)
 {
@@ -29,30 +27,30 @@ Contact::~Contact(void)
 
 void Contact::setItems(void)
 {
-	cout << "Please enter the following." << endl;
-	cout << "First name    : ";
-	getline(cin, firstName);
-	cout << "Last name     : ";
-	getline(cin, lastName);
-	cout << "Nick name     : ";
-	getline(cin, nickName);
-	cout << "Phone number  : ";
-	getline(cin, phoneNumber);
-	cout << "Darker secret : ";
-	getline(cin, darkestSecret);
-	cout << endl << "thank you!! 😻" << endl << endl;
+	std::cout << "Please enter the following." << std::endl;
+	std::cout << "First name    : ";
+	getline(std::cin, firstName);
+	std::cout << "Last name     : ";
+	getline(std::cin, lastName);
+	std::cout << "Nick name     : ";
+	getline(std::cin, nickName);
+	std::cout << "Phone number  : ";
+	getline(std::cin, phoneNumber);
+	std::cout << "Darker secret : ";
+	getline(std::cin, darkestSecret);
+	std::cout << std::endl << "thank you!! 😻" << std::endl << std::endl;
 }
 
 void Contact::output_me_all(void)
 {
-	cout << "First name    : " << firstName << endl;
-	cout << "Last name     : " << lastName << endl;
-	cout << "Nick name     : " << nickName << endl;
-	cout << "Phone number  : " << phoneNumber << endl;
-	cout << "Darker secret : " << darkestSecret << endl;
+	std::cout << "First name    : " << firstName << std::endl;
+	std::cout << "Last name     : " << lastName << std::endl;
+	std::cout << "Nick name     : " << nickName << std::endl;
+	std::cout << "Phone number  : " << phoneNumber << std::endl;
+	std::cout << "Darker secret : " << darkestSecret << std::endl;
 }
 
-static void	print_limit_ten(string s)
+static void	print_limit_ten(std::string s)
 {
 	int	i;
 	int space_count;
@@ -63,7 +61,7 @@ static void	print_limit_ten(string s)
 	len = s.size();
 	while (len != 10 && 10 - len > 0 && i < 10 - len)
 	{
-		cout << " ";
+		std::cout << " ";
 		i++;
 		space_count++;
 	}
@@ -71,22 +69,22 @@ static void	print_limit_ten(string s)
 	{
 		if (i == 9 && s[i + 1 - space_count])
 		{
-			cout << ".";
+			std::cout << ".";
 			break ;
 		}
-		cout << s[i - space_count];
+		std::cout << s[i - space_count];
 		i++;
 	}
 }
 
 void Contact::output_me_restricted(int index)
 {
-	print_limit_ten(to_string(index)); 
-	cout << "|";
+	print_limit_ten(std::to_string(index)); 
+	std::cout << "|";
 	print_limit_ten(firstName); 
-	cout  << "|";
+	std::cout  << "|";
 	print_limit_ten(lastName); 
-	cout  << "|";
+	std::cout  << "|";
 	print_limit_ten(nickName); 
-	cout  << endl;
+	std::cout << std::endl;
 }

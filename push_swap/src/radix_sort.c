@@ -15,11 +15,6 @@
 // https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e
 //箱が2つなのでビット演算を用いる
 
-static long	get_top(t_dst *dst)
-{
-	return (dst->value);
-}
-
 void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 {
 	int		max_bits;
@@ -36,7 +31,7 @@ void	radix_sort(t_dst **a, t_dst **b, t_config *conf)
 		j = 0;
 		while (j < conf->len)
 		{
-			num = get_top(*a);
+			num = (*a)->value;
 			if (num & (1 << i))
 				ra(a);
 			else

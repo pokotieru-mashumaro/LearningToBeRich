@@ -6,7 +6,7 @@
 /*   By: kkomatsu <kkomatsu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 18:08:07 by kkomatsu          #+#    #+#             */
-/*   Updated: 2024/06/28 22:31:46 by kkomatsu         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:34:27 by kkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 int main(void)
 {
-    string prompt;
+    std::string prompt;
     PhoneBook phonebook;
 
     while (1)
     {
-        cout << "ENTER [ADD SEARCH EXIT] 🫡: " << endl;
-        cout << "> ";
-        if (!getline(cin, prompt))
+        std::cout << "ENTER [ADD SEARCH EXIT] 🫡: " << std::endl;
+        std::cout << "> ";
+        if (!getline(std::cin, prompt))
             break ;           
         if (prompt == "ADD")
             phonebook.addContact();
@@ -35,9 +33,9 @@ int main(void)
             break;
         else if (prompt != "")
         {
-            cout << endl;
-            cout << "🚨 🤬🤬 What the fuck is this 🤬🤬 🚨" << endl;
-            cout << endl;
+            std::cout << std::endl;
+            std::cout << "🚨 🤬🤬 What the fuck is this 🤬🤬 🚨" << std::endl;
+            std::cout << std::endl;
         }
     }
     return 0;
