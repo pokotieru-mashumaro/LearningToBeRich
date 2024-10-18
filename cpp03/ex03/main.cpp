@@ -1,5 +1,4 @@
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main(void)
 {
@@ -24,7 +23,6 @@ int main(void)
         std::cout << std::endl;
     }
     {
-
         std::cout << "\n\nScavTrap" << std::endl;
         ScavTrap c;
         ScavTrap d("アルキメデス");
@@ -57,6 +55,20 @@ int main(void)
         e.takeDamage(1);
         e.attack("Bot2");
         f.highFivesGuys();
+        std::cout << std::endl;
+    }
+    {
+        std::cout << "\n\nDiamondTrap" << std::endl;
+        DiamondTrap a;
+        DiamondTrap b("魔王");
+        DiamondTrap c(a);
+
+        std::cout << std::endl;
+        a.whoAmI();
+        a.attack("Bot1");
+        b.whoAmI();
+        b.attack("Bot2");
+        c.whoAmI();
         std::cout << std::endl;
     }
     return (0);
