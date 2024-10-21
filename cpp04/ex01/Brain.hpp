@@ -1,5 +1,5 @@
-#ifndef   Animal_HPP
-#define   Animal_HPP
+#ifndef   Brain_HPP
+#define   Brain_HPP
 
 #include <iostream>
 

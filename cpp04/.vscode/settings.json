@@ -71,6 +71,7 @@
         "thread": "cpp",
         "complex": "cpp",
         "deque": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "iostream": "cpp"
     }
 }
