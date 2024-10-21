@@ -1,17 +1,23 @@
 NAME		=	phonebook
 SRCS		=	main.cpp Phonebook.cpp Contact.cpp
-CC			=	g++
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
-RM			=	rm -f
-OBJS		=	$(SRCS:.cpp=.o)
+INC_DIR        =    .
+CC            =    g++
+CFLAGS        =    -Wall -Wextra -Werror -std=c++98
+DBUG = -fsanitize=address -fno-omit-frame-pointer -g
+RM            =    rm -f
+OBJS        =    $(SRCS:.cpp=.o)
 
 %.o: %.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
+
+debug: $(OBJS)
+	@$(CC) $(DBUG) $(CFLAGS) $^ -o $(NAME)
+
 
 fclean: clean
 	@$(RM) $(NAME)
@@ -19,6 +25,6 @@ fclean: clean
 clean:
 	@$(RM) $(OBJS)
 
-re:	fclean all
+re:    fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:    all clean fclean re
