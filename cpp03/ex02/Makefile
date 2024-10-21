@@ -3,6 +3,7 @@ SRCS		=	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 INC_DIR        =    .
 CC            =    g++
 CFLAGS        =    -Wall -Wextra -Werror -std=c++98
+DBUG = -fsanitize=address -fno-omit-frame-pointer -g
 RM            =    rm -f
 OBJS        =    $(SRCS:.cpp=.o)
 
@@ -13,6 +14,10 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
+
+debug: $(OBJS)
+	@$(CC) $(DBUG) $(CFLAGS) $^ -o $(NAME)
+
 
 fclean: clean
 	@$(RM) $(NAME)
