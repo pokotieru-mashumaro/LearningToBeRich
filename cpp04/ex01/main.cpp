@@ -4,11 +4,14 @@ Brainクラスを実装します。
 このクラスには、ideasという名前の100個のstd::stringの配列が含まれます。
 これにより、DogとCatはBrain*のプライベート属性を持つことになります。
 DogとCatは、作成時にnew Brain();を使用してBrainを作成します。
-DogとCatは、破棄時にBrainを削除します。main関数で、Animalオブジェクトの配列を作成し、その配列にデータを入れます。
+DogとCatは、破棄時にBrainを削除します。
+
+main関数で、Animalオブジェクトの配列を作成し、その配列にデータを入れます。
 配列の半分はDogオブジェクト、残りの半分はCatオブジェクトです。
 プログラムの実行が終了したら、この配列をループ処理してすべての Animal を削除します。
 犬と猫は直接 Animal として削除しなければなりません。
 適切なデストラクタが想定通りの順序で呼び出されるようにしなければなりません。メモリリークのチェックも忘れないでください。
+
 Dog や Cat のコピーはシャローコピーであってはなりません。したがって、コピーがディープコピーであることを確認する必要があります。
 */
 
@@ -20,40 +23,54 @@ Dog や Cat のコピーはシャローコピーであってはなりません�
 
 int main()
 {
-    {
-        std::cout << "Animal -----------------------\n" << std::endl;
+	const Animal	*meta[6];
 
-        const Animal *ani = new Animal();
-        const Animal *j = new Dog();
+    for (int i = 0; i < 10; i++)
+	{
+		if (i < 3)
+		{
+			meta[i] = new Dog();
+			if (meta[i] == NULL)
+				return(1);
+		}
+		else
+		{
+			meta[i] = new Cat();
+			if (meta[i] == NULL)
+				return(1);
+		}
+	}
 
-        const Animal *i = new Cat();
-        std::cout << j->getType() << " " << std::endl;
-        std::cout << i->getType() << " " << std::endl;
-        i->makeSound();
-        j->makeSound();
-        ani->makeSound();
+	std::cout << std::endl;
+    for (int i = 0; i < 10; i++)
+		delete(meta[i]);
 
-        delete ani;
-        delete j;
-        delete i;
-    }
-    std::cout << std::endl;
-    {
-        std::cout << "\n\nWrongAnimal -----------------------\n" << std::endl;
+	std::cout << std::endl;
 
-        const WrongAnimal *ani = new WrongAnimal();
-        const Animal *j = new Dog();
+    //ディープコピー確認
+    Dog *a = new Dog();
+    // Cat *a = new Cat();
+    if (a == NULL)
+        return 1;
 
-        const WrongAnimal *i = new WrongCat();
-        std::cout << j->getType() << " " << std::endl;
-        std::cout << i->getType() << " " << std::endl;
-        i->makeSound();
-        j->makeSound();
-        ani->makeSound();
+	a->setIdea(0, "私は");
+	a->setIdea(1, "犬です");
 
-        delete ani;
-        delete j;
-        delete i;
-    }
+    Dog *b = new Dog(*a);
+    // Cat *b = new Cat(*a);
+    a->getIdea(0);
+    a->getIdea(1);
+    a->getIdea(10);
+    a->getIdea(1000);
+    b->getIdea(0);
+    b->getIdea(1);
+    b->getIdea(10);
+    b->getIdea(1000);
+
+	std::cout << std::endl;
+
+    delete(a);
+    delete(b);
+
     return (0);
 }

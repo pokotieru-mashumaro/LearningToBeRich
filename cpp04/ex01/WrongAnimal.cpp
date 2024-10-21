@@ -10,7 +10,6 @@ WrongAnimal::WrongAnimal(const WrongAnimal &copy) {
 	*this = copy;
 }
 
-// Destructor
 WrongAnimal::~WrongAnimal() {
 	std::cout << "WrongAnimal Destructor called" << std::endl;
 }

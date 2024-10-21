@@ -3,19 +3,20 @@
 
 #include <iostream>
 
-class Animal 
+class Brain 
 {
-protected:
-	std::string _type;
+private:
+	std::string _ideas[100];
 
 public:
-	Animal(void);
-	Animal(const Animal &copy);
-	virtual ~Animal();
-	Animal&	operator=(const Animal &copy);
-
-	virtual void makeSound(void)const;
-	std::string	getType(void)const;
+	Brain();
+	Brain(const Brain &copy);
+	virtual ~Brain();
+	Brain &operator=(const Brain &copy);
+    
+    const std::string getIdea(size_t i)const;
+    const std::string *getIdeaAddress(size_t i)const;
+    void setIdea(size_t i, std::string idea);
 };
 
 

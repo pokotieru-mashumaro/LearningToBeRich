@@ -1,5 +1,5 @@
 NAME		=	a.out
-SRCS		=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS		=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 INC_DIR        =    .
 CC            =    g++
 CFLAGS        =    -Wall -Wextra -Werror -std=c++98
