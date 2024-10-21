@@ -10,7 +10,6 @@ Dog::Dog(const Dog &copy) {
 	*this = copy;
 }
 
-// Destructor
 Dog::~Dog() {
 	std::cout << "Dog Destructor called" << std::endl;
 }

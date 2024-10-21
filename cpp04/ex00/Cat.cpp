@@ -10,7 +10,6 @@ Cat::Cat(const Cat &copy) {
 	*this = copy;
 }
 
-// Destructor
 Cat::~Cat() {
 	std::cout << "Cat Destructor called" << std::endl;
 }
