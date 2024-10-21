@@ -25,7 +25,7 @@ int main()
 {
 	const Animal	*meta[6];
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 6; i++)
 	{
 		if (i < 3)
 		{
@@ -42,7 +42,7 @@ int main()
 	}
 
 	std::cout << std::endl;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 6; i++)
 		delete(meta[i]);
 
 	std::cout << std::endl;
