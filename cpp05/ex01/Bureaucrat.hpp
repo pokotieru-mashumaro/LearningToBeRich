@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "Form.hpp"
+
 #define MIN_GRADE 150
 #define MAX_GRADE 1
 
@@ -22,6 +24,8 @@ public:
     int getGrade() const;
     void incrementGrade();
     void decrementGrade();
+
+    void	signForm(Form& form) const;
 
     class GradeTooLowException : public std::exception
     {

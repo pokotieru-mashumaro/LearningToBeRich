@@ -26,12 +26,16 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
     return *this;
 }
 
-const char*	Bureaucrat::GradeTooLowException::what() const throw() {
-	return "grageが低すぎます。";;
+const char *Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "Bureaucrat: grageが低すぎます。";
+    ;
 }
 
-const char*	Bureaucrat::GradeTooHighException::what() const throw() {
-	return "grageが高すぎます。";;
+const char *Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "Bureaucrat: grageが高すぎます。";
+    ;
 }
 
 const std::string &Bureaucrat::getName() const
@@ -56,6 +60,19 @@ void Bureaucrat::decrementGrade()
     if (_grade + 1 > MIN_GRADE)
         throw GradeTooLowException();
     _grade += 1;
+}
+
+void Bureaucrat::signForm(Form &form) const
+{
+    try
+    {
+        form.beSigned(*this);
+        std::cout << this->_name << " signs " << form.getName() << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << this->_name << " couldn’t sign " << form.getName() << " because " << e.what() << std::endl;
+    }
 }
 
 std::ostream &operator<<(std::ostream &o, const Bureaucrat &bureaucrat)
