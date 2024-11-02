@@ -1,5 +1,5 @@
 NAME		=	a.out
-SRCS		=	main.cpp Bureaucrat.cpp Form.cpp
+SRCS		=	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 INC_DIR        =    .
 CC            =    c++
 CFLAGS        =    -Wall -Wextra -Werror -std=c++98
@@ -17,7 +17,6 @@ $(NAME): $(OBJS)
 
 debug: $(OBJS)
 	@$(CC) $(DBUG) $(CFLAGS) $^ -o $(NAME)
-
 
 fclean: clean
 	@$(RM) $(NAME)
