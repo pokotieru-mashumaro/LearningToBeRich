@@ -19,6 +19,24 @@ void output_result(const std::string& input);
 void output_result_impossible();
 void output_result_pseudo(const std::string& pseudo);
 
+ScalarConverter::ScalarConverter()
+{}
+
+ScalarConverter::ScalarConverter(const ScalarConverter &copy)
+{
+    *this = copy;
+}
+
+ScalarConverter::~ScalarConverter()
+{}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &copy)
+{
+    if (this != &copy)
+    {}
+    return *this;
+}
+
 void ScalarConverter::convert(const std::string& input)
 {
 	if (is_pseudo(input))
