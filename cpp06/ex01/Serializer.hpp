@@ -2,7 +2,7 @@
 #define   Serializer_HPP
 
 #include <iostream>
-#include <stdint.h> // otherwise uintptr_t won't compile with c++98 standard
+#include <stdint.h>
 
 typedef struct Data
 {
