@@ -2,10 +2,6 @@
 
 std::string get_integer(const std::string& input);
 
-int ft_stoi(const std::string& str);
-float ft_stof(const std::string& str);
-double ft_stod(const std::string& str);
-
 void convert_char(const std::string& input);
 void convert_int(const std::string& input);
 void convert_float(const std::string& input);
@@ -78,75 +74,9 @@ void output_result_pseudo(const std::string& pseudo)
 	std::cout << "double: " << str << std::endl;
 }
 
-int ft_stoi(const std::string& str)
-{
-	int num;
-	std::stringstream ss(str);
-	ss >> num;
-	return num;
-};
-
-float ft_stof(const std::string& str)
-{
-	bool is_minus = str[0] == '-' ? true : false;
-	size_t i = is_minus ? 1 : 0;
-	float num = 0;
-	while(i < str.length()) {
-		if (str[i] == '.' || str[i] == 'f')
-				break;
-		if (is_minus)
-			num = num * 10 - (str[i] - '0');
-		else
-			num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	if (i != str.length() && str[i] == '.') {
-		float scale = 10;
-		while(++i < str.length() - 1) {
-			if (str[i] == 'f')
-				break ;
-			if (is_minus)
-				num -= float(str[i] - '0') / scale;
-			else
-				num += float(str[i] - '0') / scale;
-			scale *= 10;
-		}
-	}
-	return num;
-}
-
-double ft_stod(const std::string& str)
-{
-	bool is_minus = str[0] == '-' ? true : false;
-	size_t i = is_minus ? 1 : 0;
-	double num = 0;
-	while (i < str.length()) {
-		if (str[i] == '.' || str[i] == 'f')
-				break;
-		if (is_minus)
-			num = num * 10 - (str[i] - '0');
-		else
-			num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	if (i != str.length() && str[i] == '.') {
-		double scale = 10;
-		while(++i < str.length() - 1) {
-			if (str[i] == 'f')
-				break ;
-			if (is_minus)
-				num -= double(str[i] - '0') / scale;
-			else
-				num += double(str[i] - '0') / scale;
-			scale *= 10;
-		}
-	}
-	return num;
-}
-
 void convert_char(const std::string& input)
 {
-	int input_integer = ft_stoi(get_integer(input));
+	int input_integer = atoi(get_integer(input).c_str());
 	char c = input_integer;
 
 	if (input_integer < 32 || input_integer > 126)
