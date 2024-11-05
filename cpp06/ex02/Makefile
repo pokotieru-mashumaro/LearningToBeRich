@@ -1,5 +1,5 @@
-NAME		=	serializer
-SRCS		=	main.cpp Serializer.cpp
+NAME		=	a.out
+SRCS		=	main.cpp Base.cpp
 INC_DIR        =    .
 CC            =    c++
 CFLAGS        =    -Wall -Wextra -Werror -std=c++98

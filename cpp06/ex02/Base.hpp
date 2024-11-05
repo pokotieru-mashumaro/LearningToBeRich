@@ -2,6 +2,8 @@
 #define   Base_HPP
 
 #include <iostream>
+#include <cstdlib>
+#include <random>
 
 class Base
 {
