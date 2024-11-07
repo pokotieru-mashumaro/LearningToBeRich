@@ -42,7 +42,6 @@ int main(void)
         d.attack("Bot3");
 
         std::cout << std::endl;
-
     }
     return (0);
 }

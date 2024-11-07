@@ -56,6 +56,19 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &copy)
     return *this;
 }
 
+void ScavTrap::attack(const std::string &target)
+{
+    if (this->_energy_points > 0 && this->_hit_points > 0)
+    {
+        std::cout << "ScavTrap: " << this->_name << " が " << target << " に " << this->_attack_damage << " points 攻撃した!" << std::endl;
+        this->_energy_points--;
+    }
+    else if (this->_energy_points <= 0)
+        std::cout << "ScavTrap: " << this->_name << " はもう攻撃できない..（エネルギー切れ）" << std::endl;
+    else if (this->_hit_points <= 0)
+        std::cout << "ScavTrap: " << this->_name << " の体力が0です.." << std::endl;
+}
+
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap is now in Gate keeper mode." << std::endl;
 }

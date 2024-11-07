@@ -42,7 +42,7 @@ ClapTrap::ClapTrap(const ClapTrap &copy)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << _name << " Destructor called " << std::endl;
+    std::cout << _name << "Destructor called " << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &copy)
@@ -91,9 +91,21 @@ void ClapTrap::beRepaired(unsigned int amount)
     if (this->_energy_points > 0)
     { 
         std::cout << this->_name << " は " << amount << " points 回復した. " << std::endl;
-        this->_hit_points += amount;
+        if (_hit_points + amount < _hit_points)
+            this->_hit_points = 4294967295;
+        else
+            this->_hit_points += amount;
         this->_energy_points--;
     }
     else
         std::cout << this->_name << " はもう回復できない..（エネルギー切れ）" << std::endl;
 }
+
+void ClapTrap::display_me()
+{
+    std::cout << "_name:" << this->_name << std::endl;
+    std::cout << "_hit_points:" << this->_hit_points << std::endl;
+    std::cout << "_energy_points:" << this->_energy_points << std::endl;
+    std::cout << "_attack_damage:" << this->_attack_damage << std::endl;
+}
+

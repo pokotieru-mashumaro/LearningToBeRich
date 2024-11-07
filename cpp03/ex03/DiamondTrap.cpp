@@ -56,7 +56,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &copy)
 
     if (this != &copy)
     {
-        this->_name = copy._name + "_clap_trap";
+        this->_name = copy._name + "_clap_name";
         this->_hit_points = copy._hit_points;
         this->_energy_points = copy._energy_points;
         this->_attack_damage = copy._attack_damage;
