@@ -10,7 +10,10 @@ int main(void)
     a.attack("Bot1");
     a.takeDamage(10);
     a.takeDamage(20);
+    a.display_me();
     a.beRepaired(5);
+    a.beRepaired(4294967295);
+    a.display_me();
     a.attack("Bot2");
     b.beRepaired(3);
     for (int i = 0; i < 10; i++)
