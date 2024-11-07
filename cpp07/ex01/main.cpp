@@ -10,13 +10,32 @@ iter関数のテンプレートは、どのタイプの配列でも動作する�
 
 #include "iter.hpp"
 
-template <typename T>
-T iter(T& x, T& y)
+void print_int(int i)
 {
-    return (x > y) ? x : y;
+	std::cout << "print_int" << i << std::endl;
+}
+
+void print_str(std::string s)
+{
+	std::cout << "print_stt" << s << std::endl;
+}
+
+template <typename T>
+void print_t(T t)
+{
+	std::cout << "print_t" << t << std::endl;
 }
 
 int main(void)
 {
-    return 0;
+	int arr1[4] = {1, 2, 3, 4};
+	iter(arr1, 4, print_int);
+	iter(arr1, 4, print_t);
+
+    std::cout << "\n--------------------------\n" << std::endl;
+
+	std::string arr2[3] = {"one", "two","three"};
+    iter(arr2, 3, print_str);
+	iter(arr2, 3, print_t);
 }
+
