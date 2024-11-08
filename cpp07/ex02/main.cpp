@@ -1,7 +1,23 @@
+/*
+https://docs.oracle.com/cd/E19957-01/805-7887/6j7dsdheo/index.html
+
+型Tの要素を含み、以下の動作と関数を実装するクラス・テンプレートArrayを 開発しなさい：
+パラメータなしの構築： 空の配列を作成する。
+符号なし int n をパラメータとする構成： ヒント： int * a = new int(); をコンパイルしてから *a を表示してみてください。
+コピーと代入演算子による構築。どちらの場合も、コピー元の配列やコピー後の配列を変更しても、もう一方の配列には影響しません。
+メモリを確保するには、必ずnew[]演算子を使わなければならない。予防的割り当て（事前にメモリーを探しておくこと）は禁止されています。プログラムは、決して割り当てられていないメモリにアクセスしてはならない。
+要素は添え字演算子を使ってアクセスできます： [ ].
+演算子 [ ] で要素にアクセスするとき、そのインデックスが範囲外の場合は std::exception がスローされます。
+メンバ関数 size() は、配列の要素数を返します。このメンバ関数はパラメータを取らず、現在のインスタンスを変更してはいけません。いつものように、すべてが期待通りに動作することを確認し、テストを含むmain.cppファイルを提出してください。
+*/
+
+// TODO: check copy and = 
+
 #include <iostream>
 #include <Array.hpp>
 
 #define MAX_VAL 750
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -13,6 +29,7 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
+    numbers.display_array();
     //SCOPE
     {
         Array<int> tmp = numbers;
