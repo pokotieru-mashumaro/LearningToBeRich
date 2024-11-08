@@ -16,7 +16,7 @@ https://docs.oracle.com/cd/E19957-01/805-7887/6j7dsdheo/index.html
 #include <iostream>
 #include <Array.hpp>
 
-#define MAX_VAL 750
+#define MAX_VAL 10
 
 int main(int, char**)
 {
@@ -33,7 +33,10 @@ int main(int, char**)
     //SCOPE
     {
         Array<int> tmp = numbers;
+        tmp.display_array();
+
         Array<int> test(tmp);
+        test.display_array();
     }
 
     for (int i = 0; i < MAX_VAL; i++)
