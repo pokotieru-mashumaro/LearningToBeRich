@@ -13,6 +13,17 @@ https://docs.oracle.com/cd/E19957-01/805-7887/6j7dsdheo/index.html
 
 // TODO: check copy and = 
 
+/*
+
+メモ
+
+macだと45~49のコードでコピーコンストラクタと代入演算子がどちらも呼び出されてしまう。
+校舎のlinuxで要検討
+
+
+
+*/
+
 #include <iostream>
 #include <Array.hpp>
 
@@ -30,7 +41,6 @@ int main(int, char**)
         mirror[i] = value;
     }
     numbers.display_array();
-    //SCOPE
     {
         Array<int> tmp = numbers;
         tmp.display_array();

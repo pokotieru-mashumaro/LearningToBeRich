@@ -45,6 +45,8 @@ template<class T>
 Array<T>::Array(const Array<T> &copy)
 {
 	std::cout << "copy constractor" << std::endl;
+	this->_size = copy._size;
+	this->_array = NULL;
 	*this = copy;
 }
 
