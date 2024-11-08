@@ -12,25 +12,31 @@ iter関数のテンプレートは、どのタイプの配列でも動作する�
 
 void print_int(int i)
 {
-	std::cout << "print_int" << i << std::endl;
+	std::cout << "print_int: " << i << std::endl;
 }
 
 void print_str(std::string s)
 {
-	std::cout << "print_stt" << s << std::endl;
+	std::cout << "print_str: " << s << std::endl;
 }
 
 template <typename T>
 void print_t(T t)
 {
-	std::cout << "print_t" << t << std::endl;
+	std::cout << "print_t: " << t << std::endl;
+}
+
+template <typename T>
+void a(T t)
+{
+	t++;
 }
 
 int main(void)
 {
-	int arr1[4] = {1, 2, 3, 4};
-	iter(arr1, 4, print_int);
-	iter(arr1, 4, print_t);
+	int arr1[4] = {1, 2, 3};
+	iter(arr1, 3, print_int);
+	iter(arr1, 3, print_t);
 
     std::cout << "\n--------------------------\n" << std::endl;
 
