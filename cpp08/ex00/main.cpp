@@ -10,3 +10,25 @@ Tが整数のコンテナであると仮定すると、この関数は2番目の
 連想コンテナを扱う必要はない。
 */
 
+#include "easyfind.hpp"
+
+#include <vector>
+#include <list>
+
+int main(void)
+{
+    int arr[10] = {0,1,2,3,4,5,6,7,8,9};
+
+	try
+	{
+		easyfind(arr, 0);
+		easyfind(arr, 9);
+        easyfind(arr, -1);
+		easyfind(arr, 10);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	return (0);
+}
