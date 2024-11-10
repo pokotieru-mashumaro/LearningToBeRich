@@ -1,7 +1,7 @@
 NAME		=	a.out
 SRCS		=	main.cpp
 INC_DIR        =    .
-CC            =    g++
+CC            =    c++
 CFLAGS        =    -Wall -Wextra -Werror -std=c++98
 DBUG = -fsanitize=address -fno-omit-frame-pointer -g
 RM            =    rm -f
