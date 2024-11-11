@@ -1,30 +1,30 @@
 NAME		=	irc
-SRCS		=	main.cpp
-INC_DIR		=    /includes/
-CC			=    c++
-CFLAGS		=    -Wall -Wextra -Werror -std=c++98
-DBUG		= -fsanitize=address -fno-omit-frame-pointer -g
-rm			=    rm -f
-OBJS        =    $(SRCS:.cpp=.o)
+SRCDIR		=	srcs
+INC_DIR		=	-I includes/All.h
+OBJDIR		=	objs
+SRCS		=	$(wildcard $(SRCDIR)/*.cpp)
+CC			=	c++
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+RM			=	rm -f
+OBJS		=	$(SRCS:$(SRCDIR)%.c=$(OBJDIR)/%.o)
 
-%.o: %.cpp
-	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+all:	$(NAME)
 
-all: $(NAME)
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $^ -o $(NAME)
+$(OBJDIR)/%.o: $(SRCDIR)%.cpp | $(OBJDIR)
+	$(CC) $(CCFLAGS) $(INC_DIR)  -o $@ -c $<
 
-debug: $(OBJS)
-	@$(CC) $(DBUG) $(CFLAGS) $^ -o $(NAME)
-
-
-fclean: clean
-	@$(RM) $(NAME)
+$(NAME):	$(OBJS)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 clean:
-	@$(RM) $(OBJS)
+	@rm -rf $(OBJDIR)
 
-re:    fclean all
+fclean:	clean
+	@rm -f $(NAME)
 
-.PHONY:    all clean fclean re
+re:	fclean all
+
+.PHONY:	all clean fclean re
