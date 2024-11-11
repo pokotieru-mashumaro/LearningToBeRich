@@ -1,10 +1,10 @@
 NAME		=	irc
 SRCS		=	main.cpp
-INC_DIR        =    /includes/
-CC            =    c++
-CFLAGS        =    -Wall -Wextra -Werror -std=c++98
-DBUG = -fsanitize=address -fno-omit-frame-pointer -g
-RM            =    rm -f
+INC_DIR		=    /includes/
+CC			=    c++
+CFLAGS		=    -Wall -Wextra -Werror -std=c++98
+DBUG		= -fsanitize=address -fno-omit-frame-pointer -g
+rm			=    rm -f
 OBJS        =    $(SRCS:.cpp=.o)
 
 %.o: %.cpp
