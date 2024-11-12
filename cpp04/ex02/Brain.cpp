@@ -24,7 +24,7 @@ Brain &Brain::operator=(const Brain &copy)
         for (int i = 0; i < 100; i++)
         {
             if (copy._ideas[i].length() > 0)
-                this->_ideas[i].assign(copy._ideas[i]);
+                this->_ideas[i] = copy._ideas[i];
         }
     }
     return *this;
