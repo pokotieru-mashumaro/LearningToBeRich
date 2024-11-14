@@ -1,19 +1,26 @@
 #ifndef Server_HPP
 #define Server_HPP
 
-class Server
+class Server //-> class for server
 {
-    private:
-        static bool _is_signal;
+private:
+	int _port;
+	int _socket_fd;
+	static bool _is_signal;
+	std::vector<Client> _clients;
+	std::vector<struct pollfd> _fds;
 
-    public:
-        Server();
-        Server(const Server &copy);
-        ~Server();
-        Server& operator=(const Server &copy);
+public:
+	Server(){_socket_fd = -1;}
 
-        static void signal_handler(int signum); 
-        void make_socket();
+	void ServerInit();
+	void SerSocket();
+	void AcceptNewClient();
+	void ReceiveNewData(int fd);
+
+	static void SignalHandler(int signum);
+	
+	void CloseFds();
+	void ClearClients(int fd);
 };
-
 #endif

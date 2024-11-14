@@ -3,12 +3,15 @@
 
 class Client
 {
-    public:
-        Client();
-        Client(const Client &copy);
-        ~Client();
-        Client& operator=(const Client &copy);
+private:
+	int _fd;
+	std::string _ipadd;
+public:
+	Client(){};
+	int GetFd(){return _fd;}
 
+	void SetFd(int fd){_fd = fd;}
+	void setIpAdd(std::string ipadd){_ipadd = ipadd;}
 };
 
 #endif
