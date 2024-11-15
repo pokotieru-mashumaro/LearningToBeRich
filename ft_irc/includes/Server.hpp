@@ -1,7 +1,7 @@
 #ifndef Server_HPP
 #define Server_HPP
 
-class Server //-> class for server
+class Server
 {
 private:
 	int _port;
@@ -9,6 +9,7 @@ private:
 	int _socket_fd;
 	static bool _is_signal;
 	std::vector<Client> _clients;
+	std::vector<Channel> _channels;
 	std::vector<struct pollfd> _fds;
 
 public:
@@ -17,12 +18,14 @@ public:
 		_port = port;
 		_password = password;
 		_socket_fd = -1;
+		(void) _channels;
 	}
 
 	void ServerInit();
 	void SerSocket();
 	void AcceptNewClient();
 	void ReceiveNewData(int fd);
+	void OpenChannel(Client &target);
 
 	void SendMsg2Client(int cli_fd, const char *str);
 	void SendUserTerminal(int cli_fd, char buff[1024]);

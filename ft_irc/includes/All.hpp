@@ -18,8 +18,8 @@
 #define YEL "\e[1;33m"
 
 #include "Client.hpp"
-#include "Server.hpp"
 #include "Channel.hpp"
+#include "Server.hpp"
 #include "Message.hpp"
 #include "Utils.hpp"
 

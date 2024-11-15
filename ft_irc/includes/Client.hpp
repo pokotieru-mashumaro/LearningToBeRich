@@ -34,6 +34,8 @@ public:
 	void setIpAdd(std::string ipadd){_ipadd = ipadd;}
 	void setNickName(std::string nickname){_nickname = nickname;}
 	void setUserName(std::string username){_username = username;}
+
+	void OpenChannel();
 };
 
 #endif
