@@ -81,7 +81,18 @@ void Server::SendUserTerminal(int cli_fd, char buff[1024])
 			SendMsg2Client(target.getFd(), AUTH_FAIL);
 		break;
 	case NEED_NAMES:
-		SendMsg2Client(target.getFd(), INPUT_NICKNAME);
+		if (target.getNickName() == "")
+			target.setNickName(msg);
+		else if (target.getUserName() == "")
+		{
+			target.setUserName(msg);
+			if (msg != "")
+				target.setStatus(IN_HOME);
+		}
+		if (target.getNickName() == "")
+			SendMsg2Client(target.getFd(), INPUT_NICKNAME);
+		else if (target.getUserName() == "")
+			SendMsg2Client(target.getFd(), INPUT_USERNAME);
 		break;
 	default:
 		break;

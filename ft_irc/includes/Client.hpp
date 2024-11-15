@@ -19,13 +19,19 @@ public:
 	Client()
 	{
 		_status = NEED_PASSWORD;
+		_nickname = "";
+		_username = "";
 	};
 	int getFd(){return _fd;}
 	int getStatus(){return _status;}
+	std::string getNickName(){return _nickname;}
+	std::string getUserName(){return _username;}
 
 	void setFd(int fd){_fd = fd;}
 	void setStatus(int status){_status = status;}
 	void setIpAdd(std::string ipadd){_ipadd = ipadd;}
+	void setNickName(std::string nickname){_nickname = nickname;}
+	void setUserName(std::string username){_username = username;}
 };
 
 #endif
