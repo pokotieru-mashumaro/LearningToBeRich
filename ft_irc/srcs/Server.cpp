@@ -87,13 +87,18 @@ void Server::SendUserTerminal(int cli_fd, char buff[1024])
 		{
 			target.setUserName(msg);
 			if (msg != "")
+			{
 				target.setStatus(IN_HOME);
+				SendMsg2Client(target.getFd(), FINISH_INPUT_USERNAME);
+			}
 		}
 		if (target.getNickName() == "")
 			SendMsg2Client(target.getFd(), INPUT_NICKNAME);
 		else if (target.getUserName() == "")
 			SendMsg2Client(target.getFd(), INPUT_USERNAME);
 		break;
+	case IN_HOME:
+		SendMsg2Client(target.getFd(), HELLO_HOME);
 	default:
 		break;
 	}

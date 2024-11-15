@@ -2,7 +2,9 @@
 #define Client_HPP
 
 #define NEED_PASSWORD 1
+#define FINISH_PASSWORD 11
 #define NEED_NAMES 2
+#define FINIASH_NAMES 22
 #define IN_HOME 3
 #define IN_CHANNEL 4
 
