@@ -25,6 +25,7 @@ public:
 	void ReceiveNewData(int fd);
 
 	void SendMsg2Client(int cli_fd, const char *str);
+	void SendUserTerminal(int cli_fd, char buff[1024]);
 	Client &SearchCli(int cli_fd);
 
 	static void SignalHandler(int signum);

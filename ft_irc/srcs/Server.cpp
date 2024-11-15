@@ -50,18 +50,42 @@ Client &Server::SearchCli(int cli_fd)
 		if (_clients[i].getFd() == cli_fd)
 			return _clients[i];
 	}
-	//ここにくるのはありえないのでthrowする。今はめんどい
+	// ここにくるのはありえないのでthrowする。今はめんどい
 	return _clients[0];
 }
 
 void Server::SendMsg2Client(int cli_fd, const char *str)
 {
-    char buf[200];
+	char buf[200];
 
-    strcpy(buf, str);
-    ssize_t bytes = send(cli_fd, buf, (int)strlen(buf), 0);
-    if (bytes == -1)
-        std::cout << RED << "やばいよやばいよ" << WHI << std::endl;
+	strcpy(buf, str);
+	ssize_t bytes = send(cli_fd, buf, (int)strlen(buf), 0);
+	if (bytes == -1)
+		std::cout << RED << "やばいよやばいよ" << WHI << std::endl;
+}
+
+void Server::SendUserTerminal(int cli_fd, char buff[1024])
+{
+	Client &target = SearchCli(cli_fd);
+	std::string msg = std::string(buff);
+	msg.pop_back();
+	switch (target.getStatus())
+	{
+	case NEED_PASSWORD:
+		if (_password == msg)
+		{
+			target.setStatus(NEED_NAMES);
+			SendMsg2Client(target.getFd(), AUTH_SUCCESS);
+		}
+		else
+			SendMsg2Client(target.getFd(), AUTH_FAIL);
+		break;
+	case NEED_NAMES:
+		SendMsg2Client(target.getFd(), INPUT_NICKNAME);
+		break;
+	default:
+		break;
+	}
 }
 
 void Server::ReceiveNewData(int fd)
@@ -81,25 +105,8 @@ void Server::ReceiveNewData(int fd)
 	{
 		buff[bytes] = '\0';
 		std::cout << YEL << "Client <" << fd << "> Data: " << WHI << buff;
-
-		// ここにクライアントの処理を書く
-		Client& target = SearchCli(fd);
-		std::string msg = std::string(buff);
-		msg.pop_back();
-		switch (target.getStatus())
-		{
-		case NEED_PASSWORD:
-			/* code */
-			std::cout << GRE << "パスワードを受付中：" << _password << " = " << msg << WHI << std::endl;
-			if (_password == msg)
-				target.setStatus(NEED_NAMES);
-			break;
-		case NEED_NAMES:
-			std::cout << GRE << "名前を受付中" << WHI << std::endl;
-			break;
-		default:
-			break;
-		}
+		
+		SendUserTerminal(fd, buff);
 	}
 }
 
@@ -132,7 +139,7 @@ void Server::AcceptNewClient()
 	_clients.push_back(cli);
 	_fds.push_back(NewPoll);
 
-	SendMsg2Client(incofd, "パスワードを入力してください\n>");
+	SendMsg2Client(incofd, INPUT_PASSWORD);
 	std::cout << GRE << "Client <" << incofd << "> Connected" << WHI << std::endl;
 }
 
