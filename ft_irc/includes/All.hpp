@@ -21,5 +21,6 @@
 #include "Server.hpp"
 #include "Channel.hpp"
 #include "Message.hpp"
+#include "Utils.hpp"
 
 #endif

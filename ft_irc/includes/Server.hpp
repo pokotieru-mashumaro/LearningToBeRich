@@ -24,6 +24,9 @@ public:
 	void AcceptNewClient();
 	void ReceiveNewData(int fd);
 
+	void SendMsg2Client(int cli_fd, const char *str);
+	Client &SearchCli(int cli_fd);
+
 	static void SignalHandler(int signum);
 
 	void CloseFds();
