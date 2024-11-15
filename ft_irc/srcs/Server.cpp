@@ -2,7 +2,7 @@
 
 void Server::ClearClients(int fd){
 	for(size_t i = 0; i < _fds.size(); i++)
-	{ 
+	{
 		if (_fds[i].fd == fd)
 			{_fds.erase(_fds.begin() + i); break;}
 	}
@@ -61,7 +61,7 @@ void Server::AcceptNewClient()
 	struct pollfd NewPoll;
 	socklen_t len = sizeof(cliadd);
 
-	int incofd = accept(_socket_fd, (sockaddr *)&(cliadd), &len); 
+	int incofd = accept(_socket_fd, (sockaddr *)&(cliadd), &len);
 	if (incofd == -1)
 		{std::cout << "accept() failed" << std::endl; return;}
 
@@ -78,7 +78,7 @@ void Server::AcceptNewClient()
 	_fds.push_back(NewPoll);
 
 	//TODO: sendコマンドを使ってClientにメッセージを送りつける
-	const char *message = "hello, world\n";
+	char message[100] = "hello, world\n";
 	ssize_t bytes = send(incofd, message, (int)strlen(message), 0);
 	(void) bytes;
 	std::cout << GRE << "Client <" << incofd << "> Connected" << WHI << std::endl;
@@ -113,7 +113,6 @@ void Server::SerSocket()
 
 void Server::ServerInit()
 {
-	this->_port = 4444;
 	SerSocket();
 
 	std::cout << GRE << "Server <" << _socket_fd << "> Connected" << WHI << std::endl;
@@ -123,10 +122,9 @@ void Server::ServerInit()
 	{
 		if((poll(&_fds[0], _fds.size(), -1) == -1) && Server::_is_signal == false)
 			throw(std::runtime_error("poll() faild"));
-		std::cout << "let's start!!" << std::endl;
 		for (size_t i = 0; i < _fds.size(); i++)
 		{
-			std::cout << "revents: " << _fds[i].revents << std::endl;
+			// std::cout << "revents: " << _fds[i].revents << std::endl;
 			if (_fds[i].revents & POLLIN)
 			{
 				if (_fds[i].fd == _socket_fd)

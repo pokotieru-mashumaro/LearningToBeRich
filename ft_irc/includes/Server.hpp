@@ -5,13 +5,19 @@ class Server //-> class for server
 {
 private:
 	int _port;
+	std::string _password;
 	int _socket_fd;
 	static bool _is_signal;
 	std::vector<Client> _clients;
 	std::vector<struct pollfd> _fds;
 
 public:
-	Server(){_socket_fd = -1;}
+	Server(int port, std::string password)
+	{
+		_port = port;
+		_password = password;
+		_socket_fd = -1;
+	}
 
 	void ServerInit();
 	void SerSocket();
@@ -19,7 +25,7 @@ public:
 	void ReceiveNewData(int fd);
 
 	static void SignalHandler(int signum);
-	
+
 	void CloseFds();
 	void ClearClients(int fd);
 };

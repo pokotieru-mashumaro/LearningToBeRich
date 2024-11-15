@@ -1,8 +1,25 @@
 #include "../includes/All.hpp"
 
-int main()
+bool check_arg(char **av)
 {
-	Server ser;
+	int port = atoi(av[1]);
+
+	for (size_t i = 0; i < strlen(av[1]); i++)
+	{
+		if (!isnumber(av[1][i]))
+			return false;
+	}
+	if (port < 0 || port > 65535)
+		return false;
+	return true;
+}
+
+int main(int ac, char **av)
+{
+	if (ac != 3 || check_arg(av) == false)
+		return 1;
+	Server ser(atoi(av[1]), av[2]);
+
 	std::cout << "---- SERVER ----" << std::endl;
 	try{
 		signal(SIGINT, Server::SignalHandler);
