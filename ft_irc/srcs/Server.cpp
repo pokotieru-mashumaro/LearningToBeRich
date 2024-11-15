@@ -43,27 +43,6 @@ void Server::CloseFds()
 	}
 }
 
-Client &Server::SearchCli(int cli_fd)
-{
-	for (size_t i = 0; i < _clients.size(); i++)
-	{
-		if (_clients[i].getFd() == cli_fd)
-			return _clients[i];
-	}
-	// ここにくるのはありえないのでthrowする。今はめんどい
-	return _clients[0];
-}
-
-void Server::SendMsg2Client(int cli_fd, const char *str)
-{
-	char buf[200];
-
-	strcpy(buf, str);
-	ssize_t bytes = send(cli_fd, buf, (int)strlen(buf), 0);
-	if (bytes == -1)
-		std::cout << RED << "やばいよやばいよ" << WHI << std::endl;
-}
-
 void Server::SendUserTerminal(int cli_fd, char buff[1024])
 {
 	Client &target = SearchCli(cli_fd);
@@ -72,31 +51,10 @@ void Server::SendUserTerminal(int cli_fd, char buff[1024])
 	switch (target.getStatus())
 	{
 	case NEED_PASSWORD:
-		if (_password == msg)
-		{
-			target.setStatus(NEED_NAMES);
-			SendMsg2Client(target.getFd(), AUTH_SUCCESS);
-		}
-		else
-			SendMsg2Client(target.getFd(), AUTH_FAIL);
+		Auth(target, msg);
 		break;
 	case NEED_NAMES:
-		if (target.getNickName() == "")
-			target.setNickName(msg);
-		else if (target.getUserName() == "")
-		{
-			target.setUserName(msg);
-			if (msg != "")
-			{
-				target.setStatus(IN_HOME);
-				SendMsg2Client(target.getFd(), FINISH_INPUT_USERNAME);
-				SendMsg2Client(target.getFd(), HELLO_HOME);
-			}
-		}
-		if (target.getNickName() == "")
-			SendMsg2Client(target.getFd(), INPUT_NICKNAME);
-		else if (target.getUserName() == "")
-			SendMsg2Client(target.getFd(), INPUT_USERNAME);
+		SetNames(target, msg);
 		break;
 	case IN_HOME:
 		break;
@@ -125,6 +83,11 @@ void Server::ReceiveNewData(int fd)
 		
 		SendUserTerminal(fd, buff);
 	}
+}
+
+void Server::OpenChannel(Client &target)
+{
+	Channel channel(target.getFd());
 }
 
 void Server::AcceptNewClient()
@@ -200,7 +163,6 @@ void Server::ServerInit()
 			throw(std::runtime_error("poll() faild"));
 		for (size_t i = 0; i < _fds.size(); i++)
 		{
-			// std::cout << "revents: " << _fds[i].revents << std::endl;
 			if (_fds[i].revents & POLLIN)
 			{
 				if (_fds[i].fd == _socket_fd)

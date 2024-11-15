@@ -8,11 +8,16 @@ private:
     std::vector<int> _cli_fds;
 
 public:
-	Channel()
+	Channel(int operator_fd)
 	{
-        _operator_fd = 111;
-        (void) _cli_fds;
+        _operator_fd = operator_fd;
+        _cli_fds.push_back(operator_fd);
     };
+
+    void kick();
+    void invite();
+    void topic();
+    void mode(int mode);
 };
 
 #endif

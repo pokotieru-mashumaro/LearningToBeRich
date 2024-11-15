@@ -19,8 +19,8 @@
 
 #include "Client.hpp"
 #include "Channel.hpp"
+#include "Utils.hpp"
 #include "Server.hpp"
 #include "Message.hpp"
-#include "Utils.hpp"
 
 #endif

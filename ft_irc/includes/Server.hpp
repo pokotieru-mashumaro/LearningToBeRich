@@ -31,6 +31,9 @@ public:
 	void SendUserTerminal(int cli_fd, char buff[1024]);
 	Client &SearchCli(int cli_fd);
 
+	void Auth(Client &target, std::string msg);
+	void SetNames(Client &target, std::string msg);
+
 	static void SignalHandler(int signum);
 
 	void CloseFds();
