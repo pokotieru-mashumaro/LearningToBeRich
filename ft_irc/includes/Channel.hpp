@@ -1,18 +1,24 @@
 #ifndef Channel_HPP
 #define Channel_HPP
 
+#include "Client.hpp"
+
 class Channel
 {
 private:
-	int _operator_fd;
-    std::vector<int> _cli_fds;
+	std::vector<Client *>  _operators;
+    std::vector<Client *> _clients;
 
 public:
-	Channel(int operator_fd)
+	Channel(Client *owner)
 	{
-        _operator_fd = operator_fd;
-        _cli_fds.push_back(operator_fd);
+        _operators.push_back(owner);
+        _clients.push_back(owner);
     };
+
+    // Client getOperator(){return _operator;};
+
+    void setClient(Client *cli){_clients.push_back(cli);};
 
     void kick();
     void invite();

@@ -12,7 +12,7 @@ void Server::ClearClients(int fd)
 	}
 	for (size_t i = 0; i < _clients.size(); i++)
 	{
-		if (_clients[i].getFd() == fd)
+		if (_clients[i]->getFd() == fd)
 		{
 			_clients.erase(_clients.begin() + i);
 			break;
@@ -33,8 +33,8 @@ void Server::CloseFds()
 {
 	for (size_t i = 0; i < _clients.size(); i++)
 	{
-		std::cout << RED << "Client <" << _clients[i].getFd() << "> Disconnected" << WHI << std::endl;
-		close(_clients[i].getFd());
+		std::cout << RED << "Client <" << _clients[i]->getFd() << "> Disconnected" << WHI << std::endl;
+		close(_clients[i]->getFd());
 	}
 	if (_socket_fd != -1)
 	{
@@ -45,10 +45,12 @@ void Server::CloseFds()
 
 void Server::SendUserTerminal(int cli_fd, char buff[1024])
 {
-	Client &target = SearchCli(cli_fd);
+	Client *target = SearchCli(cli_fd);
 	std::string msg = std::string(buff);
 	msg.pop_back();
-	switch (target.getStatus())
+	// std::cout << "cli fd: " << target->getFd() << std::endl;
+	// std::cout << "cli status: " << target->getStatus() << std::endl;
+	switch (target->getStatus())
 	{
 	case NEED_PASSWORD:
 		Auth(target, msg);
@@ -57,6 +59,10 @@ void Server::SendUserTerminal(int cli_fd, char buff[1024])
 		SetNames(target, msg);
 		break;
 	case IN_HOME:
+		Home(target, msg);
+		break;
+	case IN_CHANNEL:
+		Send2Channel(target, msg);
 		break;
 	default:
 		break;
@@ -85,14 +91,8 @@ void Server::ReceiveNewData(int fd)
 	}
 }
 
-void Server::OpenChannel(Client &target)
-{
-	Channel channel(target.getFd());
-}
-
 void Server::AcceptNewClient()
 {
-	Client cli;
 	struct sockaddr_in cliadd;
 	struct pollfd NewPoll;
 	socklen_t len = sizeof(cliadd);
@@ -114,8 +114,12 @@ void Server::AcceptNewClient()
 	NewPoll.events = POLLIN;
 	NewPoll.revents = 0;
 
-	cli.setFd(incofd);
-	cli.setIpAdd(inet_ntoa((cliadd.sin_addr)));
+	Client *cli = new Client(incofd);
+	// cli.setFd(incofd);
+	cli->setIpAdd(inet_ntoa((cliadd.sin_addr)));
+
+	std::cout << "cli01 address: " << cli << " fd: " << cli->getFd() << std::endl;
+
 	_clients.push_back(cli);
 	_fds.push_back(NewPoll);
 

@@ -72,6 +72,8 @@
         "random": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
-        "text_encoding": "cpp"
-    }
+        "text_encoding": "cpp",
+        "csignal": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

@@ -17,9 +17,9 @@
 #define GRE "\e[1;32m"
 #define YEL "\e[1;33m"
 
-#include "Client.hpp"
-#include "Channel.hpp"
 #include "Utils.hpp"
+#include "Channel.hpp"
+#include "Client.hpp"
 #include "Server.hpp"
 #include "Message.hpp"
 
