@@ -1,18 +1,34 @@
 #ifndef Message_HPP
 #define Message_HPP
 
-#define INPUT_PASSWORD "パスワードを入力してください\n> "
-#define AUTH_SUCCESS "認証成功\n\n\nニックネームを入力してください\n> "
-#define AUTH_FAIL "パスワードが違います..\n> "
+#define RED "\e[1;31m"
+#define WHI "\e[0;37m"
+#define GRE "\e[1;32m"
+#define YEL "\e[1;33m"
 
-#define INPUT_NICKNAME "ニックネームを入力してください\n> "
-#define INPUT_USERNAME "ユーザーネームを入力してください\n> "
-#define FINISH_INPUT_USERNAME "名前の入力が完了しました\n\n"
+#define INPUT_PASSWORD "パスワード： "
+#define AUTH_SUCCESS YEL\
+                    "\n\n██╗██████╗░░█████╗░\n"\
+                    "██║██╔══██╗██╔══██╗\n"\
+                    "██║██████╔╝██║░░╚═╝\n"\
+                    "██║██╔══██╗██║░░██╗ \n"\
+                    "██║██║░░██║╚█████╔╝\n"\
+                    "╚═╝╚═╝░░╚═╝░╚════╝░\n"\
+                    WHI\
+                    "\n\nニックネーム： "
+#define AUTH_FAIL "パスワード： "
 
-#define HELLO_HOME "ircサーバーへようこそ!\n" \
-                    "現在あなたは以下のコマンドを実行できます!\n" \
-                    "OPEN\n" \
-                    "JOIN\n" \
+#define INPUT_NICKNAME "ニックネーム： "
+#define INPUT_USERNAME "ユーザーネーム： "
+
+#define HELLO_HOME YEL\
+                    "現在あなたは以下のコマンドを実行できます! \n" \
+                    "- OPEN: チャンネルを開きます\n" \
+                    "- JOIN: チャンネルに参加します\n" \
+                    WHI\
                     "\n" \
                     "> "
+
+// #define HHH
+
 #endif

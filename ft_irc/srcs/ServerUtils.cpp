@@ -16,7 +16,7 @@ Client *Server::SearchCli(int cli_fd)
 
 void Server::SendMsg2Client(int cli_fd, const char *str)
 {
-	char buf[200];
+	char buf[1000];
     
 	strcpy(buf, str);
 	ssize_t bytes = send(cli_fd, buf, (int)strlen(buf), 0);
@@ -45,7 +45,6 @@ void Server::SetNames(Client *target, std::string msg)
         if (msg != "")
         {
             target->setStatus(IN_HOME);
-            SendMsg2Client(target->getFd(), FINISH_INPUT_USERNAME);
             SendMsg2Client(target->getFd(), HELLO_HOME);
         }
     }
@@ -57,9 +56,9 @@ void Server::SetNames(Client *target, std::string msg)
 
 void Server::OpenChannel(Client *target)
 {
-	Channel channel(target);
-	_channels.push_back(&channel);
-	// target->setChannel(&channel);
+	Channel *channel = new Channel(target);
+	_channels.push_back(channel);
+	target->setChannel(channel);
 }
 
 void Server::JoinChannel(Client *target, Channel channel)
@@ -77,7 +76,7 @@ void Server::Home(Client *target, std::string msg)
         OpenChannel(target);
         target->setStatus(IN_CHANNEL);
 
-        //SendMsg2Clientでなにか送る
+        SendMsg2Client(target->getFd(), "\n\nChannelの名前を入力: ");
     }
     else if (msg == "JOIN")
     {
@@ -86,6 +85,7 @@ void Server::Home(Client *target, std::string msg)
         // JoinChannel(target, channel);
 
         target->setStatus(IN_CHANNEL);
+        SendMsg2Client(target->getFd(), "Channelの名前を入力: ");
     }
     else {
         SendMsg2Client(target->getFd(), "> ");
@@ -96,6 +96,18 @@ void Server::Send2Channel(Client *target, std::string msg)
 {
     // Channel *channel = target->getChannel();
     (void) msg;
-    // std::cout << "channel orner name: " << *channel->getOperator()->getNickName() << std::endl;
-    SendMsg2Client(target->getFd(), "> ");
+    // std::cout << "channel orner name: " << target->getUserName() << std::endl;
+    if (target->getChannel()->getName() == "")
+        target->getChannel()->setName(msg);
+    else
+    {
+        std::cout << "channel name: " << target->getChannel()->getName() << std::endl;
+    }
+
+    if (target->getChannel()->getName() == "")
+        SendMsg2Client(target->getFd(), "Channelの名前を入力: ");
+    else
+    {
+        SendMsg2Client(target->getFd(), "> ");
+    }
 }

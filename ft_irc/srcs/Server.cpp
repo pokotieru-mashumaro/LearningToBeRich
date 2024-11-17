@@ -64,6 +64,8 @@ void Server::SendUserTerminal(int cli_fd, char buff[1024])
 	case IN_CHANNEL:
 		Send2Channel(target, msg);
 		break;
+	case SET_CHANNELNAME:
+		break;
 	default:
 		break;
 	}
