@@ -1,5 +1,15 @@
 #include "../includes/All.hpp"
 
+std::vector<std::string> Server::getChannelNames()
+{
+    std::vector<std::string> array;
+    for (size_t i = 0; i < _channels.size(); i++)
+	{
+        array.push_back(_channels[i]->getName());
+	}
+    return array;
+}
+
 Client *Server::SearchCli(int cli_fd)
 {
 	for (size_t i = 0; i < _clients.size(); i++)
@@ -61,12 +71,10 @@ void Server::OpenChannel(Client *target)
 	target->setChannel(channel);
 }
 
-void Server::JoinChannel(Client *target, Channel channel)
+void Server::JoinChannel(Client *target, Channel *channel)
 {
-    (void) target;
-    (void) channel;
-
-	// channel.setClient(target);
+    target->setChannel(channel);
+    channel->setClient(target);    
 }
 
 void Server::Home(Client *target, std::string msg)
@@ -82,9 +90,16 @@ void Server::Home(Client *target, std::string msg)
     {
         //どのチャンネルに入りたいか選択する。
         // Channel channel; // = ~~~
-        // JoinChannel(target, channel);
 
         target->setStatus(IN_CHANNEL);
+
+        std::vector<std::string> channel_names = getChannelNames();
+        for (size_t i = 0; i < channel_names.size(); i++)
+	    {
+        
+    	}
+
+        // JoinChannel(target, channel);
         SendMsg2Client(target->getFd(), "Channelの名前を入力: ");
     }
     else {
@@ -101,7 +116,14 @@ void Server::Send2Channel(Client *target, std::string msg)
         target->getChannel()->setName(msg);
     else
     {
-        std::cout << "channel name: " << target->getChannel()->getName() << std::endl;
+        //同チャンネル、別ユーザーにメッセージを送信。
+        // channel->clients->fdsにfor文で送る。。。
+        std::vector<Client *> clients = target->getChannel()->getClients();
+        for (size_t i = 0; i < clients.size(); i++)
+		{
+            if (target->getFd() != clients[i]->getFd())
+			    std::cout << "fd: " << clients[i]->getFd() << std::endl;
+		}
     }
 
     if (target->getChannel()->getName() == "")

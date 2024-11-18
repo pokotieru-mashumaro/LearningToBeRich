@@ -15,14 +15,14 @@
                     "██║██║░░██║╚█████╔╝\n"\
                     "╚═╝╚═╝░░╚═╝░╚════╝░\n"\
                     WHI\
-                    "\n\nニックネーム： "
+                    "\n\nニックネーム　： "
 #define AUTH_FAIL "パスワード： "
 
 #define INPUT_NICKNAME "ニックネーム　： "
 #define INPUT_USERNAME "ユーザーネーム： "
 
 #define HELLO_HOME YEL\
-                    "現在あなたは以下のコマンドを実行できます! \n" \
+                    "\n現在あなたは以下のコマンドを実行できます! \n" \
                     "- OPEN: チャンネルを開きます\n" \
                     "- JOIN: チャンネルに参加します\n" \
                     WHI\

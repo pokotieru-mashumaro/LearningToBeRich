@@ -21,13 +21,16 @@ public:
 		(void) _channels;
 	}
 
+	std::vector<std::string> getChannelNames();
+
+
 	void ServerInit();
 	void SerSocket();
 	void AcceptNewClient();
 	void ReceiveNewData(int fd);
 
 	void OpenChannel(Client *target);
-	void JoinChannel(Client *target, Channel channel);
+	void JoinChannel(Client *target, Channel *channel);
 
 
 	void SendMsg2Client(int cli_fd, const char *str);
