@@ -18,7 +18,7 @@
                     "\n\nニックネーム： "
 #define AUTH_FAIL "パスワード： "
 
-#define INPUT_NICKNAME "ニックネーム： "
+#define INPUT_NICKNAME "ニックネーム　： "
 #define INPUT_USERNAME "ユーザーネーム： "
 
 #define HELLO_HOME YEL\

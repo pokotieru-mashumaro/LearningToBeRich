@@ -76,7 +76,7 @@ void Server::Home(Client *target, std::string msg)
         OpenChannel(target);
         target->setStatus(IN_CHANNEL);
 
-        SendMsg2Client(target->getFd(), "\n\nChannelの名前を入力: ");
+        SendMsg2Client(target->getFd(), "\n\nChannelを開きます。\nChannel名: ");
     }
     else if (msg == "JOIN")
     {
