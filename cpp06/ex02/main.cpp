@@ -4,7 +4,7 @@
 これら4つのクラスは、正統派のカノニカルフォームで設計する必要はありません。
 
 以下の関数を実装します。
-  Base * generate(void);
+  Base *generate(void);
 A、B、またはCをランダムにインスタンス化し、そのインスタンスをBaseポインタとして返します。 ランダムな選択の実装には、お好きなものをお使いください。
 
   void identify(Base* p);
@@ -19,7 +19,7 @@ typeinfo ヘッダを含めることは禁止されています。
 
 #include "Base.hpp"
 
-Base * generate(void)
+Base *generate(void)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());

@@ -79,6 +79,8 @@ void convert_char(const std::string& input)
 	int input_integer = atoi(get_integer(input).c_str());
 	char c = input_integer;
 
+	if (input_integer < 0 || input_integer > 255)
+		std::cout << "char: impossible" << std::endl;
 	if (input_integer < 32 || input_integer > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else
@@ -92,7 +94,6 @@ void convert_int(const std::string& input)
 	else
 	{
 		int input_integer = atoi(get_integer(input).c_str());
-		// int input_integer = ft_stoi(get_integer(input));
 		std::cout << "int: " << input_integer << std::endl;
 	}
 }
@@ -100,13 +101,13 @@ void convert_int(const std::string& input)
 void convert_float(const std::string& input)
 {
 	float cast = atof(input.c_str());
-	std::cout << "float: " << cast << "f" << std::endl;
+	std::cout << "float: " << static_cast<double>(cast) << "f" << std::endl;
 }
 
 void convert_double(const std::string& input)
 {
 	float cast = atof(input.c_str());
-	std::cout << "double: " << cast << std::endl;
+	std::cout << "double: " << static_cast<double>(cast) << std::endl;
 }
 
 bool is_impossible(const std::string& input)
