@@ -19,7 +19,7 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor)
 {
-	if ((int)executor.getGrade() > this->getGradeExec())
+	if (executor.getGrade() > this->getGradeExec())
 		throw (Bureaucrat::GradeTooLowException());
 	else if (this->getSigned() == false)
 		throw (AForm::FormNotSignedException());
@@ -38,7 +38,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor)
     }
 }
 
-std::ostream&	operator<<(std::ostream &o, const ShrubberyCreationForm& aform)
+std::ostream& operator<<(std::ostream &o, const ShrubberyCreationForm& aform)
 {
     o << "Name: " << aform.getName() << ", is Signed: " << aform.getSigned() << ", grade required to sign: " << aform.getGradeSign() << ", grade required to execute: " << aform.getGradeExec() << std::endl;
     return o;

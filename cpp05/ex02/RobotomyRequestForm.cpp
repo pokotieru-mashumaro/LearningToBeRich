@@ -10,7 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy)
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& copy)
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& copy)
 {
 	if (this != &copy)
 	{}
@@ -19,7 +19,7 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& c
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor)
 {
-    if ((int)executor.getGrade() > this->getGradeExec())
+    if (executor.getGrade() > this->getGradeExec())
 		throw (Bureaucrat::GradeTooLowException());
 	else if (this->getSigned() == false)
 		throw (AForm::FormNotSignedException());
@@ -31,7 +31,7 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor)
 		std::cout << "the robotomy failed!" << std::endl;
 }
 
-std::ostream&	operator<<(std::ostream &o, const RobotomyRequestForm& aform)
+std::ostream& operator<<(std::ostream &o, const RobotomyRequestForm& aform)
 {
     o << "Name: " << aform.getName() << ", is Signed: " << aform.getSigned() << ", grade required to sign: " << aform.getGradeSign() << ", grade required to execute: " << aform.getGradeExec() << std::endl;
     return o;

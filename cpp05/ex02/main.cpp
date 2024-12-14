@@ -27,15 +27,15 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-void	exe(const Bureaucrat& bureaucrat, AForm& form) {
+void exe(const Bureaucrat& bureaucrat, AForm& form) {
 	std::cout << form;
 	bureaucrat.signForm(form);
 	bureaucrat.executeForm(form);
 }
 
 int	main() {
-	Bureaucrat	taro("taro", 1);
-	Bureaucrat	hanako("hanako", 42);
+	Bureaucrat taro("taro", 1);
+	Bureaucrat hanako("hanako", 42);
 	std::cout << taro << hanako;
 
 	try {

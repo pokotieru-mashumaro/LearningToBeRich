@@ -16,6 +16,6 @@ public:
 	virtual void execute(Bureaucrat const & executor);
 };
 
-std::ostream&	operator<<(std::ostream &o, const RobotomyRequestForm& aform);
+std::ostream& operator<<(std::ostream &o, const RobotomyRequestForm& aform);
 
 #endif

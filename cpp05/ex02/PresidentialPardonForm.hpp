@@ -16,6 +16,6 @@ public:
 	void execute(Bureaucrat const & executor);
 };
 
-std::ostream&	operator<<(std::ostream &o, const PresidentialPardonForm& aform);
+std::ostream& operator<<(std::ostream &o, const PresidentialPardonForm& aform);
 
 #endif

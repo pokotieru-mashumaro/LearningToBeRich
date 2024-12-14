@@ -18,6 +18,6 @@ public:
 	void execute(Bureaucrat const & executor);
 };
 
-std::ostream&	operator<<(std::ostream &o, const ShrubberyCreationForm& aform);
+std::ostream& operator<<(std::ostream &o, const ShrubberyCreationForm& aform);
 
 #endif
