@@ -33,12 +33,12 @@ void	printError(std::exception& e)
 
 int	main()
 {
-	Bureaucrat	taro("taro", 42);
+	Bureaucrat taro("taro", 42);
 	std::cout << taro;
 
 	try
 	{
-		Form	sample("sample", 1000, 1);
+		Form sample("sample", 1000, 1);
 	}
 	catch (std::exception& e)
 	{
@@ -47,7 +47,7 @@ int	main()
 
 	try
 	{
-		Form	sample("sample", 42, 0);
+		Form sample("sample", 42, 0);
 	}
 	catch (std::exception& e)
 	{
@@ -56,8 +56,8 @@ int	main()
 
 	try
 	{
-		Form	sample1("sample1", 42, 42);
-		Form	sample2("sample2", 1, 1);
+		Form sample1("sample1", 42, 42);
+		Form sample2("sample2", 1, 1);
 
 		std::cout << std::endl << sample1 << sample2;
 

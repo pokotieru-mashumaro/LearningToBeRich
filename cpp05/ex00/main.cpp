@@ -23,7 +23,7 @@ Bureaucrat::GradeTooHighException または Bureaucrat::GradeTooLowException の
 int main()
 {
     try {
-		Bureaucrat	bob("bob", 1);
+		Bureaucrat bob("bob", 1);
 		std::cout << bob;
 	}
 	catch (std::exception& e) {
@@ -39,7 +39,7 @@ int main()
 	// }
 
     try {
-		Bureaucrat	hima("hima", 150);
+		Bureaucrat hima("hima", 150);
         // hima.decrementGrade();
 		std::cout << hima;
 	}

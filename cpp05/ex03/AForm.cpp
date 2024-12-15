@@ -41,12 +41,12 @@ AForm &AForm::operator=(const AForm &copy)
 
 const char*	AForm::GradeTooLowException::what() const throw()
 {
-	return "AForm: grageが低すぎます。";;
+	return "AForm: grageが低すぎます。";
 }
 
 const char*	AForm::GradeTooHighException::what() const throw()
 {
-	return "AForm: grageが高すぎます。";;
+	return "AForm: grageが高すぎます。";
 }
 
 const char*	AForm::FormNotSignedException::what() const throw()
