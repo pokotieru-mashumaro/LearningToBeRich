@@ -38,7 +38,7 @@ int main() {
 	try {
 		{
 			std::cout << std::endl << "< shrubbery >"  << std::endl << std::endl;
-			AForm* form = intern.makeForm("ShrubberyCreationForm", "sample1");
+			AForm* form = intern.makeForm("shrubbery creation", "sample1");
 			if (form) {
 				exe(taro, *form);
 				delete form;
@@ -46,7 +46,7 @@ int main() {
 		}
 		{
 			std::cout << std::endl << "< robotomy >"  << std::endl << std::endl;
-			AForm* form = intern.makeForm("RobotomyRequestForm", "sample2");
+			AForm* form = intern.makeForm("robotomy request", "sample2");
 			if (form) {
 				exe(taro, *form);
 				delete form;
@@ -54,13 +54,13 @@ int main() {
 		}
 		{
 			std::cout << std::endl << "< presidential >"  << std::endl << std::endl;
-			AForm* form = intern.makeForm("PresidentialPardonForm", "sample3");
+			AForm* form = intern.makeForm("presidential pardon", "sample3");
 			if (form) {
 				exe(taro, *form);
 				delete form;
 			}
 		}
-		AForm* form = intern.makeForm("PresidentialPardonForm", "sample4");
+		AForm* form = intern.makeForm("presidential pardon", "sample4");
 		if (form) {
 			std::cout << std::endl << "< execute unsigned form >"  << std::endl << std::endl;
 			std::cout << *form;
@@ -69,7 +69,7 @@ int main() {
 		}
 		{
 			std::cout << std::endl << "< too low >"  << std::endl << std::endl;
-			AForm* form = intern.makeForm("PresidentialPardonForm", "sample5");
+			AForm* form = intern.makeForm("presidential pardon", "sample5");
 			if (form) {
 				taro.signForm(*form);
 				hanako.executeForm(*form);

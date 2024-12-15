@@ -22,12 +22,11 @@ Intern &Intern::operator=(const Intern &copy) {
 
 int Intern::getFormType(const std::string& name) const
 {
-
-    if (name == "ShrubberyCreationForm")
+    if (name == "shrubbery creation")
         return FORM_SHRUBBERY;
-    else if (name == "RobotomyRequestForm")
+    else if (name == "robotomy request")
         return FORM_ROBOTOMY;
-    else if (name == "PresidentialPardonForm")
+    else if (name == "presidential pardon")
         return FORM_PRESIDENTIAL;
     return -1;
 }
@@ -36,7 +35,6 @@ const char *Intern::FormNotExitException::what() const throw()
 {
     return "Intern: Formが存在しません";
 }
-
 
 AForm* Intern::makeForm(const std::string& name, const std::string& target) 
 {
