@@ -1,23 +1,18 @@
 NAME		=	serializer
 SRCS		=	main.cpp Serializer.cpp
-INC_DIR        =    .
-CC            =    c++
-CFLAGS        =    -Wall -Wextra -Werror -std=c++98
-DBUG = -fsanitize=address -fno-omit-frame-pointer -g
-RM            =    rm -f
-OBJS        =    $(SRCS:.cpp=.o)
+INC_DIR		=    .
+CXX			=    c++
+CXXFLAGS	=    -Wall -Wextra -Werror -std=c++98
+RM			=    rm -f
+OBJS		=    $(SRCS:.cpp=.o)
 
 %.o: %.cpp
-	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $^ -o $(NAME)
-
-debug: $(OBJS)
-	@$(CC) $(DBUG) $(CFLAGS) $^ -o $(NAME)
-
+	@$(CXX) $(CXXFLAGS) $^ -o $(NAME)
 
 fclean: clean
 	@$(RM) $(NAME)
