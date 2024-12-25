@@ -9,6 +9,24 @@ size_t count_char(const std::string &str, char c)
     return count;
 }
 
+std::string trim(const std::string &str)
+{
+    std::string::size_type first = str.find_first_not_of(" \t");
+    if (first == std::string::npos)
+        return "";
+    std::string::size_type last = str.find_last_not_of(" \t");
+    return str.substr(first, last - first + 1);
+}
+
+bool is_header(const std::string &str, char c)
+{
+    if (c == '|' && str != "date | value")
+        return false;
+    else if (c == ',' && str != "date,exchange_rate")
+        return false;
+    return true;
+}
+
 bool is_date(const std::string &str)
 {
     if (str.size() != 10)
