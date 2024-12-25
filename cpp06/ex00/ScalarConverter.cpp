@@ -8,6 +8,7 @@ bool is_pseudo(const std::string &input);
 
 bool is_number(const std::string &input);
 int dot_count(const std::string &input);
+int zero_count(const std::string &input);
 std::string get_integer(const std::string& input);
 
 int type_check(const std::string &input);
@@ -71,7 +72,11 @@ void ScalarConverter::convert(const std::string &input)
 
 int type_check(const std::string &input)
 {
-	if (is_char(input))
+	if (input.size() > 1 && input[0] == '-' && input[1] == '0')
+		return TYPE_IMPOSSIBLE;
+	else if (zero_count(input) > 1)
+		return TYPE_IMPOSSIBLE;
+	else if (is_char(input))
 		return TYPE_CHAR;
 	else if (is_int(input))
 		return TYPE_INT;
@@ -118,9 +123,13 @@ void output_float(const std::string &input)
     convert_char(input);
     
     if (num2 > INT_MAX || num2 < INT_MIN)
+	{
         std::cout << "int: impossible" << std::endl;
+	}
     else
+	{
         std::cout << "int: " << num2 << std::endl;
+	}
 
 	if (num > FLT_MAX || num < -FLT_MAX)
 	{
@@ -150,7 +159,10 @@ void output_double(const std::string &input)
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << num << "f" << std::endl;
-	std::cout << "double: " << num << std::endl;
+	if (num > DBL_MAX || num < -DBL_MAX)
+		std::cout << "double: impossible" << std::endl;
+	else
+		std::cout << "double: " << num << std::endl;
 }
 
 void output_psedo(const std::string& input)
@@ -179,7 +191,7 @@ void output_impossible()
 
 void convert_char(const std::string& input)
 {
-	int input_integer = atoi(get_integer(input).c_str());
+	double input_integer = atof(get_integer(input).c_str());
 	char c = input_integer;
 
 	if (input_integer < 0 || input_integer > 255)
@@ -200,8 +212,11 @@ bool is_char(const std::string &input)
 bool is_number(const std::string &input)
 {
 	bool is_minus = input[0] == '-';
+
 	if ((is_minus && input[1] == '.') || (!is_minus && input[0] == '.') || input[input.size() - 1] == '.' || (input[input.size() - 1] == 'f' && input[input.size() - 2] == '.'))
 		return false;
+
+
 	for (size_t i = is_minus ? 1 : 0; i < input.size() - 1; i++)
 	{
 		if ((input[i] < '0' || input[i] > '9') && input[i] != '.')
@@ -213,10 +228,25 @@ bool is_number(const std::string &input)
 int dot_count(const std::string &input)
 {
 	int count = 0;
+
 	for (size_t i = 0; i < input.size(); i++)
 	{
 		if (input[i] == '.')
 			count++;
+	}
+	return count;
+}
+
+int zero_count(const std::string &input)
+{
+	int count = 0;
+	bool is_minus = input[0] == '-';
+
+	for (size_t i = is_minus ? 1 : 0; i < input.size(); i++)
+	{
+		if (input[i] != '0')
+			break;
+		count++;
 	}
 	return count;
 }
