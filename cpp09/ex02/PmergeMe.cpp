@@ -1,18 +1,17 @@
 #include "PmergeMe.hpp"
-void display_vec(std::vector<unsigned int> vec);
+void display_vec(std::vector<int> vec);
 
 PmergeMe::PmergeMe()
 {}
 
 PmergeMe::PmergeMe(char **argv)
 {
-    setContainers(argv);
-    display_array("before");
+    setContainers_vec(argv);
+    createJacobSequence();
 
-    std::vector<unsigned int> tmp(_vector.size());
-    merge_insertion_sort_vector(tmp);
-
-    display_array("after");
+    // display_array("before");
+    sort_vec();
+    // display_array("after");
 }
 
 PmergeMe::PmergeMe(const PmergeMe &copy)
@@ -51,7 +50,16 @@ bool PmergeMe::is_ok_arg(std::string str)
     return true;
 }
 
-void PmergeMe::setContainers(char **argv)
+int PmergeMe::jacobsthal(int n)
+{
+	if (n == 0)
+		return (0);
+	if (n == 1)
+		return (1);
+	return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
+}
+
+void PmergeMe::setContainers_vec(char **argv)
 {
     argv++;
     while (*argv)
@@ -62,75 +70,74 @@ void PmergeMe::setContainers(char **argv)
             exit(1);
         }
         _vector.push_back(atoi(*argv));
-        _deque.push_back(atoi(*argv));
         argv++;
     }
 }
 
-void PmergeMe::merge_insertion_sort_vector(std::vector<unsigned int> tmp)
+void PmergeMe::createJacobSequence()
 {
-    m_sort_vec(tmp, 0, tmp.size() - 1);
-}
+    size_t size;
+    size_t jcobstalIndex;
+    int index;
 
+    size = _vector.size();
+    index = 3;
 
-void PmergeMe::m_sort_vec(std::vector<unsigned int> tmp, int left, int right)
-{
-    int mid;
-    if (right > left)
+    while ((jcobstalIndex = jacobsthal(index)) < size - 1)
     {
-        mid = (right + left) / 2;
-        std::cout << "left: " << left << " mid: " << mid << std::endl;
-        m_sort_vec(tmp, left, mid);
-        std::cout << "mid + 1: " << mid + 1 << " right: " << right << std::endl;
-        m_sort_vec(tmp, mid + 1, right);
-
-        std::cout << "merge_vec" << std::endl;
-        std::cout << "before: ";
-        display_vec(_vector);
-        merge_vec(left, mid + 1, right);
-        std::cout << "after: ";
-        display_vec(_vector);
+        _jacobSequence.push_back(jcobstalIndex);
+        index++;
     }
 }
 
-void PmergeMe::merge_vec(int left, int mid, int right)
+void PmergeMe::sort_vec()
 {
-    std::vector<unsigned int> left_array(_vector.begin() + left, _vector.begin() + mid);
-    std::vector<unsigned int> right_array(_vector.begin() + mid, _vector.begin() + right + 1);
+    std::vector<int> vec = _vector;
+    std::vector<int> indexes;
 
-    size_t i = 0;
-    size_t j = 0;
-    size_t k = left;
-
-    while (i < left_array.size() && j < right_array.size())
-    {
-        if (left_array[i] <= right_array[j])
-        {
-            _vector[k] = left_array[i];
-            i++;
-        }
-        else
-        {
-            _vector[k] = right_array[j];
-            j++;
-        }
-        k++;
-    }
-
-    while (i < left_array.size())
-    {
-        _vector[k] = left_array[i];
-        i++;
-        k++;
-    }
-
-    while (j < right_array.size())
-    {
-        _vector[k] = right_array[j];
-        j++;
-        k++;
-    }
+    merge_insertion_sort(vec, indexes);
+    _vector = vec;
 }
+
+void PmergeMe::set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainchain, std::vector<int>& pend)
+{
+    bool is_odd = vec.size() % 2 != 0;
+
+    for (size_t i = 0; i + 1 < vec.size(); i += 2) 
+    {
+        mainchain.push_back(vec[i]);
+        pend.push_back(vec[i + 1]);
+    }
+
+    if (is_odd)
+        pend.push_back(vec.back());
+}
+
+void PmergeMe::merge_insertion_sort(std::vector<int>& vec, std::vector<int>& indexes)
+{
+    if (vec.size() <= 1)
+        return ;
+    (void)indexes;
+
+    std::vector<int>::iterator it = vec.begin();
+    for (size_t i = 0; i < vec.size() / 2; i++)
+    {
+        if (*it < *(it + 1))
+            std::iter_swap(it, it + 1);
+        it += 2;
+    }
+
+    std::vector<int> mainchain, pend, subIndexes;
+    set_mainchain_pend(vec, mainchain, pend);
+    display_vec(mainchain);
+    display_vec(pend);
+    std::cout << std::endl;
+    for (size_t i = 0; i < mainchain.size(); i++)
+        subIndexes.push_back(i);
+    
+    merge_insertion_sort(mainchain, subIndexes);
+}
+
 
 void PmergeMe::display_array(std::string str)
 {
@@ -140,7 +147,7 @@ void PmergeMe::display_array(std::string str)
     std::cout << std::endl;
 }
 
-void display_vec(std::vector<unsigned int> vec)
+void display_vec(std::vector<int> vec)
 {
     for (size_t i = 0; i < vec.size(); i++)
         std::cout << vec[i] << " ";

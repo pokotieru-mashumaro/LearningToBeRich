@@ -14,11 +14,15 @@ private:
     PmergeMe(const PmergeMe &copy);
     PmergeMe &operator=(const PmergeMe &copy);
 
-    std::vector<unsigned int> _vector;
-    std::deque<unsigned int> _deque;
+    std::vector<int> _vector;
+	std::vector<int> _jacobSequence;
 
-    void setContainers(char **argv);
+    std::deque<int> _deque;
+
+    void setContainers_vec(char **argv);
+    void setContainers_deq(char **argv);
     bool is_ok_arg(std::string str);
+    int jacobsthal(int n);
 
 public:
     PmergeMe(char **argv);
@@ -26,7 +30,11 @@ public:
 
     void display_array(std::string str);
 
-    void merge_insertion_sort_vector(std::vector<unsigned int> tmp);
-    void m_sort_vec(std::vector<unsigned int> tmp, int left, int right);
-    void merge_vec(int left, int mid, int right);
+    void createVectorPairs();
+    void createJacobSequence();
+
+    void set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainchain, std::vector<int>& pend);
+    void sort_vec();
+    void merge_insertion_sort(std::vector<int>& vec, std::vector<int>& indexes);
+
 };
