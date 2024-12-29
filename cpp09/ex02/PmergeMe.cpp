@@ -7,8 +7,14 @@ PmergeMe::PmergeMe()
 PmergeMe::PmergeMe(char **argv)
 {
     setContainers_vec(argv);
-    createJacobSequence();
-
+    setJacob();
+    std::cout << "jacob: ";
+    std::cout << "jacob 0: " << jacobsthal(0) << std::endl;
+    std::cout << "jacob 1: " << jacobsthal(1) << std::endl;
+    std::cout << "jacob 2: " << jacobsthal(2) << std::endl;
+    std::cout << "jacob 3: " << jacobsthal(3) << std::endl;
+    std::cout << "jacob 4: " << jacobsthal(4) << std::endl;
+    std::cout << std::endl;
     // display_array("before");
     sort_vec();
     // display_array("after");
@@ -50,15 +56,6 @@ bool PmergeMe::is_ok_arg(std::string str)
     return true;
 }
 
-int PmergeMe::jacobsthal(int n)
-{
-	if (n == 0)
-		return (0);
-	if (n == 1)
-		return (1);
-	return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
-}
-
 void PmergeMe::setContainers_vec(char **argv)
 {
     argv++;
@@ -74,18 +71,23 @@ void PmergeMe::setContainers_vec(char **argv)
     }
 }
 
-void PmergeMe::createJacobSequence()
+int PmergeMe::jacobsthal(int n)
 {
-    size_t size;
+	if (n == 0)
+		return (0);
+	if (n == 1)
+		return (1);
+	return (jacobsthal(n - 1) + 2 * jacobsthal(n - 2));
+}
+
+void PmergeMe::setJacob()
+{
+    int index = 2;
     size_t jcobstalIndex;
-    int index;
 
-    size = _vector.size();
-    index = 3;
-
-    while ((jcobstalIndex = jacobsthal(index)) < size - 1)
+    while ((jcobstalIndex = jacobsthal(index)) < _vector.size() - 1)
     {
-        _jacobSequence.push_back(jcobstalIndex);
+        _jacob.push_back(jcobstalIndex);
         index++;
     }
 }
@@ -113,31 +115,83 @@ void PmergeMe::set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainc
         pend.push_back(vec.back());
 }
 
+void rearrange_vec(std::vector<int>& vec, std::vector<int>& indexes)
+{
+    std::vector<int> tmp = vec;
+    for (size_t i = 0; i < indexes.size(); i++)
+        vec[i] = tmp[indexes[i]];
+}
+
 void PmergeMe::merge_insertion_sort(std::vector<int>& vec, std::vector<int>& indexes)
 {
     if (vec.size() <= 1)
         return ;
-    (void)indexes;
 
-    std::vector<int>::iterator it = vec.begin();
+    std::vector<int>::iterator it_vec = vec.begin();
+    std::vector<int>::iterator it_indexes = indexes.begin();
+    bool indexes_empty = indexes.empty();
     for (size_t i = 0; i < vec.size() / 2; i++)
     {
-        if (*it < *(it + 1))
-            std::iter_swap(it, it + 1);
-        it += 2;
+        if (*it_vec < *(it_vec + 1))
+        {
+            std::iter_swap(it_vec, it_vec + 1);
+            if (!indexes_empty)
+                std::iter_swap(it_indexes, it_indexes + 1);
+        }
+        it_vec += 2;
+        if (!indexes_empty)
+            it_indexes += 2;
     }
 
-    std::vector<int> mainchain, pend, subIndexes;
+    std::vector<int> mainchain, i_main, pend, i_pend, newIndexes;
     set_mainchain_pend(vec, mainchain, pend);
-    display_vec(mainchain);
-    display_vec(pend);
-    std::cout << std::endl;
+    if (!indexes_empty)
+        set_mainchain_pend(indexes, i_main, i_pend);
     for (size_t i = 0; i < mainchain.size(); i++)
-        subIndexes.push_back(i);
+        newIndexes.push_back(i);
+    merge_insertion_sort(mainchain, newIndexes);
+    rearrange_vec(pend, newIndexes);
+    if (!indexes_empty)
+    {
+        rearrange_vec(i_main, newIndexes);
+        rearrange_vec(i_pend, newIndexes);
+    }
     
-    merge_insertion_sort(mainchain, subIndexes);
+    // std::cout << "before: " << std::endl;
+    // display_vec(mainchain);
+    // display_vec(pend);
+    binaryInsert(mainchain, pend, i_main, i_pend);
+	// std::cout << "after: " << std::endl;
+    // display_vec(mainchain);
+    // display_vec(pend);
+    // std::cout << std::endl;
+
+    vec = mainchain;
+    indexes = i_main;
 }
 
+void PmergeMe::binaryInsert(std::vector<int>& mainchain, std::vector<int>& pend, std::vector<int>& i_main, std::vector<int>& i_pend)
+{
+    std::vector<int>::iterator	it;
+
+    for (size_t i = 0; i < _jacob.size(); i++)
+    {
+        size_t jacobPrev = (_jacob[i] == 1) ? 0 : _jacob[i - 1];
+
+        for (size_t j = _jacob[i]; j > jacobPrev; j--)
+        {
+            if (j > pend.size())
+                continue ;
+            if (j == 1)
+                it = mainchain.begin();
+            else
+                it = std::lower_bound(mainchain.begin(), mainchain.end(), pend[j - 1]);
+            if (!i_main.empty())
+                i_main.insert(i_main.begin() + std::distance(mainchain.begin(), it), i_pend[j - 1]);
+            mainchain.insert(it, pend[j - 1]);
+        }
+    }
+}
 
 void PmergeMe::display_array(std::string str)
 {

@@ -15,7 +15,8 @@ private:
     PmergeMe &operator=(const PmergeMe &copy);
 
     std::vector<int> _vector;
-	std::vector<int> _jacobSequence;
+    std::vector<int> _ans;
+	std::vector<int> _jacob;
 
     std::deque<int> _deque;
 
@@ -30,11 +31,11 @@ public:
 
     void display_array(std::string str);
 
-    void createVectorPairs();
-    void createJacobSequence();
+    void setJacob();
 
     void set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainchain, std::vector<int>& pend);
     void sort_vec();
     void merge_insertion_sort(std::vector<int>& vec, std::vector<int>& indexes);
+    void binaryInsert(std::vector<int>& mainchain, std::vector<int>& pend, std::vector<int>& i_main, std::vector<int>& i_pend);
 
 };
