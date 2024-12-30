@@ -4,6 +4,10 @@
 #include <iostream>
 #include <sstream>
 #include <float.h>
+#include <stdlib.h>
+#include <climits>
+#include <cmath>
+#include <iomanip>
 
 #define TYPE_CHAR 0
 #define TYPE_INT 1

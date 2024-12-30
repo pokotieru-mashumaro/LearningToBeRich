@@ -139,7 +139,11 @@ void output_float(const std::string &input)
 	else
 	{
 		std::cout << "float: " << num << "f" << std::endl;
-    	std::cout << "double: " << num << std::endl;
+
+		if (std::floor(num) == num)
+			std::cout << "double: " << num << ".0" << std::endl;
+		else
+    		std::cout << "double: " << num << std::endl;
 	}
 }
 
@@ -162,7 +166,12 @@ void output_double(const std::string &input)
 	if (num > DBL_MAX || num < -DBL_MAX)
 		std::cout << "double: impossible" << std::endl;
 	else
-		std::cout << "double: " << num << std::endl;
+	{
+		if (std::floor(num) == num)
+			std::cout << "double: " << num << ".0" << std::endl;
+		else
+    		std::cout << "double: " << num << std::endl;
+	}
 }
 
 void output_psedo(const std::string& input)

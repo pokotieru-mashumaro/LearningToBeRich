@@ -35,6 +35,14 @@ char: '*'
 int: 42
 float: 42.0f
 double: 42.0
+
+
+ダメだったところ
+static castを使っていない。（static_cast<double>()でキャストすればよさげ）
+doubleの出力を.0まで表示していない（linux）で。~streamを使う可能性大。
+
+ex02
+A,B,Cのhppを作成し、それぞれのcppを作成する。
 */
 
 #include "ScalarConverter.hpp"
