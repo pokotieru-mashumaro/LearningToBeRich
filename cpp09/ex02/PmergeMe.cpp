@@ -6,18 +6,29 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(char **argv)
 {
+    std::clock_t vec_start = std::clock();
     setContainers_vec(argv);
     setJacob();
-    std::cout << "jacob: ";
-    std::cout << "jacob 0: " << jacobsthal(0) << std::endl;
-    std::cout << "jacob 1: " << jacobsthal(1) << std::endl;
-    std::cout << "jacob 2: " << jacobsthal(2) << std::endl;
-    std::cout << "jacob 3: " << jacobsthal(3) << std::endl;
-    std::cout << "jacob 4: " << jacobsthal(4) << std::endl;
-    std::cout << std::endl;
-    // display_array("before");
     sort_vec();
-    // display_array("after");
+    std::clock_t vec_end = std::clock();
+
+    std::clock_t deq_start = std::clock();
+    setContainers_deq(argv);
+    setJacob_deq();
+    sort_deq();
+    std::clock_t deq_end = std::clock();
+
+    display_array("Before");
+    display_array("After");
+
+    double vec_duration = 1000000.0 * (vec_end - vec_start) / CLOCKS_PER_SEC;
+    double deq_duration = 1000000.0 * (deq_end - deq_start) / CLOCKS_PER_SEC;
+
+    std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : "
+              << vec_duration << " us" << std::endl;
+    std::cout << "Time to process a range of " << _vector.size() << " elements with std::deque : "
+              << deq_duration << " us" << std::endl;
+
 }
 
 PmergeMe::PmergeMe(const PmergeMe &copy)
@@ -115,7 +126,7 @@ void PmergeMe::set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainc
         pend.push_back(vec.back());
 }
 
-void rearrange_vec(std::vector<int>& vec, std::vector<int>& indexes)
+void PmergeMe::rearrange_vec(std::vector<int>& vec, std::vector<int>& indexes)
 {
     std::vector<int> tmp = vec;
     for (size_t i = 0; i < indexes.size(); i++)
@@ -130,6 +141,7 @@ void PmergeMe::merge_insertion_sort(std::vector<int>& vec, std::vector<int>& ind
     std::vector<int>::iterator it_vec = vec.begin();
     std::vector<int>::iterator it_indexes = indexes.begin();
     bool indexes_empty = indexes.empty();
+    
     for (size_t i = 0; i < vec.size() / 2; i++)
     {
         if (*it_vec < *(it_vec + 1))
@@ -149,7 +161,10 @@ void PmergeMe::merge_insertion_sort(std::vector<int>& vec, std::vector<int>& ind
         set_mainchain_pend(indexes, i_main, i_pend);
     for (size_t i = 0; i < mainchain.size(); i++)
         newIndexes.push_back(i);
+
     merge_insertion_sort(mainchain, newIndexes);
+    // std::cout << "indexes: " << std::endl;
+    // display_vec(indexes);
     rearrange_vec(pend, newIndexes);
     if (!indexes_empty)
     {
@@ -206,4 +221,136 @@ void display_vec(std::vector<int> vec)
     for (size_t i = 0; i < vec.size(); i++)
         std::cout << vec[i] << " ";
     std::cout << std::endl;
+}
+
+
+
+
+
+
+
+
+
+void PmergeMe::setContainers_deq(char **argv)
+{
+    argv++;
+    while (*argv)
+    {
+        if (!is_ok_arg(*argv))
+        {
+            std::cerr << "Error" << std::endl;
+            exit(1);
+        }
+        _deque.push_back(atoi(*argv));
+        argv++;
+    }
+}
+
+void PmergeMe::setJacob_deq()
+{
+    int index = 2;
+    size_t jcobstalIndex;
+
+    while ((jcobstalIndex = jacobsthal(index)) < _deque.size() - 1)
+    {
+        _jacob_deq.push_back(jcobstalIndex);
+        index++;
+    }
+}
+
+void PmergeMe::sort_deq()
+{
+    std::deque<int> deq = _deque;
+    std::deque<int> indexes;
+
+    merge_insertion_sort_deq(deq, indexes);
+    _deque = deq;
+}
+
+void PmergeMe::set_mainchain_pen_deq(std::deque<int>& deq, std::deque<int>& mainchain, std::deque<int>& pend)
+{
+    bool is_odd = deq.size() % 2 != 0;
+
+    for (size_t i = 0; i + 1 < deq.size(); i += 2) 
+    {
+        mainchain.push_back(deq[i]);
+        pend.push_back(deq[i + 1]);
+    }
+
+    if (is_odd)
+        pend.push_back(deq.back());
+}
+
+void PmergeMe::rearrange_deq(std::deque<int>& deq, std::deque<int>& indexes)
+{
+    std::deque<int> tmp = deq;
+    for (size_t i = 0; i < indexes.size(); i++)
+        deq[i] = tmp[indexes[i]];
+}
+
+void PmergeMe::merge_insertion_sort_deq(std::deque<int>& deq, std::deque<int>& indexes)
+{
+    if (deq.size() <= 1)
+        return ;
+
+    std::deque<int>::iterator it_deq = deq.begin();
+    std::deque<int>::iterator it_indexes = indexes.begin();
+    bool indexes_empty = indexes.empty();
+    
+    for (size_t i = 0; i < deq.size() / 2; i++)
+    {
+        if (*it_deq < *(it_deq + 1))
+        {
+            std::iter_swap(it_deq, it_deq + 1);
+            if (!indexes_empty)
+                std::iter_swap(it_indexes, it_indexes + 1);
+        }
+        it_deq += 2;
+        if (!indexes_empty)
+            it_indexes += 2;
+    }
+
+    std::deque<int> mainchain, i_main, pend, i_pend, newIndexes;
+    set_mainchain_pen_deq(deq, mainchain, pend);
+    if (!indexes_empty)
+        set_mainchain_pen_deq(indexes, i_main, i_pend);
+    for (size_t i = 0; i < mainchain.size(); i++)
+        newIndexes.push_back(i);
+
+    merge_insertion_sort_deq(mainchain, newIndexes);
+    // std::cout << "indexes: " << std::endl;
+    // display_deq(indexes);
+    rearrange_deq(pend, newIndexes);
+    if (!indexes_empty)
+    {
+        rearrange_deq(i_main, newIndexes);
+        rearrange_deq(i_pend, newIndexes);
+    }
+    binaryInsert_deq(mainchain, pend, i_main, i_pend);
+
+    deq = mainchain;
+    indexes = i_main;
+}
+
+void PmergeMe::binaryInsert_deq(std::deque<int>& mainchain, std::deque<int>& pend, std::deque<int>& i_main, std::deque<int>& i_pend)
+{
+    std::deque<int>::iterator	it;
+
+    for (size_t i = 0; i < _jacob.size(); i++)
+    {
+        size_t jacobPrev = (_jacob[i] == 1) ? 0 : _jacob[i - 1];
+
+        for (size_t j = _jacob[i]; j > jacobPrev; j--)
+        {
+            if (j > pend.size())
+                continue ;
+            if (j == 1)
+                it = mainchain.begin();
+            else
+                it = std::lower_bound(mainchain.begin(), mainchain.end(), pend[j - 1]);
+            if (!i_main.empty())
+                i_main.insert(i_main.begin() + std::distance(mainchain.begin(), it), i_pend[j - 1]);
+            mainchain.insert(it, pend[j - 1]);
+        }
+    }
 }
