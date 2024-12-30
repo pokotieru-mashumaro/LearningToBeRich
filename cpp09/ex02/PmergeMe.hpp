@@ -19,7 +19,7 @@ private:
 	std::vector<int> _jacob;
 
     std::deque<int> _deque;
-    std::vector<int> _jacob_deq;
+    std::deque<int> _jacob_deq;
 
     bool is_ok_arg(std::string str);
     int jacobsthal(int n);
@@ -28,6 +28,8 @@ private:
     void setContainers_deq(char **argv);
     void setJacob();
     void setJacob_deq();
+    void set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainchain, std::vector<int>& pend);
+    void set_mainchain_pen_deq(std::deque<int>& vec, std::deque<int>& mainchain, std::deque<int>& pend);
 
     void rearrange_vec(std::vector<int>& vec, std::vector<int>& indexes);
     void rearrange_deq(std::deque<int>& vec, std::deque<int>& indexes);
@@ -37,10 +39,6 @@ public:
     ~PmergeMe();
 
     void display_array(std::string str);
-
-
-    void set_mainchain_pend(std::vector<int>& vec, std::vector<int>& mainchain, std::vector<int>& pend);
-    void set_mainchain_pen_deq(std::deque<int>& vec, std::deque<int>& mainchain, std::deque<int>& pend);
 
     void sort_vec();
     void sort_deq();

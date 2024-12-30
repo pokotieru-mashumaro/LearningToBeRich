@@ -28,7 +28,6 @@ PmergeMe::PmergeMe(char **argv)
               << vec_duration << " us" << std::endl;
     std::cout << "Time to process a range of " << _vector.size() << " elements with std::deque : "
               << deq_duration << " us" << std::endl;
-
 }
 
 PmergeMe::PmergeMe(const PmergeMe &copy)
