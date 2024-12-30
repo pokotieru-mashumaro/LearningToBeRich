@@ -45,6 +45,8 @@ void BitcoinExchange::setBitcoinPrice(std::string filename) {
 
     while (std::getline(file, line))
     {
+        if (line == "\n" || line == "")
+            continue;
         if (count_char(line, ',') != 1)
             throw std::runtime_error("Error: invalid format in data.csv.");
 

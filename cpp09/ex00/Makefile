@@ -1,10 +1,10 @@
 NAME		=	btc
 SRCS		=	main.cpp BitcoinExchange.cpp utils.cpp
-INC_DIR		=    .
-CXX			=    c++
-CXXFLAGS	=    -Wall -Wextra -Werror -std=c++98 -pedantic-errors
-RM			=    rm -f
-OBJS		=    $(SRCS:.cpp=.o)
+INC_DIR		=	.
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -pedantic-errors
+RM			=	rm -f
+OBJS		=	$(SRCS:.cpp=.o)
 
 %.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -I$(INC_DIR) -c $< -o $@
