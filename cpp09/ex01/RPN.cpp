@@ -87,6 +87,11 @@ void RPN::divided()
     int a = _stack.top();
     _stack.pop();
     int b = _stack.top();
+    if (a == 0 || b == 0)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
     _stack.pop();
     _stack.push(b / a);
 }
