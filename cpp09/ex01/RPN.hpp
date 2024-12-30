@@ -4,6 +4,7 @@
 #include <stack>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 class RPN
 {
