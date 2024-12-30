@@ -57,41 +57,89 @@ void RPN::calculate(std::string str)
 
 void RPN::plus()
 {
+    if (_stack.size() < 2)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
+
     int a = _stack.top();
     _stack.pop();
     int b = _stack.top();
+
+    long tmp = b + a;
+    if (tmp > INT_MAX || tmp < INT_MIN)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
+
     _stack.pop();
     _stack.push(b + a);
 }
 
 void RPN::minus()
 {
+    if (_stack.size() < 2)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
     int a = _stack.top();
     _stack.pop();
     int b = _stack.top();
+
+    long tmp = b - a;
+    if (tmp > INT_MAX || tmp < INT_MIN)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
+
     _stack.pop();
     _stack.push(b - a);
 }
 
 void RPN::multiplied()
 {
+    if (_stack.size() < 2)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
     int a = _stack.top();
     _stack.pop();
     int b = _stack.top();
+
+    long tmp = b * a;
+    if (tmp > INT_MAX || tmp < INT_MIN)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
+
     _stack.pop();
     _stack.push(b * a);
 }
 
 void RPN::divided()
 {
-    int a = _stack.top();
-    _stack.pop();
-    int b = _stack.top();
-    if (a == 0 || b == 0)
+    if (_stack.size() < 2)
     {
         std::cerr << "Error" << std::endl;
         exit(1);
     }
+    int a = _stack.top();
+    _stack.pop();
+    int b = _stack.top();
+
+    long tmp = b / a;
+    if (tmp > INT_MAX || tmp < INT_MIN)
+    {
+        std::cerr << "Error" << std::endl;
+        exit(1);
+    }
+
     _stack.pop();
     _stack.push(b / a);
 }
