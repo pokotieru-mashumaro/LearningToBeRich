@@ -63,9 +63,9 @@ void RPN::plus()
         exit(1);
     }
 
-    int a = _stack.top();
+    long a = _stack.top();
     _stack.pop();
-    int b = _stack.top();
+    long b = _stack.top();
 
     long tmp = b + a;
     if (tmp > INT_MAX || tmp < INT_MIN)
@@ -85,9 +85,9 @@ void RPN::minus()
         std::cerr << "Error" << std::endl;
         exit(1);
     }
-    int a = _stack.top();
+    long a = _stack.top();
     _stack.pop();
-    int b = _stack.top();
+    long b = _stack.top();
 
     long tmp = b - a;
     if (tmp > INT_MAX || tmp < INT_MIN)
@@ -107,9 +107,9 @@ void RPN::multiplied()
         std::cerr << "Error" << std::endl;
         exit(1);
     }
-    int a = _stack.top();
+    long a = _stack.top();
     _stack.pop();
-    int b = _stack.top();
+    long b = _stack.top();
 
     long tmp = b * a;
     if (tmp > INT_MAX || tmp < INT_MIN)
@@ -129,9 +129,9 @@ void RPN::divided()
         std::cerr << "Error" << std::endl;
         exit(1);
     }
-    int a = _stack.top();
+    long a = _stack.top();
     _stack.pop();
-    int b = _stack.top();
+    long b = _stack.top();
 
     long tmp = b / a;
     if (tmp > INT_MAX || tmp < INT_MIN)
