@@ -48,11 +48,11 @@ int main()
     }
 
     {
-        Span sp = Span(50000);
+        Span sp = Span(100);
 
         try
         {
-            sp.addNumbers(50000);
+            sp.addNumbers(100);
             std::cout << sp.shortestSpan() << std::endl;
             std::cout << sp.longestSpan() << std::endl;
             // sp.display_arr();

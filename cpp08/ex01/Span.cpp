@@ -45,47 +45,36 @@ void Span::addNumbers(unsigned int end)
             throw AlreadyStoredException();
         _arr[i] = i;
     }
-    _index = end - 1;
+    _index = end;
 }
-
-
 
 long Span::shortestSpan(void)
 {
-    long ret = 2147483647 + 2147483648;
-
     if (_index <= 1)
         throw NoSpanException();
 
-    for (unsigned int i = 0; i < _index; i++)
+    std::vector<int> temp(_arr, _arr + _index);
+    std::sort(temp.begin(), temp.end());
+    
+    long min_span = static_cast<long>(temp[1]) - static_cast<long>(temp[0]);
+    for (unsigned int i = 1; i < _index - 1; ++i)
     {
-        for (unsigned int j = i + 1; j < _index; j++)
-        {
-            int val = _arr[i] > _arr[j] ? _arr[i] - _arr[j] : _arr[j] - _arr[i];
-            if (ret > val)
-                ret = val;
-        }
+        long span = static_cast<long>(temp[i + 1]) - static_cast<long>(temp[i]);
+        if (span < min_span)
+            min_span = span;
     }
-    return ret;
+    return min_span;
 }
 
 long Span::longestSpan(void)
 {
-    int max_val, min_val;
-
     if (_index <= 1)
         throw NoSpanException();
-    max_val = _arr[0] > _arr[1] ? _arr[0] : _arr[1];
-    min_val = _arr[0] > _arr[1] ? _arr[1] : _arr[0];
-    for (unsigned int i = 2; i < _N; i++)
-    {
-        int value = _arr[i];
-        if (max_val < value)
-            max_val = value;
-        else if (min_val > value)
-            min_val = value;
-    }
-    return max_val - min_val;
+
+    std::pair<int*, int*> result = std::minmax_element(_arr, _arr + _index);
+    // std::cout << "min: " << *result.first << std::endl;
+    // std::cout << "max: " << *result.second << std::endl;
+    return static_cast<long>(*result.second) - static_cast<long>(*result.first);
 }
 
 void Span::display_arr(void)
