@@ -2,16 +2,16 @@
 #define   easyfind_HPP
 
 #include <iostream>
+#include <algorithm>
 
-template <typename T, size_t N>
-void easyfind(T (&container)[N], int value) {
-    for (size_t i = 0; i < N; i++) {
-        if (container[i] == value) {
-            std::cout << "Value found: " << value << std::endl;
-            return ;
-        }
+template <typename T>
+void easyfind(T& container, int value) {
+    typename T::iterator it = std::find(container.begin(), container.end(), value);
+    if (it != container.end()) {
+        std::cout << "Value found: " << value << std::endl;
+    } else {
+        throw std::exception();
     }
-    throw std::exception();
 }
 
 #endif

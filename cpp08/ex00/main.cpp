@@ -11,24 +11,30 @@ Tが整数のコンテナであると仮定すると、この関数は2番目の
 */
 
 #include "easyfind.hpp"
-
 #include <vector>
 #include <list>
 
 int main(void)
 {
-    int arr[10] = {0,1,2,3,4,5,6,7,8,9};
+    std::vector<int> vec;
+    std::list<int> lst;
+    
+    for (int i = 0; i < 10; i++) {
+        vec.push_back(i);
+        lst.push_back(i);
+    }
 
-	try
-	{
-		easyfind(arr, 0);
-		easyfind(arr, 9);
-        easyfind(arr, -1);
-		easyfind(arr, 10);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	return (0);
+    try
+    {
+        easyfind(vec, 0);
+        easyfind(vec, 9);
+        easyfind(lst, 5);
+        easyfind(vec, -1);
+        easyfind(lst, 10);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    return (0);
 }
