@@ -71,10 +71,9 @@ long Span::longestSpan(void)
     if (_index <= 1)
         throw NoSpanException();
 
-    std::pair<int*, int*> result = std::minmax_element(_arr, _arr + _index);
-    // std::cout << "min: " << *result.first << std::endl;
-    // std::cout << "max: " << *result.second << std::endl;
-    return static_cast<long>(*result.second) - static_cast<long>(*result.first);
+    int* min = std::min_element(_arr, _arr + _index);
+    int* max = std::max_element(_arr, _arr + _index);
+    return static_cast<long>(*max) - static_cast<long>(*min);
 }
 
 void Span::display_arr(void)
