@@ -39,7 +39,8 @@ public:
     PmergeMe(char **argv);
     ~PmergeMe();
 
-    void display_array(std::string str);
+    void display_vec(std::string str);
+    void display_deq(std::string str);
 
     void sort_vec();
     void sort_deq();

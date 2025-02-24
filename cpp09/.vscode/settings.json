@@ -75,6 +75,11 @@
         "__node_handle": "cpp",
         "__memory": "cpp",
         "list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "codecvt": "cpp",
+        "execution": "cpp",
+        "iomanip": "cpp"
     }
 }

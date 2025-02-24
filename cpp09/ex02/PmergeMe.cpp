@@ -1,5 +1,7 @@
 #include "PmergeMe.hpp"
+// https://docs.google.com/presentation/d/15kKgFEli2fFdC-1qmXzEr7Y1hpJT5ABrb9UymUzdXCs/edit?usp=sharing
 void display_vec(std::vector<int> vec);
+void display_deque(std::deque<int> deq);
 
 PmergeMe::PmergeMe()
 {}
@@ -18,8 +20,8 @@ PmergeMe::PmergeMe(char **argv)
     sort_deq();
     std::clock_t deq_end = std::clock();
 
-    display_array("Before");
-    display_array("After");
+    display_vec("vector");
+    display_deq("deque ");
 
     double vec_duration = 1000000.0 * (vec_end - vec_start) / CLOCKS_PER_SEC;
     double deq_duration = 1000000.0 * (deq_end - deq_start) / CLOCKS_PER_SEC;
@@ -207,7 +209,7 @@ void PmergeMe::binaryInsert(std::vector<int>& mainchain, std::vector<int>& pend,
     }
 }
 
-void PmergeMe::display_array(std::string str)
+void PmergeMe::display_vec(std::string str)
 {
     std::cout << str << ": ";
     for (size_t i = 0; i < _vector.size(); i++)
@@ -215,17 +217,13 @@ void PmergeMe::display_array(std::string str)
     std::cout << std::endl;
 }
 
-void display_vec(std::vector<int> vec)
+void PmergeMe::display_deq(std::string str)
 {
-    for (size_t i = 0; i < vec.size(); i++)
-        std::cout << vec[i] << " ";
+    std::cout << str << ": ";
+    for (size_t i = 0; i < _deque.size(); i++)
+        std::cout << _deque[i] << " ";
     std::cout << std::endl;
 }
-
-
-
-
-
 
 
 
