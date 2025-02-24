@@ -130,7 +130,7 @@ void BitcoinExchange::display(std::string filename)
                     std::cout << "Error: no data available for this date." << std::endl;
                     continue;
                 }
-                else if (it == _bitcoinPrice.end())
+                if (it != _bitcoinPrice.begin())
                     --it;
                 rate = it->second;
             }
